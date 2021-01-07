@@ -1,0 +1,21 @@
+{
+  "name": "3rd-year-group-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client/index.js",
+  "scripts": {
+    "start": "cd backend && npm install && node app.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taybluetooth/3rd-year-group-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taybluetooth/3rd-year-group-project/issues"
+  },
+  "homepage": "https://github.com/taybluetooth/3rd-year-group-project#readme"
+}
