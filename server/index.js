@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const { User } = require("./models/user");
+const dbConfig = require("./database/db.js");
 require("dotenv/config");
 
 const app = express();
@@ -10,29 +11,18 @@ console.log(process.env.DB_CONNECTION);
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../client/build")));
 
-// Connect to DB
-mongoose.set("useUnifiedTopology", true);
-mongoose.set("useCreateIndex", true);
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  { useNewUrlParser: true },
-  (err) => {
-    console.log("Connected to DB");
-    if (err) console.error(err);
+// Connecting to flock cluster database
+mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => {
+  console.log('Database sucessfully connected!')
+},
+  error => {
+    console.log('Could not connect to database : ' + error)
   }
-);
-
-// test
-app.get("/hi", async (req, res) => {
-  const user = new User({ password: "abc12345" });
-  try {
-    await user.save();
-  } catch (err) {
-    console.error(err);
-  }
-
-  res.send("hi");
-});
+)
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
