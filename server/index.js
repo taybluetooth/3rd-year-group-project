@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const { User } = require("./models/user");
+const { Post } = require("./models/post")
 const dbConfig = require("./database/db.js");
 require("dotenv/config");
 
@@ -24,14 +25,24 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
-app.get("/test", async (req, res) => {
+app.get("/usertest", async (req, res) => {
   const user = new User({ email: "test123@email.com", password: "hello123", username: "testing123", verified: false, userType: "user"});
   try {
     await user.save();
   } catch (err) {
     console.error(err);
   }
-  res.send("test");
+  res.send("user test complete");
+});
+
+app.get("/posttest", async (req, res) => {
+  const post = new Post({ image: "sample image", date: "12/01/2021", likes: 2, description: "Example post", location: "Edinburgh", points: 100, achievement: "Tester"});
+  try {
+    await post.save();
+  } catch (err) {
+    console.error(err);
+  }
+  res.send("post test complete");
 });
 
 // Handles any requests that don't match the ones above

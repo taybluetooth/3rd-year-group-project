@@ -11,7 +11,7 @@ const postSchema = mongoose.Schema({
     maxlength: 10,
   },
   likes: {
-    type: Integer,
+    type: Number,
   },
   description: {
     type: String,
@@ -24,7 +24,7 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   points: {
-    type: Integer,
+    type: Number,
   },
   achievement: {
     type: String,
