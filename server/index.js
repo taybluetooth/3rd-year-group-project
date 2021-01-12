@@ -9,8 +9,11 @@ require("dotenv/config");
 const app = express();
 console.log(process.env.DB_CONNECTION);
 
+// importing routes
+require('./routes/userRoutes')(app);
+
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "/../client/public")));
 
 // Connecting to flock cluster database
 mongoose.Promise = global.Promise;
@@ -25,6 +28,7 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
+/* TESTING ROUTES FOR INSERTING ENTRIES INTO MONGODB
 app.get("/usertest", async (req, res) => {
   const user = new User({ email: "test123@email.com", password: "hello123", username: "testing123", verified: false, userType: "user"});
   try {
@@ -44,10 +48,11 @@ app.get("/posttest", async (req, res) => {
   }
   res.send("post test complete");
 });
+*/
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/../client/public/index.html"));
 });
 
 // start server
