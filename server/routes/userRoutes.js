@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
 
 module.exports = (app) => {
-
   app.get(`/api/user`, async (req, res) => {
     let users = await User.find();
     return res.status(200).send(users);
@@ -12,8 +11,7 @@ module.exports = (app) => {
     let user = await User.create(req.body);
     return res.status(201).send({
       error: false,
-      user
-    })
-  })
-
-}
+      user,
+    });
+  });
+};

@@ -2,10 +2,13 @@
   "name": "3rd-year-group-project",
   "version": "1.0.0",
   "description": "",
-  "main": "client/index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "cd client && npm install && node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "start": "cd server && npm install && node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "build-fe": "cd client && npm install --only=dev && npm install && npm run build",
+    "full-build": "npm run build-frontend && npm run start",
+    "dev": "cd server && node index.js"
   },
   "repository": {
     "type": "git",
