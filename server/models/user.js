@@ -25,17 +25,17 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: 8,
-    maxlength: 256,
+    maxlength: 75,
     set: setPassword, // hash the password before it's stored in the db
   },
   username: {
     type: String,
     required: true,
-    minlength: 1,
-    maxlength: 40,
+    minlength: 5,
+    maxlength: 15,
     unique: true,
   },
-  confirmed: {
+  verified: {
     type: Boolean,
     default: false,
   },

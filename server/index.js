@@ -24,6 +24,16 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
+app.get("/test", async (req, res) => {
+  const user = new User({ email: "test123@email.com", password: "hello123", username: "testing123", verified: false, userType: "user"});
+  try {
+    await user.save();
+  } catch (err) {
+    console.error(err);
+  }
+  res.send("test");
+});
+
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "../client/build/index.html"));
