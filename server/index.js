@@ -11,6 +11,7 @@ console.log(process.env.DB_CONNECTION);
 
 // importing routes
 require("./routes/userRoutes")(app);
+require("./routes/postRoutes")(app);
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../client/build")));

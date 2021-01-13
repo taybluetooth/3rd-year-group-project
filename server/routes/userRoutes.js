@@ -15,7 +15,7 @@ module.exports = (app) => {
     });
   });
 
-  app.put(`/api/user/:id`, async (req, res) => {
+  app.put('/api/user/:id', async (req, res) => {
     const {id} = req.params;
     let user = await User.findByIdAndUpdate(id, req.body);
     return res.status(202).send({
@@ -24,7 +24,7 @@ module.exports = (app) => {
     });
   });
 
-  app.delete(`/api/user/:id`, async (req, res) => {
+  app.delete('/api/user/:id', async (req, res) => {
     const {id} = req.params;
     let user = await User.findByIdAndDelete(id);
     return res.status(202).send({
