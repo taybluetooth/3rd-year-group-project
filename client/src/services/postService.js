@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-export default {
+const postService = {
   getAll: async () => {
     let res = await axios.get('/api/post');
     return res.data || [];
   }
-}
+};
+
+export default postService;
