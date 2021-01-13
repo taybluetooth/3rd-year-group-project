@@ -7,7 +7,6 @@ const dbConfig = require("./database/db.js");
 require("dotenv/config");
 
 const app = express();
-console.log(process.env.DB_CONNECTION);
 
 // importing routes
 require("./routes/userRoutes")(app);
