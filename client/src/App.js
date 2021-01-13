@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React /*,{ useState, useEffect }*/ from "react";
+import Navbar from "./components/Navbar.js";
 
-// SERVICES
+/* SERVICES
 import userService from './services/userService';
 import postService from './services/postService';
+*/
 
 function App() {
+  /* Async functions for future reference
   const [users, setusers] = useState(null);
   const [posts, setposts] = useState(null);
 
@@ -27,8 +30,9 @@ function App() {
     let res = await postService.getAll();
     console.log(res);
     setposts(res);
-  }
+  }*/
 
+  /* Rendering functions to refer to later
   const renderUser = user => {
     return (
       <li key={user._id} className="list__item user">
@@ -47,24 +51,26 @@ function App() {
     );
   };
 
+  <ul className="list">
+    {(users && users.length > 0) ? (
+      users.map(user => renderUser(user))
+    ) : (
+      <p>No users found</p>
+    )}
+  </ul>
+
+  <ul className="list">
+    {(posts && posts.length > 0) ? (
+      posts.map(post => renderPost(post))
+    ) : (
+      <p>No posts found</p>
+    )}
+  </ul>
+  */
+
   return (
     <div className="App">
-      <ul className="list">
-        {(users && users.length > 0) ? (
-          users.map(user => renderUser(user))
-        ) : (
-          <p>No users found</p>
-        )}
-      </ul>
-
-      <ul className="list">
-        {(posts && posts.length > 0) ? (
-          posts.map(post => renderPost(post))
-        ) : (
-          <p>No posts found</p>
-        )}
-      </ul>
-
+      <Navbar/>
     </div>
   );
 }
