@@ -9,7 +9,7 @@
     "build-fe": "cd client && npm install --only=dev && npm install && npm run build",
     "full-build": "npm run build-fe && npm run start",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "npm install && concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
