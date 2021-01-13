@@ -4,6 +4,7 @@ const postSchema = mongoose.Schema({
   image: {
     type: String,
     required: true,
+    default: 'image'
   },
   date: {
     type: String,
@@ -12,6 +13,7 @@ const postSchema = mongoose.Schema({
   },
   likes: {
     type: Number,
+    default: 0,
   },
   description: {
     type: String,
@@ -25,9 +27,11 @@ const postSchema = mongoose.Schema({
   },
   points: {
     type: Number,
+    default: 0,
   },
   achievement: {
     type: String,
+    default: 'tester',
   },
 });
 

@@ -7,6 +7,10 @@ const dbConfig = require("./database/db.js");
 require("dotenv/config");
 
 const app = express();
+const bodyParser = require("body-parser")
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // Make sure it comes back as json
 
 // importing routes
 require("./routes/userRoutes")(app);
@@ -31,28 +35,6 @@ mongoose
     }
   );
 mongoose.set("useCreateIndex", true);
-
-/* TESTING ROUTES FOR INSERTING ENTRIES INTO MONGODB
-app.get("/usertest", async (req, res) => {
-  const user = new User({ email: "test123@email.com", password: "hello123", username: "testing123", verified: false, userType: "user"});
-  try {
-    await user.save();
-  } catch (err) {
-    console.error(err);
-  }
-  res.send("user test complete");
-});
-
-app.get("/posttest", async (req, res) => {
-  const post = new Post({ image: "sample image", date: "12/01/2021", likes: 2, description: "Example post", location: "Edinburgh", points: 100, achievement: "Tester"});
-  try {
-    await post.save();
-  } catch (err) {
-    console.error(err);
-  }
-  res.send("post test complete");
-});
-*/
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
