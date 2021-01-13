@@ -20,7 +20,7 @@ module.exports = (app) => {
     let user = await User.findByIdAndUpdate(id, req.body);
     return res.status(202).send({
       error: false,
-      product
+      user
     });
   });
 
@@ -29,7 +29,7 @@ module.exports = (app) => {
     let user = await User.findByIdAndDelete(id);
     return res.status(202).send({
       error: false,
-      product
+      user
     });
   });
 };
