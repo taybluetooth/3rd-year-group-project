@@ -1,6 +1,5 @@
 import React /*,{ useState, useEffect }*/ from "react";
 import Button from "./components/Button.js";
-import Navbar from "./components/Navbar.js";
 
 /* SERVICES
 import userService from './services/userService';
@@ -71,7 +70,6 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
       <Button />
     </div>
   );
