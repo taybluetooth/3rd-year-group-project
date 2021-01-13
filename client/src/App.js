@@ -5,7 +5,8 @@ import userService from './services/userService';
 import postService from './services/postService';
 
 function App() {
-  const [users, setusers, posts, setposts] = useState(null);
+  const [users, setusers] = useState(null);
+  const [posts, setposts] = useState(null);
 
   useEffect(() => {
     if(!users) {
@@ -56,7 +57,7 @@ function App() {
         )}
       </ul>
 
-      <ul className="list2">
+      <ul className="list">
         {(posts && posts.length > 0) ? (
           posts.map(post => renderPost(post))
         ) : (
