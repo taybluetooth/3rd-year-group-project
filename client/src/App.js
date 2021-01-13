@@ -1,4 +1,5 @@
 import React /*,{ useState, useEffect }*/ from "react";
+import Button from "./components/Button.js";
 import Navbar from "./components/Navbar.js";
 
 /* SERVICES
@@ -70,7 +71,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
+      <Button />
     </div>
   );
 }
