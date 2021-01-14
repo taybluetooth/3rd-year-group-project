@@ -14,7 +14,7 @@ function setPassword(password) {
   return createHash(password, this._id);
 }
 
-const userSchema = Schema({
+const UserSchema = Schema({
   email: {
     type: String,
     required: true,
@@ -47,6 +47,6 @@ const userSchema = Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = { User };

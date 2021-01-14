@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-const achievementSchema = Schema({
+const AchievementSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -16,6 +16,6 @@ const achievementSchema = Schema({
   }
 });
 
-const Achievement = mongoose.model("Achievement", achievementSchema);
+const Achievement = mongoose.model("Achievement", AchievementSchema);
 
 module.exports = { Achievement };
