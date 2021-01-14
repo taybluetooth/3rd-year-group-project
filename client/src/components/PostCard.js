@@ -25,7 +25,7 @@ export default (props) => {
       </div>
       <span class="px-2 hover:bg-gray-300 cursor-pointer rounded">{ellipsis}</span>
     </div>
-    <Image cloudName="bluetooth" class="w-full bg-cover" publicId="sample.jpg" secure="true"></Image>
+    <Image cloudName="bluetooth" class="w-full bg-cover" publicId={props.image} secure="true"></Image>
 
     <div class="px-3 pb-2">
       <div class="pt-2">

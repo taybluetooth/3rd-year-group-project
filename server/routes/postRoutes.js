@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
+var cloudinary = require('cloudinary').v2;
 const Post = mongoose.model("Post");
+
+cloudinary.config({
+    cloud_name: 'bluetooth',
+    api_key: '171536158776577',
+    api_secret: 'xXv64nJhkSZcTKqjb0MEltxIsqc'
+});
 
 module.exports = (app) => {
   app.get('/api/post', async (req, res) => {
@@ -9,6 +16,11 @@ module.exports = (app) => {
 
   app.post('/api/post', async (req, res) => {
     let post = await Post.create(req.body);
+    cloudinary.uploader.upload('../client/public/london.jpg', function(error, result) {
+      post.image = result.public_id;
+      post.save();
+      console.log(result, error);
+    });
     return res.status(201).send({
       error: false,
       post,
