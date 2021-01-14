@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+var idValidator = require('mongoose-id-validator');
 var Schema = mongoose.Schema;
 
-const postSchema = Schema ({
+const PostSchema = Schema ({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -41,6 +42,8 @@ const postSchema = Schema ({
   },
 });
 
-const Post = mongoose.model("Post", postSchema);
+PostSchema.plugin(idValidator);
+
+const Post = mongoose.model("Post", PostSchema);
 
 module.exports = { Post };
