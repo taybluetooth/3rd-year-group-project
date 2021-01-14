@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Button from "./components/Button.js";
-
+import Navbar from "./components/Navbar.js";
 // SERVICES
 import userService from './services/userService';
 import postService from './services/postService';
@@ -54,7 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      <Button />
+      <Navbar />
       <ul className="list">
         {(users && users.length > 0) ? (
           users.map(user => renderUser(user))
