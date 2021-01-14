@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar.js";
+import PostCard from "./components/PostCard.js";
+
 // SERVICES
-import userService from './services/userService';
 import postService from './services/postService';
-import achievementService from './services/achievementService';
 
 function App() {
 
@@ -22,10 +22,23 @@ function App() {
     setposts(res);
   };
 
+  const renderPost = post => {
+    return (
+      <PostCard key={post._id} location={post.location} description={post.description}/>
+    );
+  };
+
 
   return (
     <div className="App">
       <Navbar />
+      <ul className="list">
+        {(posts && posts.length > 0) ? (
+          posts.map(post => renderPost(post))
+        ) : (
+          <p>No posts found</p>
+        )}
+      </ul>
     </div>
   );
 }
