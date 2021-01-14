@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const { User } = require("./models/user");
 const { Post } = require("./models/post");
+const { Achievement } = require("./models/achievement");
 const dbConfig = require("./database/db.js");
 require("dotenv/config");
 
@@ -15,6 +16,8 @@ app.use(express.json()); // Make sure it comes back as json
 // importing routes
 require("./routes/userRoutes")(app);
 require("./routes/postRoutes")(app);
+require("./routes/achievementRoutes")(app);
+
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../client/build")));

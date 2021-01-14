@@ -3,12 +3,13 @@ import Navbar from "./components/Navbar.js";
 // SERVICES
 import userService from './services/userService';
 import postService from './services/postService';
-
+import achievementService from './services/achievementService';
 
 function App() {
 
   const [users, setusers] = useState(null);
   const [posts, setposts] = useState(null);
+  const [achievements, setachievements] = useState(null);
 
   useEffect(() => {
     if(!users) {
@@ -16,6 +17,9 @@ function App() {
     }
     if(!posts) {
       getPosts();
+    }
+    if(!achievements) {
+      getAchievements();
     }
   })
 
@@ -30,6 +34,12 @@ function App() {
     let res = await postService.getAll();
     console.log(res);
     setposts(res);
+  };
+
+  const getAchievements = async () => {
+    let res = await achievementService.getAll();
+    console.log(res);
+    setachievements(res);
   };
 
   // Rendering functions to refer to later
@@ -51,6 +61,15 @@ function App() {
     );
   };
 
+  const renderAchievement = achievement => {
+    return (
+      <li key={achievement._id} className="list__item achievement">
+        <h3 className="achievement__name">{achievement.name}</h3>
+        <p className="achievement__points">{achievement.points}</p>
+      </li>
+    );
+  };
+
   return (
     <div className="App">
       <Navbar />
@@ -67,6 +86,14 @@ function App() {
           posts.map(post => renderPost(post))
         ) : (
           <p>No posts found</p>
+        )}
+      </ul>
+
+      <ul className="list">
+        {(achievements && achievements.length > 0) ? (
+          achievements.map(achievement => renderAchievement(achievement))
+        ) : (
+          <p>No achievements found</p>
         )}
       </ul>
     </div>
