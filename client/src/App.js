@@ -1,7 +1,7 @@
 import React from "react";
 import Posts from "./pages/Posts";
 import UploadPost from "./pages/UploadPost";
-import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function App() {
           <Posts />
         </Route>
         <Route path="/">
-          <SignUp />
+          <SignIn />
         </Route>
       </Switch>
     </Router>

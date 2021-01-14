@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar.js";
 
-function SignUp() {
+function SignIn() {
 
   return (
     <div>
@@ -11,4 +11,4 @@ function SignUp() {
 
 }
 
-export default SignUp;
+export default SignIn;
