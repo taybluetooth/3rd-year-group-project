@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const forge = require("node-forge");
+var Schema = mongoose.Schema;
 
 // Create the password hash
 function createHash(password, salt) {
@@ -13,7 +14,7 @@ function setPassword(password) {
   return createHash(password, this._id);
 }
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
   email: {
     type: String,
     required: true,

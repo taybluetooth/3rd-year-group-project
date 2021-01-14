@@ -15,7 +15,7 @@ export default (props) => {
         <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
           <img src="https://avatars0.githubusercontent.com/u/38799309?v=4" alt="profilepic"></img>
         </div>
-        <span class="pt-1 ml-2 font-bold text-sm">CallumTaylor</span>
+        <span class="pt-1 ml-2 font-bold text-sm">{props.user}</span>
         <span class="pt-1 ml-3 text-sm">{props.location}</span>
       </div>
       <span class="px-2 hover:bg-gray-300 cursor-pointer rounded">{element}</span>

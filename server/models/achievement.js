@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-const achievementSchema = mongoose.Schema({
+const achievementSchema = Schema({
   name: {
     type: String,
     required: true,
