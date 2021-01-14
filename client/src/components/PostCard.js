@@ -28,7 +28,7 @@ export default (props) => {
       </div>
       <div class="pt-1">
         <div class="mb-2 text-sm">
-          <span class="font-medium mr-2">Callum Taylor</span> {props.description}
+          <span class="font-medium mr-2">{props.user}</span> {props.description}
         </div>
       </div>
     </div>
