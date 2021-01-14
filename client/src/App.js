@@ -24,7 +24,7 @@ function App() {
 
   const renderPost = post => {
     return (
-      <PostCard key={post._id} location={post.location} description={post.description}/>
+      <PostCard key={post._id} location={post.location} description={post.description} image={post.image}/>
     );
   };
 
