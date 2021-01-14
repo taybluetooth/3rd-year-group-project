@@ -5,9 +5,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import {Image} from 'cloudinary-react';
 
-// TEMP SOLUTION!
-import image from "../../public/london.jpg";
-
 const ellipsis = <FontAwesomeIcon icon={faEllipsisH} />
 const heart = <FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg"/>
 const star = <FontAwesomeIcon icon={faStar} color="#CCCC00" size="lg"/>
