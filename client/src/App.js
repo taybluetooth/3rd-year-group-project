@@ -48,7 +48,7 @@ function App() {
 
   const renderPost = post => {
     return (
-      <PostCard key={post._id} user={getUsername(post)} location={post.location} description={post.description} image={post.image}/>
+      <PostCard key={post._id} user={getUsername(post)} location={post.location} description={post.description} image={post.image} likes={post.likes} points={post.points}/>
     );
   };
 
@@ -56,13 +56,13 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <ul className="list">
+      <div className="container mx-auto p-3">
         {(posts && posts.length > 0) ? (
           posts.map(post => renderPost(post))
         ) : (
           <p>No posts found</p>
         )}
-      </ul>
+      </div>
     </div>
   );
 }
