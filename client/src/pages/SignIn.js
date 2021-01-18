@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Navbar from "../components/Navbar.js";
 import ReactDOM from 'react-dom';
@@ -8,13 +9,16 @@ import { Formik, Field, Form } from 'formik';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const user = <FontAwesomeIcon icon={faUser} class="text-gray-400 text-xs"/>
 
-const SignIn = () => {
+const SignIn = ({setToken}) => {
+
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
 
   return (
     <div>
       <div class="flex items-center h-screen w-full bg-indigo-700">
         <div class="max-w-xs w-full m-auto bg-white rounded p-5">
-          <Formik initialValues={{firstName: '', lastName: '', email: '',}}
+          <Formik initialValues={{username: '', password: '',}}
           onSubmit={async (values) => {
             await new Promise((r) => setTimeout(r, 500));
             alert(JSON.stringify(values, null, 2));
@@ -28,12 +32,12 @@ const SignIn = () => {
 
               <div class="flex flex-col mb-4">
                 <label htmlFor="username" class="text-gray-400 text-xs">Username</label>
-                <Field class="rounded border py-2 px-3 text-grey-darkest text-xs" id="firstName" name="firstName" placeholder= "Type your username"/>
+                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" onChange={e => setUserName(e.target.value)} />
               </div>
 
               <div class="flex flex-col mb-4">
                 <label htmlFor="password" class="text-gray-400 text-xs">Password</label>
-                <Field class="rounded border py-2 px-3 text-grey-darkest text-xs" id="lastName" name="lastName" placeholder="Type your password"/>
+                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" onChange={e => setPassword(e.target.value)} />
               </div>
 
               <div class="flex flex-col mb-4">
