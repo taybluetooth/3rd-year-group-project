@@ -11,21 +11,6 @@ import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
 function App() {
 
-  useEffect(() => {
-    const token = getToken();
-    if (!token) {
-      return;
-    }
-
-    axios.get(`http://localhost:5000/verifyToken?token=${token}`).then(response => {
-      setUserSession(response.data.token, response.data.user);
-      setAuthLoading(false);
-    }).catch(error => {
-      removeUserSession();
-      setAuthLoading(false);
-    });
-  }, []);
-
   return (
     <Router>
       <Switch>
