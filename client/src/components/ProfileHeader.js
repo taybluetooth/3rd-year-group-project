@@ -12,9 +12,9 @@ export default () => {
           <div class="pt-4 ml-10">
             <span class="font-bold text-lg"> Username </span>
             <div class="grid grid-flow-col auto-cols-max gap-4 text-sm">
-              <div>0 posts</div>
-              <div>0 followers</div>
-              <div>0 following</div>
+              <div><b>0</b> posts</div>
+              <div><b>0</b> followers</div>
+              <div><b>0</b> following</div>
             </div>
             <div class="pt-3 text-sm">
               <span class="font-bold"> Firstname </span>
