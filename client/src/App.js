@@ -3,6 +3,7 @@ import axios from 'axios';
 import Posts from "./pages/Posts";
 import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
+import Profile from "./pages/Profile";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute';
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/login">
           <SignIn />
+        </Route>
+        <Route path="/profiletest">
+          <Profile />
         </Route>
         <Route path="/">
           <Posts />
