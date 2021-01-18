@@ -1,18 +1,34 @@
-import React, { useState, useEffect } from "react";
-import * as Yup from 'yup';
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Navbar from "../components/Navbar.js";
-import ReactDOM from 'react-dom';
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
+import axios from 'axios';
+import { setUserSession } from '../utils/Common'
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const user = <FontAwesomeIcon icon={faUser} class="text-gray-400 text-xs"/>
 
-const SignIn = ({setToken}) => {
+const SignIn = (props) => {
 
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
+
+  const handleLogin = () => {
+    setError(null);
+    setLoading(true);
+    axios.post('http://localhost:5000/api/user/login', { username: username.value, password: password.value }).then(response => {
+      setLoading(false);
+      setUserSession(response.data.token, response.data.user);
+      props.history.push('/dashboard');
+    }).catch(error => {
+      setLoading(false);
+      if (error.response.status === 401) setError(error.response.data.message);
+      else setError("Something went wrong. Please try again later.");
+    });
+  }
+
 
   return (
     <div>
@@ -32,16 +48,16 @@ const SignIn = ({setToken}) => {
 
               <div class="flex flex-col mb-4">
                 <label htmlFor="username" class="text-gray-400 text-xs">Username</label>
-                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" onChange={e => setUserName(e.target.value)} />
+                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" {...username} autoComplete="new-username" />
               </div>
 
               <div class="flex flex-col mb-4">
                 <label htmlFor="password" class="text-gray-400 text-xs">Password</label>
-                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" onChange={e => setPassword(e.target.value)} />
+                <input class="rounded border py-2 px-3 text-grey-darkest text-xs" type="text" {...password} autoComplete="new-password"  />
               </div>
 
               <div class="flex flex-col mb-4">
-                <button type="submit" class="rounded p-2 bg-indigo-700 text-white text-md">Login</button>
+                <button type="submit" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} class="rounded p-2 bg-indigo-700 text-white text-md">Login</button>
               </div>
 
               <div class="flex flex-col mb-4 pt-6">
@@ -55,5 +71,17 @@ const SignIn = ({setToken}) => {
     </div>
   );
 };
+
+const useFormInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleChange
+  }
+}
 
 export default SignIn;
