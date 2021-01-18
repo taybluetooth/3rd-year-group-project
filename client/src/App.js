@@ -7,7 +7,7 @@ import SignIn from "./pages/SignIn";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute';
 import PublicRoute from './utils/PublicRoute';
-import { getToken, removeUserSession, setUserSession } from './Utils/Common';
+import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
 function App() {
 
