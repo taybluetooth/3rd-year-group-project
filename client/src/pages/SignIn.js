@@ -19,7 +19,7 @@ const SignIn = () => {
             alert(JSON.stringify(values, null, 2));
           }}
           >
-            <Form class="mb-6">
+            <Form class="mb-6 p-8">
               <div class="flex flex-col mb-4">
                 <label htmlFor="username">Username</label>
                 <Field class="border py-2 px-3 text-grey-darkest" id="firstName" name="firstName"/>
@@ -30,7 +30,7 @@ const SignIn = () => {
                 <Field class="border py-2 px-3 text-grey-darkest" id="lastName" name="lastName" />
               </div>
 
-              <button type="submit">Submit</button>
+              <button type="submit">Login</button>
             </Form>
           </Formik>
         </div>
