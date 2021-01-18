@@ -49,4 +49,14 @@ const UserSchema = Schema({
 
 const User = mongoose.model("User", UserSchema);
 
-module.exports = { User };
+function validateUserLogin(user) {
+  const schema = Joi.object({
+    // email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().required(), //.pattern(new RegExp('...')) LATER: Decide on password regex pattern
+    username: Joi.string().min(5).max(15).required(),
+  });
+
+  return schema.validate(user);
+}
+
+module.exports = { User, createHash, validateUserLogin };
