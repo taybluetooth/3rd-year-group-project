@@ -38,7 +38,7 @@ app.get("/api/verifyToken/:token", async (req, res) => {
     });
   }
 
-  const { displayName, username, email, _id } = user;
+  const { displayName, username, email } = user;
 
   return res.status(201).send({
     error: false,

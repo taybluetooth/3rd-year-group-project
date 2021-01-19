@@ -40,9 +40,6 @@ function App() {
         <Route path="/upload_post">
           <UploadPost />
         </Route>
-        <Route path="/">
-          <SignIn isLogin />
-        </Route>
         <Route path="/signup">
           <SignIn />
         </Route>
@@ -51,6 +48,9 @@ function App() {
         </Route>
         <Route path="/posts">
           <Posts />
+        </Route>
+        <Route path="/">
+          <SignIn isLogin />
         </Route>
       </Switch>
     </Router>
