@@ -35,13 +35,13 @@ function App() {
         <Route path="/upload_post">
           <UploadPost />
         </Route>
-        <Route path="/login">
+        <Route path="/">
           <SignIn isLogin />
         </Route>
         <Route path="/profiletest">
           <Profile />
         </Route>
-        <Route path="/">
+        <Route path="/posts">
           <Posts />
         </Route>
       </Switch>
