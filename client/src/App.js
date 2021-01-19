@@ -40,7 +40,7 @@ function App() {
         <Route path="/upload_post">
           <UploadPost />
         </Route>
-        <Route path="/login">
+        <Route path="/">
           <SignIn isLogin />
         </Route>
         <Route path="/signup">
@@ -49,7 +49,7 @@ function App() {
         <Route path="/profiletest">
           <PrivateRoute component={Profile} />
         </Route>
-        <Route path="/">
+        <Route path="/posts">
           <Posts />
         </Route>
       </Switch>
