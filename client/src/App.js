@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Posts from "./pages/Posts";
 import UploadPost from "./pages/UploadPost";
@@ -8,27 +8,32 @@ import Profile from "./pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
-import { getToken, removeUserSession, setUserSession } from "./utils/Common";
-
-// useEffect(() => {
-//   const token = getToken();
-//   if (!token) {
-//     return;
-//   }
-
-//   axios
-//     .get(`http://localhost:5000/verifyToken?token=${token}`)
-//     .then((response) => {
-//       setUserSession(response.data.token, response.data.user);
-//       // setAuthLoading(false);
-//     })
-//     .catch((error) => {
-//       removeUserSession();
-//       // setAuthLoading(false);
-//     });
-// }, []);
+import { getToken, removeUserSession, setUser } from "./utils/Common";
 
 function App() {
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+
+    const verifyToken = async () =>
+      axios
+        .get(`/api/verifyToken/${token}`)
+        .then((response) => {
+          console.dir(response);
+          setUser(response.data.user);
+          // setAuthLoading(false);
+        })
+        .catch((error) => {
+          console.dir(error);
+          removeUserSession();
+          // setAuthLoading(false);
+        });
+
+    verifyToken();
+  }, []);
+
   return (
     <Router>
       <Switch>
@@ -38,8 +43,11 @@ function App() {
         <Route path="/login">
           <SignIn isLogin />
         </Route>
+        <Route path="/signup">
+          <SignIn />
+        </Route>
         <Route path="/profiletest">
-          <Profile />
+          <PrivateRoute component={Profile} />
         </Route>
         <Route path="/">
           <Posts />

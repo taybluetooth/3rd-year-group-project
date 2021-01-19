@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-const { createHash, validateUserLogin } = require("../models/user");
+const { generateToken } = require("../token");
+const {
+  createHash,
+  validateUserLogin,
+  validateUserSignup,
+} = require("../models/user");
 
 module.exports = (app) => {
   app.get("/api/user", async (req, res) => {
@@ -28,7 +33,12 @@ module.exports = (app) => {
         .send({ error: true, message: error.details[0].message });
     }
 
-    let user = await User.findOne({ username });
+    let user;
+    try {
+      user = await User.findOne({ username });
+    } catch {
+      user = null;
+    }
 
     if (!user)
       return res.status(401).send({
@@ -47,17 +57,49 @@ module.exports = (app) => {
     return res.status(201).send({
       error: false,
       user,
+      token: generateToken(user._id),
     });
   });
 
   app.post("/api/user/signup", async (req, res) => {
-    // let user = await User.create(req.body);
-    // return res.status(201).send({
-    //   error: false,
-    //   user,
-    // });
     console.dir(req.body);
-    res.status(401).send({ message: "Error!" });
+    const { username, password, displayName, email } = req.body;
+    const { error } = validateUserSignup({
+      username,
+      password,
+      displayName,
+      email,
+    });
+    if (error) {
+      console.dir(error);
+      return res
+        .status(401)
+        .send({ error: true, message: error.details[0].message });
+    }
+
+    let user = await User.findOne().or([{ email }, { username }]);
+
+    if (user)
+      return res.status(401).send({
+        error: true,
+        message: "Login combination failed, please try again.",
+      });
+
+    try {
+      user = await User.create({ username, password, displayName, email });
+    } catch (err) {
+      console.error(err);
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    return res.status(201).send({
+      error: false,
+      user,
+      token: generateToken(user._id),
+    });
   });
 
   app.put("/api/user/:id", async (req, res) => {

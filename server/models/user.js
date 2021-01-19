@@ -15,6 +15,12 @@ function setPassword(password) {
 }
 
 const UserSchema = Schema({
+  displayName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 70,
+  },
   email: {
     type: String,
     required: true,
@@ -59,4 +65,15 @@ function validateUserLogin(user) {
   return schema.validate(user);
 }
 
-module.exports = { User, createHash, validateUserLogin };
+function validateUserSignup(user) {
+  const schema = Joi.object({
+    displayName: Joi.string().min(1).max(70).required(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().required(), //.pattern(new RegExp('...')) LATER: Decide on password regex pattern
+    username: Joi.string().min(5).max(15).required(),
+  });
+
+  return schema.validate(user);
+}
+
+module.exports = { User, createHash, validateUserLogin, validateUserSignup };
