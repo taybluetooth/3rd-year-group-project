@@ -7,15 +7,11 @@ import axios from "axios";
 import { setUserSession } from "../utils/Common";
 import { Redirect } from "react-router-dom";
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const user = (
   <FontAwesomeIcon icon={faUser} className="text-gray-400 text-xs" />
 );
 
 const SignIn = ({ isLogin, ...props }) => {
-  // const [loading, setLoading] = useState(false);
-  // const username = useFormInput("");
-  // const password = useFormInput("");
   const [error, setError] = useState(null);
   const [schema, setSchema] = useState({
     username: Yup.string()
