@@ -1,47 +1,49 @@
 const mongoose = require("mongoose");
-var idValidator = require('mongoose-id-validator');
+var idValidator = require("mongoose-id-validator");
 var Schema = mongoose.Schema;
 
-const PostSchema = Schema ({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+const postSchema = Schema(
+  {
+    userID: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    channelID: {
+      type: Schema.Types.ObjectId,
+      ref: "Channel",
+    },
+    image: {
+      type: String,
+    },
+    // likes: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    description: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 100,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    // points: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // achievement: {
+    //   type: String,
+    //   default: "tester",
+    // },
   },
-  image: {
-    type: String,
-  },
-  date: {
-    type: String,
-    minlength: 10,
-    maxlength: 10,
-  },
-  likes: {
-    type: Number,
-    default: 0,
-  },
-  description: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 100,
-  },
-  location: {
-    type: String,
-    required: true,
-  },
-  points: {
-    type: Number,
-    default: 0,
-  },
-  achievement: {
-    type: String,
-    default: 'tester',
-  },
-});
+  { timestamps: "true" }
+);
 
-PostSchema.plugin(idValidator);
+postSchema.plugin(idValidator);
 
-const Post = mongoose.model("Post", PostSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = { Post };
