@@ -15,7 +15,7 @@ const followsSchema = Schema(
       required: true,
     },
   },
-  { timestamps: "true" }
+  { timestamps: true }
 );
 
 followsSchema.plugin(idValidator);

@@ -39,7 +39,7 @@ const postSchema = Schema(
     //   default: "tester",
     // },
   },
-  { timestamps: "true" }
+  { timestamps: true }
 );
 
 postSchema.plugin(idValidator);

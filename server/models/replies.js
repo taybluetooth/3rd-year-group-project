@@ -15,7 +15,7 @@ const repliesSchema = Schema(
       required: true,
     },
   },
-  { timestamps: "true" }
+  { timestamps: true }
 );
 
 repliesSchema.plugin(idValidator);

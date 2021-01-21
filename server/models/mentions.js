@@ -15,7 +15,7 @@ const mentionsSchema = Schema(
       required: true,
     },
   },
-  { timestamps: "true" }
+  { timestamps: true }
 );
 
 mentionsSchema.plugin(idValidator);

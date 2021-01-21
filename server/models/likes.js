@@ -15,7 +15,7 @@ const likesSchema = Schema(
       required: true,
     },
   },
-  { timestamps: "true" }
+  { timestamps: true }
 );
 
 likesSchema.plugin(idValidator);
