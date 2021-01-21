@@ -42,7 +42,7 @@ const SignIn = ({ isLogin, ...props }) => {
   const handleLogin = async (values) => {
     setError(null);
     // setLoading(true);
-    return axios
+    axios
       .post(`/api/user/${isLogin ? "login" : "signup"}`, values)
       .then((response) => {
         // setLoading(false);

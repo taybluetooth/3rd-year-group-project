@@ -7,11 +7,11 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div class="flex justify-center container mx-auto p-3">
+      <div className="flex justify-center container mx-auto p-3">
         <ProfileHeader />
       </div>
-      <div class="flex justify-center container mx-auto p-3">
-        <span class="font-bold"> Posts Here </span>
+      <div className="flex justify-center container mx-auto p-3">
+        <span className="font-bold"> Posts Here </span>
       </div>
       <button
         onClick={() => {
