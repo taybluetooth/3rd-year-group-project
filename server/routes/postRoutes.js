@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 var cloudinary = require("cloudinary").v2;
 const Post = mongoose.model("Post");
 var multer = require("multer");
+const { getUserFromToken } = require("../models/user");
 var upload = multer();
 
 cloudinary.config({
@@ -20,11 +21,18 @@ module.exports = (app) => {
   // Change this later
   app.post("/api/post", upload.none(), async (req, res) => {
     console.log(req.body);
-    let testUserId = "60003a0dc79ff410189a1265";
-    let description = req.body.text;
+    const { token, description, imageUrl } = req.body;
+    const { _id: userID } = await getUserFromToken(token);
+
+    if (!userID)
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+
     let location = "London";
-    let post = await Post.create({ user: testUserId, description, location });
-    cloudinary.uploader.upload(req.body.imageUrl, function (error, result) {
+    let post = await Post.create({ userID, description, location });
+    cloudinary.uploader.upload(imageUrl, function (error, result) {
       post.image = result.public_id;
       post.save();
       console.log(result, error);

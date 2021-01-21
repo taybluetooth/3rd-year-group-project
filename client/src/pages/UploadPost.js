@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { getToken } from "../utils/Common";
 
 function UploadPost() {
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    const obj = { imageUrl, text };
+    const obj = { imageUrl, description, token: getToken() };
     console.log(obj);
     Object.keys(obj).forEach((key, i) => {
       formData.append(key, obj[key]);
@@ -27,7 +28,7 @@ function UploadPost() {
 
   const OnTextChange = (e) => {
     e.preventDefault();
-    setText(e.target.value);
+    setDescription(e.target.value);
   };
 
   const onImageFileChange = (e) => {
@@ -47,12 +48,12 @@ function UploadPost() {
 
   return (
     <>
-      <form enctype="multipart/form-data">
+      <form encType="multipart/form-data">
         <input type="file" onChange={onImageFileChange} />
         <input
           type="text"
           onChange={OnTextChange}
-          value={text}
+          value={description}
           className="border-2"
         />
         <button onClick={onSubmit}>Submit!</button>

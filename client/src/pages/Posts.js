@@ -36,7 +36,7 @@ function Posts() {
     var username = "";
     if (users && users.length > 0) {
       for (let user of users) {
-        if (user._id === post.user) {
+        if (user._id === post.userID) {
           username = user.username;
         }
       }

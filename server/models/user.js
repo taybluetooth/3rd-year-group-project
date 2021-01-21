@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const forge = require("node-forge");
+const { getIDFromToken } = require("../token");
 var Schema = mongoose.Schema;
 
 // Create the password hash
@@ -83,4 +84,20 @@ function validateUserSignup(user) {
   return schema.validate(user);
 }
 
-module.exports = { User, createHash, validateUserLogin, validateUserSignup };
+async function getUserFromToken(token) {
+  try {
+    const _id = getIDFromToken(token);
+    const user = await User.findOne({ _id });
+    return user;
+  } catch {
+    return null;
+  }
+}
+
+module.exports = {
+  User,
+  createHash,
+  validateUserLogin,
+  validateUserSignup,
+  getUserFromToken,
+};

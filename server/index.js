@@ -5,7 +5,7 @@ const { User } = require("./models/user");
 const { Post } = require("./models/post");
 const { Achievement } = require("./models/achievement");
 const dbConfig = require("./database/db.js");
-const { getIDFromToken } = require("./token");
+const { getUserFromToken } = require("./models/user");
 require("dotenv/config");
 
 const app = express();
@@ -21,24 +21,15 @@ require("./routes/achievementRoutes")(app);
 
 app.get("/api/verifyToken/:token", async (req, res) => {
   const token = req.params.token;
-  const _id = getIDFromToken(token);
-  if (!_id)
+  const user = await getUserFromToken(token);
+
+  if (!user)
     return res.status(401).send({
       error: true,
       message: "This token is not valid, please try again.",
     });
 
-  let user;
-  try {
-    user = await User.findOne({ _id });
-  } catch {
-    return res.status(401).send({
-      error: true,
-      message: "Something went wrong, please try again",
-    });
-  }
-
-  const { displayName, username, email } = user;
+  const { displayName, username, email, _id } = user;
 
   return res.status(201).send({
     error: false,
