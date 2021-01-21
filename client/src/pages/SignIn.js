@@ -185,7 +185,9 @@ const SignIn = ({ isLogin, ...props }) => {
                     type="submit"
                     className="rounded p-2 text-md bg-gray-700 text-white"
                     onClick={() =>
-                      props.history.push(`/${isLogin ? "signup" : "login"}`)
+                      (window.location.href = `/${
+                        isLogin ? "signup" : "login"
+                      }`)
                     }
                   >
                     {isLogin ? "Or Sign Up" : "Or Login"}
