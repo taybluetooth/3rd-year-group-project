@@ -9,12 +9,11 @@ const {
 const { getUserFromToken } = require("../models/user");
 
 module.exports = (app) => {
-  /* get all users
+
   app.get("/api/user", async (req, res) => {
     let users = await User.find();
     return res.status(200).send(users);
   });
-  */
 
   // get specific user by tokenised ID.
   app.get("/api/user/:token", async (req, res) => {

@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { setUserSession } from "../utils/Common";
 import { Redirect } from "react-router-dom";
-
-const user = (
-  <FontAwesomeIcon icon={faUser} className="text-gray-400 text-xs" />
-);
+import {Image} from 'cloudinary-react';
 
 const SignIn = ({ isLogin, ...props }) => {
   const [error, setError] = useState(null);
@@ -62,7 +57,7 @@ const SignIn = ({ isLogin, ...props }) => {
   };
 
   return error === false ? (
-    <Redirect to="/profiletest"></Redirect>
+    <Redirect to="/profile"></Redirect>
   ) : (
     <div className="flex items-center h-screen w-full bg-color-custom-grey">
       <div className="max-w-xs shadow-md w-full m-auto bg-color-custom-lightgrey rounded p-5">
@@ -83,7 +78,7 @@ const SignIn = ({ isLogin, ...props }) => {
             <>
               <form className="bg-color-custom-lightgrey mb-6 p-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col mb-4 text-center text-lg">
-                  <span className="text-white text-md"> flock </span>
+                  <Image className="w-50 h-50"cloudName="bluetooth" class="w-full bg-cover" publicId="flock" secure="true"></Image>
                 </div>
 
                 {!isLogin ? (
@@ -95,7 +90,7 @@ const SignIn = ({ isLogin, ...props }) => {
                       Name
                     </label>
                     <Field
-                      className="border-field py-2 px-3 text-grey-darkest text-xs"
+                      className="border-field py-2 px-3 text-white text-xs"
                       type="text"
                       // autoComplete="new-username"
                       {...getFieldProps("displayName")}
@@ -113,7 +108,7 @@ const SignIn = ({ isLogin, ...props }) => {
                     Username
                   </label>
                   <Field
-                    className="border-field py-2 px-3 text-grey-darkest text-xs"
+                    className="border-field py-2 px-3 text-white text-xs"
                     type="text"
                     autoComplete="new-username"
                     {...getFieldProps("username")}
@@ -131,7 +126,7 @@ const SignIn = ({ isLogin, ...props }) => {
                       Email
                     </label>
                     <Field
-                      className="border-field py-2 px-3 text-grey-darkest text-xs"
+                      className="border-field py-2 px-3 text-white text-xs"
                       type="email"
                       // autoComplete="new-username"
                       {...getFieldProps("email")}
@@ -149,7 +144,7 @@ const SignIn = ({ isLogin, ...props }) => {
                     Password
                   </label>
                   <Field
-                    className="border-field py-2 px-3 text-grey-darkest text-xs"
+                    className="border-field py-2 px-3 text-white text-xs"
                     type="password"
                     autoComplete="new-password"
                     {...getFieldProps("password")}
