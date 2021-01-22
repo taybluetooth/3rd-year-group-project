@@ -17,8 +17,6 @@ module.exports = (app) => {
     return res.status(200).send(posts);
   });
 
-  // Hard coded user id for now
-  // Change this later
   app.post("/api/post", upload.none(), async (req, res) => {
     console.log(req.body);
     const { token, description, imageUrl } = req.body;

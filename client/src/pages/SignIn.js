@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { setUserSession } from "../utils/Common";
 import { Redirect } from "react-router-dom";
-import {Image} from 'cloudinary-react';
+import { Image } from "cloudinary-react";
 
 const SignIn = ({ isLogin, ...props }) => {
   const [error, setError] = useState(null);
@@ -76,9 +76,18 @@ const SignIn = ({ isLogin, ...props }) => {
         >
           {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
             <>
-              <form className="bg-color-custom-lightgrey mb-6 p-8" onSubmit={handleSubmit}>
-                <div className="flex flex-col mb-4 text-center text-lg">
-                  <Image className="w-50 h-50"cloudName="bluetooth" class="w-full bg-cover" publicId="flock" secure="true"></Image>
+              <form
+                className="bg-color-custom-lightgrey mb-6 p-4 sm:p-8"
+                onSubmit={handleSubmit}
+              >
+                <div className="flex mb-4 justify-center">
+                  <Image
+                    className=""
+                    cloudName="bluetooth"
+                    class="w-40 h-40 lg:w-full lg:h-full bg-cover"
+                    publicId="flock"
+                    secure="true"
+                  ></Image>
                 </div>
 
                 {!isLogin ? (
@@ -156,7 +165,7 @@ const SignIn = ({ isLogin, ...props }) => {
                   ) : null}
                 </div>
 
-                <div className="flex flex-col mb-4">
+                <div className="flex justify-between">
                   <button
                     type="submit"
                     // value={loading ? "Loading..." : "Login"}
@@ -170,9 +179,7 @@ const SignIn = ({ isLogin, ...props }) => {
                       ? "Login"
                       : "Sign Up"}
                   </button>
-                </div>
 
-                <div className="flex flex-col">
                   <button
                     type="submit"
                     className="rounded p-2 text-md bg-color-custom-pink text-white"
@@ -185,6 +192,20 @@ const SignIn = ({ isLogin, ...props }) => {
                     {isLogin ? "Or Sign Up" : "Or Login"}
                   </button>
                 </div>
+
+                {/* <div className="flex flex-col">
+                  <button
+                    type="submit"
+                    className="rounded p-2 text-md bg-color-custom-pink text-white"
+                    onClick={() =>
+                      (window.location.href = `/${
+                        isLogin ? "signup" : "login"
+                      }`)
+                    }
+                  >
+                    {isLogin ? "Or Sign Up" : "Or Login"}
+                  </button>
+                </div> */}
 
                 {/* <div className="flex flex-col mb-4 pt-6">
                   <label
