@@ -89,7 +89,7 @@ async function getUserFromToken(token) {
     const _id = getIDFromToken(token);
     const user = await User.findOne({ _id });
     return user;
-  } catch {
+  } catch(error) {
     return null;
   }
 }
