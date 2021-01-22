@@ -1,8 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.gradient {
+  background: #11998e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+.bg-color-custom-grey {
+  background-color: #333333;
+}
+
+.bg-color-custom-lightgrey {
+  background-color: #36454F;
+}
+
+.border-field {
+  border-bottom: 1px solid #FFFFFF;
+  background: none;
+}
+
+.border-field:focus {
+  outline: none;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

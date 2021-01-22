@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { setUserSession } from "../utils/Common";
@@ -64,8 +64,8 @@ const SignIn = ({ isLogin, ...props }) => {
   return error === false ? (
     <Redirect to="/profiletest"></Redirect>
   ) : (
-    <div className="flex items-center h-screen w-full bg-indigo-700">
-      <div className="max-w-xs shadow-md w-full m-auto bg-white rounded p-5">
+    <div className="flex items-center h-screen w-full bg-color-custom-grey">
+      <div className="max-w-xs shadow-md w-full m-auto bg-color-custom-lightgrey rounded p-5">
         <Formik
           initialValues={{
             username: "",
@@ -81,12 +81,9 @@ const SignIn = ({ isLogin, ...props }) => {
         >
           {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
             <>
-              <form className="mb-6 p-8" onSubmit={handleSubmit}>
+              <form className="bg-color-custom-lightgrey mb-6 p-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col mb-4 text-center text-lg">
-                  <span className="text-indigo-700 text-md"> Flock </span>
-                  <span>
-                    {isLogin ? "Login to your" : "Sign up for an"} Account
-                  </span>
+                  <span className="text-white text-md"> flock </span>
                 </div>
 
                 {!isLogin ? (
@@ -97,8 +94,8 @@ const SignIn = ({ isLogin, ...props }) => {
                     >
                       Name
                     </label>
-                    <input
-                      className="rounded border py-2 px-3 text-grey-darkest text-xs"
+                    <Field
+                      className="border-field py-2 px-3 text-grey-darkest text-xs"
                       type="text"
                       // autoComplete="new-username"
                       {...getFieldProps("displayName")}
@@ -115,8 +112,8 @@ const SignIn = ({ isLogin, ...props }) => {
                   <label htmlFor="username" className="text-gray-400 text-xs">
                     Username
                   </label>
-                  <input
-                    className="rounded border py-2 px-3 text-grey-darkest text-xs"
+                  <Field
+                    className="border-field py-2 px-3 text-grey-darkest text-xs"
                     type="text"
                     autoComplete="new-username"
                     {...getFieldProps("username")}
@@ -133,8 +130,8 @@ const SignIn = ({ isLogin, ...props }) => {
                     <label htmlFor="email" className="text-gray-400 text-xs">
                       Email
                     </label>
-                    <input
-                      className="rounded border py-2 px-3 text-grey-darkest text-xs"
+                    <Field
+                      className="border-field py-2 px-3 text-grey-darkest text-xs"
                       type="email"
                       // autoComplete="new-username"
                       {...getFieldProps("email")}
@@ -151,8 +148,8 @@ const SignIn = ({ isLogin, ...props }) => {
                   <label htmlFor="password" className="text-gray-400 text-xs">
                     Password
                   </label>
-                  <input
-                    className="rounded border py-2 px-3 text-grey-darkest text-xs"
+                  <Field
+                    className="border-field py-2 px-3 text-grey-darkest text-xs"
                     type="password"
                     autoComplete="new-password"
                     {...getFieldProps("password")}
@@ -170,7 +167,7 @@ const SignIn = ({ isLogin, ...props }) => {
                     // value={loading ? "Loading..." : "Login"}
                     // onClick={handleLogin}
                     disabled={isSubmitting}
-                    className="rounded p-2 text-md bg-indigo-700 text-white"
+                    className="rounded p-2 text-md gradient text-white"
                   >
                     {isSubmitting
                       ? "Loading..."
@@ -183,7 +180,7 @@ const SignIn = ({ isLogin, ...props }) => {
                 <div className="flex flex-col">
                   <button
                     type="submit"
-                    className="rounded p-2 text-md bg-gray-700 text-white"
+                    className="rounded p-2 text-md bg-color-custom-pink text-white"
                     onClick={() =>
                       (window.location.href = `/${
                         isLogin ? "signup" : "login"
