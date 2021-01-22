@@ -7,7 +7,11 @@ export default class ProfileHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      user: {
+        username: "",
+        displayName: "",
+        bio: "",
+      },
     }
   }
 
@@ -15,9 +19,13 @@ export default class ProfileHeader extends React.Component {
     const token = getToken();
     axios.get(`/api/user/${token}`)
       .then(res => {
-        const users = res.data;
-        console.log(users);
-        this.setState({users});
+        const user = res.data.user;
+        console.log(user);
+        this.setState({user: {
+          username: user.username,
+          displayName: user.displayName,
+          bio: user.bio,
+        }});
       })
   }
 
@@ -30,15 +38,16 @@ export default class ProfileHeader extends React.Component {
               <img src="https://avatars0.githubusercontent.com/u/39353470?s=460&u=c82cc7e746e25bdab580cdb83ec41dbb938a7d71&v=4" alt="profilepic"></img>
             </div>
             <div className="pt-4 ml-10">
+            {this.state.user.username}
               <div className="grid grid-flow-col auto-cols-max gap-4 text-sm">
                 <div><b>0</b> posts</div>
                 <div><b>0</b> followers</div>
                 <div><b>0</b> following</div>
               </div>
               <div className="pt-3 text-sm">
-                <span className="font-bold"> Firstname </span>
+                <span className="font-bold"> {this.state.user.displayName} </span>
                 <br />
-                <span> A basic description about the profile here. </span>
+                <span> {this.state.user.bio} </span>
               </div>
             </div>
           </div>
