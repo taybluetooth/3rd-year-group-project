@@ -12,11 +12,31 @@ cloudinary.config({
 });
 
 module.exports = (app) => {
+
+  // get all posts
   app.get("/api/post", async (req, res) => {
     let posts = await Post.find();
     return res.status(200).send(posts);
   });
 
+  // get posts by userID
+  app.get("/api/post/:userID", async (req, res) => {
+    const { userID } = req.params;
+    console.log(userID)
+    let posts = await Post.find({userID: userID}).exec();
+
+    if (!posts) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    return res.status(200).send(posts);
+
+  });
+
+  // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
     console.log(req.body);
     const { token, description, imageUrl } = req.body;
@@ -41,6 +61,8 @@ module.exports = (app) => {
     });
   });
 
+
+  // update a post
   app.put("/api/post/:id", async (req, res) => {
     const { id } = req.params;
     let post = await Post.findByIdAndUpdate(id, req.body);
@@ -50,6 +72,7 @@ module.exports = (app) => {
     });
   });
 
+  // delete a post
   app.delete("/api/post/:id", async (req, res) => {
     const { id } = req.params;
     let post = await Post.findByIdAndDelete(id);

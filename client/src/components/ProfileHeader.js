@@ -1,22 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getToken } from "../utils/Common";
+import React from "react";
 
-function ProfileHeader() {
-  const [username, setUsername] = useState(null);
-  const [displayName, setDisplayName] = useState(null);
-  const [bio, setBio] = useState(null);
-
-  useEffect(() => {
-    const token = getToken();
-    axios.get(`/api/user/${token}`).then((res) => {
-      const user = res.data.user;
-      console.log(user);
-      setUsername(user.username);
-      setDisplayName(user.displayName);
-      setBio(user.bio);
-    });
-  }, []);
+function ProfileHeader(props) {
 
   return (
     <div className="md:w-8/12 mx-0 mx-3 text-white overflow-hidden">
@@ -31,7 +15,7 @@ function ProfileHeader() {
           </div>
           <div className="pt-4 ml-10">
             <div className="md:text-2xl text-md pt-5 pb-2">
-              <span> {username} </span>
+              <span> {props.username} </span>
             </div>
             <button
               href="#"
@@ -44,9 +28,9 @@ function ProfileHeader() {
               <div>0 following</div>
             </div>
             <div className="md:text-lg text-sm pb-8 pt-3">
-              <span> {displayName} </span>
+              <span> {props.displayName} </span>
               <br />
-              <span> {bio} </span>
+              <span> {props.bio} </span>
             </div>
           </div>
         </div>
