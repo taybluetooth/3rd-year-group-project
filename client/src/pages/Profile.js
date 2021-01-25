@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePosts from "../components/ProfilePosts";
@@ -6,7 +6,6 @@ import axios from "axios";
 import { getToken } from "../utils/Common";
 
 function Profile() {
-
   const [_id, set_id] = useState(null);
   const [username, setUsername] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -23,15 +22,24 @@ function Profile() {
     });
   }, []);
 
-
   return (
     <div className="w-full h-screen">
       <Navbar />
-      <div className="flex justify-center mx-auto">
-        <ProfileHeader username={username} displayName={displayName} bio={bio}/>
+      <div className="flex justify-center mx-auto p-3">
+        {username ? (
+          <ProfileHeader
+            username={username}
+            displayName={displayName}
+            bio={bio}
+          />
+        ) : null}
       </div>
-      <div className="profile-container">
-        <ProfilePosts id={_id} username={username} />
+      <div className="flex justify-center mx-auto p-3">
+        {_id && username ? (
+          <ProfilePosts id={_id} username={username} />
+        ) : (
+          <p>No posts found</p>
+        )}
       </div>
     </div>
   );

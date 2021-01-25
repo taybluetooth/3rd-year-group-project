@@ -1,9 +1,8 @@
 import React from "react";
 
 function ProfileHeader(props) {
-
   return (
-    <div className="md:w-8/12 mx-0 mx-3 text-white overflow-hidden">
+    <div className="md:w-8/12 mx-3 text-white overflow-hidden">
       <div className="md:w-full container p-3">
         <div className="flex items-center justify-center container divider">
           <div className="md:flex-shrink-0 flex items-center justify-center overflow-hidden">
@@ -20,7 +19,8 @@ function ProfileHeader(props) {
             <button
               href="#"
               className="px-3 py-2 mb-2 rounded-md text-xs bg-white text-black"
-            > EDIT
+            >
+              EDIT
             </button>
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">
               <div>0 posts</div>
