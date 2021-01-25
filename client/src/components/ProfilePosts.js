@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import PostCard from "./PostCard";
+import ProfilePostCard from "./ProfilePostCard";
 import postService from "../services/postService";
 
 function ProfilePosts(props) {
@@ -19,25 +19,19 @@ function ProfilePosts(props) {
 
   const renderPost = (post) => {
     return (
-      <PostCard
-        key={post._id}
-        user={props.username}
-        location={post.location}
-        description={post.description}
-        image={post.image}
-        likes="0" //static for now
-        points="0" // static for now
-      />
+      <ProfilePostCard image={post.image} />
     );
   };
 
   return (
-    <div className="container mx-auto p-3 text-black">
-      {posts && posts.length > 0 ? (
-        posts.map((post) => renderPost(post))
-      ) : (
-        <p>No posts found</p>
-      )}
+    <div className="profile-container">
+  		<div className="gallery flex-row flex-col md:flex-row">
+        {posts && posts.length > 0 ? (
+          posts.map((post) => renderPost(post))
+        ) : (
+          <p>No posts found</p>
+        )}
+      </div>
     </div>
   );
 }

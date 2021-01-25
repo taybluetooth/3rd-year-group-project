@@ -25,12 +25,12 @@ function Profile() {
 
 
   return (
-    <div className="bg-color-custom-grey w-full h-full">
+    <div className="w-full h-screen">
       <Navbar />
-      <div className="flex justify-center mx-auto p-3">
+      <div className="flex justify-center mx-auto">
         <ProfileHeader username={username} displayName={displayName} bio={bio}/>
       </div>
-      <div className="flex justify-center mx-auto p-3">
+      <div className="profile-container">
         <ProfilePosts id={_id} username={username} />
       </div>
     </div>
