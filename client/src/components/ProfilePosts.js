@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
 import postService from "../services/postService";
 
 function ProfilePosts(props) {
-
   const [posts, setposts] = useState(null);
 
   useEffect(() => {
@@ -33,11 +32,10 @@ function ProfilePosts(props) {
 
   return (
     <div className="container mx-auto p-3 text-black">
-      {posts && posts.length > 0 ? (
-        posts.map((post) => renderPost(post))
-      ) : (
-        <p>No posts found</p>
-      )}
+      {posts && posts.length > 0
+        ? posts.map((post) => renderPost(post))
+        : // <p>No posts found</p>
+          null}
     </div>
   );
 }

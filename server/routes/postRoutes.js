@@ -12,7 +12,6 @@ cloudinary.config({
 });
 
 module.exports = (app) => {
-
   // get all posts
   app.get("/api/post", async (req, res) => {
     let posts = await Post.find();
@@ -22,8 +21,8 @@ module.exports = (app) => {
   // get posts by userID
   app.get("/api/post/:userID", async (req, res) => {
     const { userID } = req.params;
-    console.log(userID)
-    let posts = await Post.find({userID: userID}).exec();
+    console.log(userID);
+    let posts = await Post.find({ userID: userID }).exec();
 
     if (!posts) {
       return res.status(401).send({
@@ -33,13 +32,12 @@ module.exports = (app) => {
     }
 
     return res.status(200).send(posts);
-
   });
 
   // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
-    console.log(req.body);
     const { token, description, imageUrl } = req.body;
+    console.log({ token, description });
     const { _id: userID } = await getUserFromToken(token);
 
     if (!userID)
@@ -60,7 +58,6 @@ module.exports = (app) => {
       post,
     });
   });
-
 
   // update a post
   app.put("/api/post/:id", async (req, res) => {
