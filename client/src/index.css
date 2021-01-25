@@ -19,24 +19,46 @@ body {
 }
 
 .profile-container {
-  max-width: 100rem;
+  max-width: 93.5rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2rem;
+}
+
+.square-box{
+  position: relative;
+  width: 50%;
+  overflow: hidden;
+}
+
+.square-box:before{
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.square-content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+  text-align: center;
 }
 
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -1rem -1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  grid-gap: 2rem;
   padding-bottom: 3rem;
 }
 
 .gallery-item {
   position: relative;
   flex: 1 0 22rem;
-  margin: 1rem;
   color: #fff;
   cursor: pointer;
+  width: auto;
 }
 
 .gallery-image {

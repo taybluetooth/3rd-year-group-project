@@ -25,7 +25,7 @@ function ProfilePosts(props) {
 
   return (
     <div className="profile-container">
-  		<div className="gallery flex-row flex-col md:flex-row">
+  		<div className="gallery">
         {posts && posts.length > 0 ? (
           posts.map((post) => renderPost(post))
         ) : (
