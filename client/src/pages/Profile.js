@@ -26,7 +26,7 @@ function Profile() {
     <div className="h-screen">
       <Navbar />
       <div>
-        <div className="flex justify-center mx-auto p-3">
+        <div className="flex justify-center mx-auto p-1">
           {username ? (
             <ProfileHeader
               username={username}
@@ -35,7 +35,7 @@ function Profile() {
             />
           ) : null}
         </div>
-        <div className="justify-center mx-auto p-3">
+        <div className="justify-center mx-auto p-1">
           {_id && username ? (
             <ProfilePosts id={_id} username={username} />
           ) : (
