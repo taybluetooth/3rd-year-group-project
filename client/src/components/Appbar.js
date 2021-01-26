@@ -12,14 +12,11 @@ const logout = <FontAwesomeIcon icon={faSignOutAlt} />
 
 export default () => {
   return (
-    <nav className="nav-hide">
-      <div className="fixed bg-white w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <h1 className="px-3 py-2 text-xs">FLOCK</h1>
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-2">
+    <nav className="app-hide">
+      <div className="bg-white w-full bottom-0 fixed px-6">
+        <div className="flex items-center justify-center h-16">
+          <div className="block">
+            <div className="flex items-baseline mx-auto space-x-2">
               <a href="#" className="px-3 py-2 rounded-md text-lg">{home}</a>
               <a href="#" className="px-3 py-2 rounded-md text-lg">{compass}</a>
               <a href="#" className="px-3 py-2 rounded-md text-lg text-pink">{heart}</a>

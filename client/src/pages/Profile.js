@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePosts from "../components/ProfilePosts";
+import Appbar from "../components/Appbar";
+
 import axios from "axios";
 import { getToken } from "../utils/Common";
 
@@ -43,6 +45,7 @@ function Profile() {
           )}
         </div>
       </div>
+      <Appbar />
     </div>
   );
 }

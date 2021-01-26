@@ -2,7 +2,7 @@ import React from "react";
 
 function ProfileHeader(props) {
   return (
-    <div className="md:w-8/12 mx-3 text-white overflow-hidden">
+    <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-12">
       <div className="md:w-full container p-3">
         <div className="flex items-center justify-center container divider">
           <div className="md:flex-shrink-0 flex items-center justify-center overflow-hidden">

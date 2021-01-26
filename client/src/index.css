@@ -119,6 +119,10 @@ body {
   border-bottom: 1px solid white;
 }
 
+.app-hide {
+  display: none;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -131,9 +135,15 @@ body {
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
   .gallery-item:hover .gallery-item-info,
   .gallery-item:focus .gallery-item-info {
     display: none;
+  }
+  .nav-hide {
+    display: none;
+  }
+  .app-hide {
+    display: inherit;
   }
 }
