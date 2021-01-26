@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faHeart, faCompass, faUser, faSignOutAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faHeart, faUser, faSignOutAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { removeUserSession } from "../utils/Common";
 
 const home = <FontAwesomeIcon icon={faHome} />
 const heart = <FontAwesomeIcon icon={faHeart} />
-const compass = <FontAwesomeIcon icon={faCompass} />
 const user = <FontAwesomeIcon icon={faUser} />
 const plus = <FontAwesomeIcon icon={faPlus} />
 const logout = <FontAwesomeIcon icon={faSignOutAlt} />
@@ -20,20 +20,27 @@ export default () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-2">
-              <button href="#" className="w-1/4 px-3 py-2 rounded-md text-xl">{home}</button>
-              <button href="#" className="w-1/4 px-3 py-2 rounded-md text-xl">{plus}</button>
-              <button href="#" className="w-1/4 px-3 py-2 rounded-md text-xl">{compass}</button>
-              <button href="#" className="w-1/4 px-3 py-2 rounded-md text-xl text-pink">{heart}</button>
-              <button href="/profile" className="px-3 py-2 rounded-md text-xl">{user}</button>
-              <button
-                href="#"
-                className="w-1/4 px-3 py-2 rounded-md text-xl text-red-500"
-                onClick={() => {
-                  removeUserSession();
-                  window.location.href = "/";
-                }}
-              > {logout}
-              </button>
+              <Link to="/feed">
+                <button className="w-1/4 px-3 py-2 rounded-md text-xl">{home}</button>
+              </Link>
+              <Link to="/upload_post">
+                <button className="w-1/4 px-3 py-2 rounded-md text-xl">{plus}</button>
+              </Link>
+                <button className="w-1/4 px-3 py-2 rounded-md text-xl text-pink">{heart}</button>
+              <Link to="/profile">
+                <button className="px-3 py-2 rounded-md text-xl">{user}</button>
+              </Link>
+              <Link to="/">
+                <button
+                  href="#"
+                  className="w-1/4 px-3 py-2 rounded-md text-xl text-red-500"
+                  onClick={() => {
+                    removeUserSession();
+                    window.location.href = "/";
+                  }}
+                > {logout}
+                </button>
+              </Link>
             </div>
           </div>
         </div>

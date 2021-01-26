@@ -47,9 +47,6 @@ function App() {
         <Route path="/profile">
           <PrivateRoute component={Profile} />
         </Route>
-        <Route path="/posts">
-          <Posts />
-        </Route>
         <Route path="/feed">
           <Feed />
         </Route>
