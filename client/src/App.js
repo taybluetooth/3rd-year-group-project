@@ -4,6 +4,7 @@ import Posts from "./pages/Posts";
 import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
+import Feed from "./pages/Feed";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
@@ -48,6 +49,9 @@ function App() {
         </Route>
         <Route path="/posts">
           <Posts />
+        </Route>
+        <Route path="/feed">
+          <Feed />
         </Route>
         <Route path="/">
           <SignIn isLogin={true} />
