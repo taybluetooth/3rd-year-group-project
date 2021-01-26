@@ -192,32 +192,6 @@ const SignIn = ({ isLogin, ...props }) => {
                     {isLogin ? "Or Sign Up" : "Or Login"}
                   </button>
                 </div>
-
-                {/* <div className="flex flex-col">
-                  <button
-                    type="submit"
-                    className="rounded p-2 text-md bg-color-custom-pink text-white"
-                    onClick={() =>
-                      (window.location.href = `/${
-                        isLogin ? "signup" : "login"
-                      }`)
-                    }
-                  >
-                    {isLogin ? "Or Sign Up" : "Or Login"}
-                  </button>
-                </div> */}
-
-                {/* <div className="flex flex-col mb-4 pt-6">
-                  <label
-                    htmlFor="password"
-                    className="text-gray-400 text-xs text-center mb-4"
-                  >
-                    Or Sign Up Using
-                  </label>
-                  <button type="submit" className="text-gray-400 text-xs">
-                    Sign Up
-                  </button>
-                </div> */}
               </form>
               {error ? <div className="">{error}</div> : null}
             </>
