@@ -18,13 +18,13 @@ export default (props) => {
         <div className="gallery-item-info">
           <ul>
             <li>
-              <span> {heart} 0 </span> // static for now, implement props passing likes
+              <span> {heart} 0 </span>
             </li>
             <li>
-              <span> {star} 0 </span> // static for now, implement props passing points
+              <span> {star} 0 </span>
             </li>
             <li>
-              <span> {comment} 0 </span> // static for now, implement props passing comments
+              <span> {comment} 0 </span>
             </li>
           </ul>
         </div>
