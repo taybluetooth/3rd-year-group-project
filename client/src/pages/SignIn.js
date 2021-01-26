@@ -36,23 +36,16 @@ const SignIn = ({ isLogin, ...props }) => {
 
   const handleLogin = async (values) => {
     setError(null);
-    // setLoading(true);
     axios
       .post(`/api/user/${isLogin ? "login" : "signup"}`, values)
       .then((response) => {
-        // setLoading(false);
         setUserSession(response.data.token, response.data.user);
-        // props.history.push("/dashboard");
         setError(false);
         console.dir(response);
       })
       .catch((error) => {
         console.dir(error);
         setError(error.response.data.message);
-        // setLoading(false);
-        // if (error.response.status === 401)
-        //   setError(error.response.data.message);
-        // else setError("Something went wrong. Please try again later.");
       });
   };
 
@@ -101,7 +94,6 @@ const SignIn = ({ isLogin, ...props }) => {
                     <Field
                       className="border-field py-2 px-3 text-white text-xs"
                       type="text"
-                      // autoComplete="new-username"
                       {...getFieldProps("displayName")}
                     />
                     {touched.displayName && errors.displayName ? (
@@ -137,7 +129,6 @@ const SignIn = ({ isLogin, ...props }) => {
                     <Field
                       className="border-field py-2 px-3 text-white text-xs"
                       type="email"
-                      // autoComplete="new-username"
                       {...getFieldProps("email")}
                     />
                     {touched.email && errors.email ? (
@@ -168,8 +159,6 @@ const SignIn = ({ isLogin, ...props }) => {
                 <div className="flex flex-col justify-between">
                   <button
                     type="submit"
-                    // value={loading ? "Loading..." : "Login"}
-                    // onClick={handleLogin}
                     disabled={isSubmitting}
                     className="rounded p-2 text-md gradient text-white"
                   >
