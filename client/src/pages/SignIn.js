@@ -59,8 +59,8 @@ const SignIn = ({ isLogin, ...props }) => {
   return error === false ? (
     <Redirect to="/profile"></Redirect>
   ) : (
-    <div className="flex items-center h-screen w-full bg-color-custom-grey">
-      <div className="max-w-xs shadow-md w-full m-auto bg-color-custom-lightgrey rounded p-5">
+    <div className="flex items-center h-screen w-full bg-custom-grey-A">
+      <div className="max-w-xs shadow-md w-full m-auto bg-custom-grey-B rounded p-5">
         <Formik
           initialValues={{
             username: "",
@@ -77,7 +77,7 @@ const SignIn = ({ isLogin, ...props }) => {
           {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
             <>
               <form
-                className="bg-color-custom-lightgrey mb-6 p-4 sm:p-8"
+                className="bg-custom-grey-B mb-6 p-4 sm:p-8"
                 onSubmit={handleSubmit}
               >
                 <div className="flex mb-4 justify-center">

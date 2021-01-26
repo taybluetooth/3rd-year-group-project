@@ -61,8 +61,8 @@ function Posts() {
 
   return (
     <div>
-      <Navbar />
-      <div className="container mx-auto p-3">
+      {/* <Navbar /> */}
+      <div className="flex items-center flex-col">
         {posts && posts.length > 0 ? (
           posts.map((post) => renderPost(post))
         ) : (
