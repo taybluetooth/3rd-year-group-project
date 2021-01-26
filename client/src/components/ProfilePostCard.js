@@ -15,16 +15,16 @@ export default (props) => {
     <div className='gallery-item square-box'>
       <div className='square-content'>
         <Image className="gallery-image" cloudName="bluetooth" publicId={props.image} secure="true"></Image>
-        <div className="gallery-item-info">
+        <div className="gallery-item-info mx-auto">
           <ul>
             <li>
-              <span> {heart} 0 </span>
+              <span className="text-sm md:text-lg"> {heart} 0 </span>
             </li>
             <li>
-              <span> {star} 0 </span>
+              <span className="text-sm md:text-lg"> {star} 0 </span>
             </li>
             <li>
-              <span> {comment} 0 </span>
+              <span className="text-sm md:text-lg"> {comment} 0 </span>
             </li>
           </ul>
         </div>

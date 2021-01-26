@@ -79,9 +79,8 @@ body {
 
 .gallery-item-info li {
   display: inline-block;
-  font-size: 1.7rem;
-  font-weight: 600;
-  margin-right: 1.5rem;
+  font-weight: 500;
+  margin-right: 1rem;
 }
 
 .gallery-image {
@@ -130,4 +129,11 @@ body {
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+@media only screen and (max-width: 800px) {
+  .gallery-item:hover .gallery-item-info,
+  .gallery-item:focus .gallery-item-info {
+    display: none;
+  }
 }

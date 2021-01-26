@@ -165,7 +165,7 @@ const SignIn = ({ isLogin, ...props }) => {
                   ) : null}
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex flex-col justify-between">
                   <button
                     type="submit"
                     // value={loading ? "Loading..." : "Login"}
