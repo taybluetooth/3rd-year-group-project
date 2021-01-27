@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const forge = require("node-forge");
 const { getIDFromToken } = require("../token");
+const { func } = require("joi");
 var Schema = mongoose.Schema;
 
 // Create the password hash
@@ -57,6 +58,10 @@ const userSchema = Schema(
       type: String,
       default: "user",
     },
+    profileImage: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
@@ -89,7 +94,16 @@ async function getUserFromToken(token) {
     const _id = getIDFromToken(token);
     const user = await User.findOne({ _id });
     return user;
-  } catch(error) {
+  } catch (error) {
+    return null;
+  }
+}
+
+async function getUserFromUsername(username) {
+  try {
+    const user = await User.findOne({ username });
+    return user;
+  } catch (error) {
     return null;
   }
 }
@@ -100,4 +114,5 @@ module.exports = {
   validateUserLogin,
   validateUserSignup,
   getUserFromToken,
+  getUserFromUsername,
 };

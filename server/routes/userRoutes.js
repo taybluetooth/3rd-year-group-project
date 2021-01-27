@@ -5,11 +5,11 @@ const {
   createHash,
   validateUserLogin,
   validateUserSignup,
+  getUserFromUsername,
 } = require("../models/user");
 const { getUserFromToken } = require("../models/user");
 
 module.exports = (app) => {
-
   app.get("/api/user", async (req, res) => {
     let users = await User.find();
     return res.status(200).send(users);
@@ -19,6 +19,23 @@ module.exports = (app) => {
   app.get("/api/user/:token", async (req, res) => {
     const { token } = req.params;
     const user = await getUserFromToken(token);
+
+    if (!user) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    return res.status(201).send({
+      error: false,
+      user,
+    });
+  });
+
+  app.get("/api/user/username/:username", async (req, res) => {
+    const { username } = req.params;
+    const user = await getUserFromUsername(username);
 
     if (!user) {
       return res.status(401).send({
@@ -125,7 +142,6 @@ module.exports = (app) => {
     });
   });
 
-
   // update a user's details by their ID
   app.put("/api/user/:id", async (req, res) => {
     const { id } = req.params;
@@ -135,7 +151,6 @@ module.exports = (app) => {
       user,
     });
   });
-
 
   // delete a user by their ID
   app.delete("/api/user/:id", async (req, res) => {
