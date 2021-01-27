@@ -47,11 +47,11 @@ export default () => {
               <button className="px-3 py-2 rounded-md text-xl text-pink-500">
                 {heart}
               </button>
-              <Link to={`/profile/${getUser().username}`}>
+              <a href={`/profile/${getUser().username}`}>
                 <button className="px-3 py-2 rounded-md text-xl text-white">
                   {user}
                 </button>
-              </Link>
+              </a>
               <Link to="/">
                 <button
                   href="#"
