@@ -70,15 +70,14 @@ const SignIn = ({ isLogin, ...props }) => {
           {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
             <>
               <form
-                className="bg-custom-grey-B mb-6 p-4 sm:p-8"
+                className="bg-custom-grey-B mb-6 p-8"
                 onSubmit={handleSubmit}
               >
-                <div className="flex mb-4 justify-center">
+                <div className="w-50 h-20 flex mb-8 justify-center">
                   <Image
-                    className=""
                     cloudName="bluetooth"
-                    class="w-40 h-40 lg:w-full lg:h-full bg-cover"
-                    publicId="flock"
+                    className="bg-cover"
+                    publicId="flock-logo-grey"
                     secure="true"
                   ></Image>
                 </div>

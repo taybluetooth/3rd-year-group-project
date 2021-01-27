@@ -126,18 +126,6 @@ body {
   animation: gradient 5s ease infinite;
 }
 
-/* .bg-color-custom-grey {
-  background-color: #333333;
-}
-
-.bg-color-custom-lightgrey {
-  background-color: #36454f;
-}
-
-.border-custom-lightgrey {
-  border-color: #36454f;
-} */
-
 .border-field {
   border-bottom: 1px solid #ffffff;
   background: none;
