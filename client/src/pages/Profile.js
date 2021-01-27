@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePosts from "../components/ProfilePosts";
 import Appbar from "../components/Appbar";
-
+import Loading from "../components/Loading";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../utils/Common";
 
@@ -12,21 +12,32 @@ function Profile() {
   const [username, setUsername] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [bio, setBio] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  let { username: userName } = useParams();
 
   useEffect(() => {
     const token = getToken();
-    axios.get(`/api/user/${token}`).then((res) => {
-      const user = res.data.user;
-      set_id(user._id);
-      setUsername(user.username);
-      setDisplayName(user.displayName);
-      setBio(user.bio);
-    });
+    axios
+      .get(`/api/user/username/${userName}`)
+      .then((res) => {
+        const user = res.data.user;
+        set_id(user._id);
+        setUsername(user.username);
+        setDisplayName(user.displayName);
+        setBio(user.bio);
+        setError(false);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
   }, []);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : error === true ? (
+    <Redirect to="/feed" />
+  ) : (
     <div className="h-screen">
-      <Navbar />
       <div>
         <div className="flex justify-center mx-auto p-1">
           {username ? (
@@ -40,9 +51,7 @@ function Profile() {
         <div className="justify-center mx-auto p-1">
           {_id && username ? (
             <ProfilePosts id={_id} username={username} />
-          ) : (
-            null
-          )}
+          ) : null}
         </div>
       </div>
       <Appbar />

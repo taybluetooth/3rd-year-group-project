@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ProfilePostCard from "./ProfilePostCard";
 import PostCard from "./PostCard";
 import postService from "../services/postService";
@@ -17,17 +17,15 @@ function ProfilePosts(props) {
     setposts(res);
   };
 
-  const renderPost = (post) => {
-    return (
-      <ProfilePostCard image={post.image} />
-    );
+  const renderPost = (post, i) => {
+    return <ProfilePostCard key={i} image={post.image} />;
   };
 
   return (
     <div className="profile-container">
-  		<div className="gallery">
+      <div className="gallery">
         {posts && posts.length > 0 ? (
-          posts.map((post) => renderPost(post))
+          posts.map((post, i) => renderPost(post, i))
         ) : (
           <p>No posts found</p>
         )}

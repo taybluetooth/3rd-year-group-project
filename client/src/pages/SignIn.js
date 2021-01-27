@@ -50,7 +50,7 @@ const SignIn = ({ isLogin, ...props }) => {
   };
 
   return error === false ? (
-    <Redirect to="/profile"></Redirect>
+    <Redirect to="/feed" />
   ) : (
     <div className="overflow-hidden flex items-center h-screen w-full bg-custom-grey-A">
       <div className="max-w-xs shadow-md w-full m-auto bg-custom-grey-B rounded p-5">

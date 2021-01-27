@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar.js";
 import PostCard from "../components/PostCard.js";
 
 // SERVICES
@@ -60,8 +59,7 @@ function Posts() {
   };
 
   return (
-    <div>
-      {/* <Navbar /> */}
+    <>
       <div className="flex items-center flex-col">
         {posts && posts.length > 0 ? (
           posts.map((post) => renderPost(post))
@@ -69,7 +67,7 @@ function Posts() {
           <p>No posts found</p>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

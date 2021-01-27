@@ -44,8 +44,8 @@ function App() {
         <Route path="/signup">
           <SignIn isLogin={false} />
         </Route>
-        <Route path="/profile">
-          <PrivateRoute component={Profile} />
+        <Route path="/profile/:username">
+          <Profile />
         </Route>
         <Route path="/feed">
           <Feed />

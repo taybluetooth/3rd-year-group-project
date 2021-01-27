@@ -1,32 +1,56 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faHeart, faCompass, faUser, faSignOutAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faHeart,
+  faCompass,
+  faUser,
+  faSignOutAlt,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession } from "../utils/Common";
+import { Image } from "cloudinary-react";
 
-const home = <FontAwesomeIcon icon={faHome} />
-const heart = <FontAwesomeIcon icon={faHeart} />
-const compass = <FontAwesomeIcon icon={faCompass} />
-const user = <FontAwesomeIcon icon={faUser} />
-const plus = <FontAwesomeIcon icon={faPlus} />
-const logout = <FontAwesomeIcon icon={faSignOutAlt} />
+const home = <FontAwesomeIcon icon={faHome} />;
+const heart = <FontAwesomeIcon icon={faHeart} />;
+const compass = <FontAwesomeIcon icon={faCompass} />;
+const user = <FontAwesomeIcon icon={faUser} />;
+const plus = <FontAwesomeIcon icon={faPlus} />;
+const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 
 export default () => {
   return (
-    <nav className="app-hide">
-      <div className="bg-black w-full bottom-0 fixed px-6">
-        <div className="flex items-center justify-center h-16">
-          <div className="block">
-            <div className="flex items-baseline mx-auto space-x-2">
+    <nav className="">
+      <div className="bg-black w-full bottom-0 md:top-0 md:bottom-auto fixed px-6 md:px-8">
+        <div className="flex items-center justify-center md:justify-between h-16">
+          <div className="w-20 h-10 hidden md:flex items-center">
+            <Image
+              cloudName="bluetooth"
+              className="bg-cover"
+              publicId="flock-logo-nav"
+              secure="true"
+            ></Image>
+          </div>
+          <div className="">
+            <div className="flex items-baseline mx-auto">
               <Link to="/feed">
-                <button className="px-3 py-2 rounded-md text-xl text-white">{home}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-white">
+                  {home}
+                </button>
               </Link>
               <Link to="/upload_post">
-                <button className="px-3 py-2 rounded-md text-xl text-white">{plus}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-white">
+                  {plus}
+                </button>
               </Link>
-                <button className="px-3 py-2 rounded-md text-xl text-pink-500">{heart}</button>
+              <button className="px-3 py-2 rounded-md text-xl text-pink-500">
+                {heart}
+              </button>
               <Link to="/profile">
-                <button className="px-3 py-2 rounded-md text-xl text-white">{user}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-white">
+                  {user}
+                </button>
               </Link>
               <Link to="/">
                 <button
@@ -36,7 +60,8 @@ export default () => {
                     removeUserSession();
                     window.location.href = "/";
                   }}
-                > {logout}
+                >
+                  {logout}
                 </button>
               </Link>
             </div>
