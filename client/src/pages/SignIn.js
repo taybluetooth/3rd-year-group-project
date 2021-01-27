@@ -73,7 +73,7 @@ const SignIn = ({ isLogin, ...props }) => {
                 className="bg-custom-grey-B mb-6 p-8"
                 onSubmit={handleSubmit}
               >
-                <div className="w-50 h-20 flex mb-8 justify-center">
+                <div className="w-20 h-10 flex mb-8 mx-auto justify-center">
                   <Image
                     cloudName="bluetooth"
                     className="bg-cover"

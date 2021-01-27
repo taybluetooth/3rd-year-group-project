@@ -14,7 +14,7 @@ const logout = <FontAwesomeIcon icon={faSignOutAlt} />
 export default () => {
   return (
     <nav className="nav-hide">
-      <div className="fixed bg-black w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="fixed bg-black w-full mx-auto px-8">
         <div className="flex items-center justify-between h-16">
           <div className="w-20 h-10 flex items-center">
             <Image
@@ -27,19 +27,19 @@ export default () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-2">
               <Link to="/feed">
-                <button className="w-1/4 px-3 py-2 rounded-md text-xl text-white">{home}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-white">{home}</button>
               </Link>
               <Link to="/upload_post">
-                <button className="w-1/4 px-3 py-2 rounded-md text-xl text-white">{plus}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-white">{plus}</button>
               </Link>
-                <button className="w-1/4 px-3 py-2 rounded-md text-xl text-pink-500">{heart}</button>
+                <button className="px-3 py-2 rounded-md text-xl text-pink-500">{heart}</button>
               <Link to="/profile">
                 <button className="px-3 py-2 rounded-md text-xl text-white">{user}</button>
               </Link>
               <Link to="/">
                 <button
                   href="#"
-                  className="w-1/4 px-3 py-2 rounded-md text-xl text-red-500"
+                  className="px-3 py-2 rounded-md text-xl text-red-500"
                   onClick={() => {
                     removeUserSession();
                     window.location.href = "/";
