@@ -9,7 +9,7 @@ import {
   faSignOutAlt,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { removeUserSession } from "../utils/Common";
+import { removeUserSession, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
 
 const home = <FontAwesomeIcon icon={faHome} />;
@@ -47,7 +47,7 @@ export default () => {
               <button className="px-3 py-2 rounded-md text-xl text-pink-500">
                 {heart}
               </button>
-              <Link to="/profile">
+              <Link to={`/profile/${getUser().username}`}>
                 <button className="px-3 py-2 rounded-md text-xl text-white">
                   {user}
                 </button>
@@ -58,7 +58,6 @@ export default () => {
                   className="px-3 py-2 rounded-md text-xl text-red-500"
                   onClick={() => {
                     removeUserSession();
-                    window.location.href = "/";
                   }}
                 >
                   {logout}

@@ -5,7 +5,7 @@ import Appbar from "../components/Appbar";
 import Loading from "../components/Loading";
 import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
-import { getToken } from "../utils/Common";
+import { getToken, getUser } from "../utils/Common";
 
 function Profile() {
   const [_id, set_id] = useState(null);
@@ -28,7 +28,10 @@ function Profile() {
         setBio(user.bio);
         setError(false);
       })
-      .catch(() => setError(true))
+      .catch((error) => {
+        setError(true);
+        alert("Sorry, something went wrong, please try again.");
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -45,6 +48,7 @@ function Profile() {
               username={username}
               displayName={displayName}
               bio={bio}
+              isLoggedInUser={getUser()._id === _id}
             />
           ) : null}
         </div>
