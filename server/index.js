@@ -18,6 +18,7 @@ app.use(express.json()); // Make sure it comes back as json
 require("./routes/userRoutes")(app);
 require("./routes/postRoutes")(app);
 require("./routes/achievementRoutes")(app);
+require("./routes/followerRoutes")(app);
 
 app.get("/api/verifyToken/:token", async (req, res) => {
   const token = req.params.token;

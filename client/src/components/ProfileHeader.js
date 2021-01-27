@@ -1,6 +1,13 @@
 import React from "react";
 
-function ProfileHeader({ username, isLoggedInUser, displayName, bio }) {
+function ProfileHeader({
+  username,
+  isLoggedInUser,
+  displayName,
+  bio,
+  numFollows,
+  numFollowing,
+}) {
   return (
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-12">
       <div className="md:w-full container p-3">
@@ -16,7 +23,8 @@ function ProfileHeader({ username, isLoggedInUser, displayName, bio }) {
             <div className="md:text-2xl text-md pt-5 pb-2">
               <span> {username} </span>
             </div>
-            {isLoggedInUser ? (
+            {/* change this later*/}
+            {isLoggedInUser === null ? null : isLoggedInUser ? (
               <button
                 href="#"
                 className="px-3 py-2 mb-2 rounded-md text-xs bg-white text-black"
@@ -33,8 +41,8 @@ function ProfileHeader({ username, isLoggedInUser, displayName, bio }) {
             )}
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">
               <div>0 posts</div>
-              <div>0 followers</div>
-              <div>0 following</div>
+              <div>{numFollows} followers</div>
+              <div>{numFollowing} following</div>
             </div>
             <div className="md:text-lg text-sm pb-8 pt-3">
               <span> {displayName} </span>

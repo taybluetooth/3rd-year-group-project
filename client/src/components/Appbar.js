@@ -47,14 +47,19 @@ export default () => {
               <button className="px-3 py-2 rounded-md text-xl text-pink-500">
                 {heart}
               </button>
-              <a href={`/profile/${getUser().username}`}>
+              <a
+                href={
+                  getUser() === null
+                    ? `/login`
+                    : `/profile/${getUser().username}`
+                }
+              >
                 <button className="px-3 py-2 rounded-md text-xl text-white">
                   {user}
                 </button>
               </a>
               <Link to="/">
                 <button
-                  href="#"
                   className="px-3 py-2 rounded-md text-xl text-red-500"
                   onClick={() => {
                     removeUserSession();

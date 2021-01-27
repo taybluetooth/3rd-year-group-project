@@ -62,6 +62,14 @@ const userSchema = Schema(
       type: String,
       default: "",
     },
+    numFollows: {
+      type: Number,
+      default: 0,
+    },
+    numFollowing: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

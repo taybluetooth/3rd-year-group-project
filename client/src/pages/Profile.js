@@ -8,10 +8,11 @@ import axios from "axios";
 import { getToken, getUser } from "../utils/Common";
 
 function Profile() {
-  const [_id, set_id] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [displayName, setDisplayName] = useState(null);
-  const [bio, setBio] = useState(null);
+  // const [_id, set_id] = useState(null);
+  // const [username, setUsername] = useState(null);
+  // const [displayName, setDisplayName] = useState(null);
+  // const [bio, setBio] = useState(null);
+  const [profileUser, setProfileUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   let { username: userName } = useParams();
@@ -22,14 +23,16 @@ function Profile() {
       .get(`/api/user/username/${userName}`)
       .then((res) => {
         const user = res.data.user;
-        set_id(user._id);
-        setUsername(user.username);
-        setDisplayName(user.displayName);
-        setBio(user.bio);
+        // set_id(user._id);
+        // setUsername(user.username);
+        // setDisplayName(user.displayName);
+        // setBio(user.bio);
+        setProfileUser(user);
         setError(false);
       })
       .catch((error) => {
         setError(true);
+        console.error(error);
         alert("Sorry, something went wrong, please try again.");
       })
       .finally(() => setLoading(false));
@@ -43,19 +46,21 @@ function Profile() {
     <div className="h-screen">
       <div>
         <div className="flex justify-center mx-auto p-1">
-          {username ? (
+          {profileUser ? (
             <ProfileHeader
-              username={username}
-              displayName={displayName}
-              bio={bio}
-              isLoggedInUser={getUser()._id === _id}
+              username={profileUser.username}
+              displayName={profileUser.displayName}
+              bio={profileUser.bio}
+              isLoggedInUser={
+                getUser() === null ? null : getUser()._id === profileUser._id
+              }
+              numFollows={profileUser.numFollows}
+              numFollowing={profileUser.numFollowing}
             />
           ) : null}
         </div>
         <div className="justify-center mx-auto p-1">
-          {_id && username ? (
-            <ProfilePosts id={_id} username={username} />
-          ) : null}
+          {profileUser ? <ProfilePosts id={profileUser._id} /> : null}
         </div>
       </div>
       <Appbar />

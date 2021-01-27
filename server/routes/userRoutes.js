@@ -6,8 +6,8 @@ const {
   validateUserLogin,
   validateUserSignup,
   getUserFromUsername,
+  getUserFromToken,
 } = require("../models/user");
-const { getUserFromToken } = require("../models/user");
 
 module.exports = (app) => {
   app.get("/api/user", async (req, res) => {
