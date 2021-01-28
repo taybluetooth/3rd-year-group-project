@@ -6,7 +6,12 @@ import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { getToken, removeUserSession, setUser } from "./utils/Common";
@@ -51,7 +56,7 @@ function App() {
           <Feed />
         </Route>
         <Route path="/">
-          <SignIn isLogin={true} />
+          {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
         </Route>
       </Switch>
     </Router>

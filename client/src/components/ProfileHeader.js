@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import { getToken } from "../utils/Common";
 
 function ProfileHeader({
   username,
@@ -7,7 +9,24 @@ function ProfileHeader({
   bio,
   numFollows,
   numFollowing,
+  isFollowing,
 }) {
+  const followOrUnfollow = () => {
+    axios
+      .post(`/api/${isFollowing ? "unfollow" : "follow"}`, {
+        token: getToken(),
+        followingUsername: username,
+      })
+      .then((res) => {
+        console.dir(res);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Sorry, something went wrong. Please try again");
+      });
+  };
+
   return (
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-12">
       <div className="md:w-full container p-3">
@@ -35,8 +54,11 @@ function ProfileHeader({
               <button
                 href="#"
                 className="px-3 py-2 mb-2 rounded-md text-xs bg-white text-black"
+                onClick={() => {
+                  followOrUnfollow();
+                }}
               >
-                FOLLOW
+                {isFollowing ? "UNFOLLOW" : "FOLLOW"}
               </button>
             )}
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">

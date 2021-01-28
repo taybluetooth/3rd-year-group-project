@@ -58,16 +58,15 @@ export default () => {
                   {user}
                 </button>
               </a>
-              <Link to="/">
-                <button
-                  className="px-3 py-2 rounded-md text-xl text-red-500"
-                  onClick={() => {
-                    removeUserSession();
-                  }}
-                >
-                  {logout}
-                </button>
-              </Link>
+              <button
+                className="px-3 py-2 rounded-md text-xl text-red-500"
+                onClick={() => {
+                  removeUserSession();
+                  window.location.href = "/";
+                }}
+              >
+                {logout}
+              </button>
             </div>
           </div>
         </div>
