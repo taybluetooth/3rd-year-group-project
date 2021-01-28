@@ -50,7 +50,6 @@ function ProfileHeader({
               >
                 EDIT
               </button>
-
             ) : (
               <button
                 href="#"
@@ -64,7 +63,7 @@ function ProfileHeader({
             )}
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">
               <div>0 posts</div>
-              <div>{numFollows} followers</div>
+              <div>{numFollows} follower(s)</div>
               <div>{numFollowing} following</div>
             </div>
             <div className="md:text-lg text-sm pb-8 pt-3">
