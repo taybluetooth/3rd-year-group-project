@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Appbar from "../components/Appbar";
 import axios from "axios";
 import { getToken } from "../utils/Common";
 
@@ -48,18 +49,32 @@ function UploadPost() {
 
   return (
     <>
-      <form encType="multipart/form-data">
-        <input type="file" onChange={onImageFileChange} />
-        <input
-          type="text"
-          onChange={OnTextChange}
-          value={description}
-          className="border-2"
-        />
-        <button onClick={onSubmit}>Submit!</button>
-      </form>
-      <h1 className="mt-12">Test</h1>
-      <img src={imageUrl}></img>
+      <div className="h-screen">
+        <div className="flex justify-center mx-auto pt-20">
+          <form encType="multipart/form-data">
+            <div className="flex flex-col p-5 items-center">
+              <h1 className="pb-5 text-2xl text-white text-bold"> Hey! I see you wanna make a post... </h1>
+              <div>
+                <span className="text-bold text-lg text-white"> Description: </span>
+                <br></br>
+                <textarea
+                  type="text"
+                  onChange={OnTextChange}
+                  value={description}
+                  style={{resize: "none"}}
+                  className="border-2 rounded p-10"
+                />
+              </div>
+              <div className="p-6">
+                <input type="file" id="files" onChange={onImageFileChange} className="hidden"/>
+                <label className="rounded p-4 text-md bg-white text-black" for="files"> Select Image </label>
+              </div>
+              <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
+            </div>
+          </form>
+        </div>
+        <Appbar />
+      </div>
     </>
   );
 }
