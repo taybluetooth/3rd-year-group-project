@@ -50,6 +50,7 @@ function ProfileHeader({
               >
                 EDIT
               </button>
+
             ) : (
               <button
                 href="#"
