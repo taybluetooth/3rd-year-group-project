@@ -9,6 +9,7 @@ function UploadPost() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
+  const token = getToken();
 
   const onSubmit = (e) => {
     setError(null);
@@ -55,6 +56,8 @@ function UploadPost() {
 
   return error === false ? (
     <Redirect to="/feed" />
+  ) : token == null ? (
+    <Redirect to="/" />
   ) : (
     <>
     <Appbar />
