@@ -1,8 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisH,
+  faHeart,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 

@@ -16,10 +16,10 @@ const postSchema = Schema(
     image: {
       type: String,
     },
-    // likes: {
-    //   type: Number,
-    //   default: 0,
-    // },
+    likes: {
+    type: Number,
+    default: 0,
+    },
     description: {
       type: String,
       required: true,
@@ -30,10 +30,10 @@ const postSchema = Schema(
       type: String,
       required: true,
     },
-    // points: {
-    //   type: Number,
-    //   default: 0,
-    // },
+    points: {
+      type: Number,
+      default: 0,
+    },
     // achievement: {
     //   type: String,
     //   default: "tester",

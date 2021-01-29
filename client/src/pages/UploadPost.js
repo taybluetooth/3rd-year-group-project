@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Appbar from "../components/Appbar";
 import axios from "axios";
 import { getToken } from "../utils/Common";
@@ -10,6 +10,7 @@ function UploadPost() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
   const token = getToken();
+
 
   const onSubmit = (e) => {
     setError(null);
@@ -26,6 +27,10 @@ function UploadPost() {
       .post("/api/post", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+        },
+        params: {
+          lat: 55.953251,
+          lon: -3.188267, //static for now
         },
       })
       .then((response) => {

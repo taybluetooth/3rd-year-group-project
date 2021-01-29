@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
-var cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;
 const Post = mongoose.model("Post");
-var multer = require("multer");
+const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
-var upload = multer();
+const upload = multer();
+const navigate = require('navigator');
 
 cloudinary.config({
   cloud_name: "bluetooth",
@@ -37,7 +38,9 @@ module.exports = (app) => {
   // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
     const { token, description, imageUrl } = req.body;
+    const { lat, lon } = req.query;
     console.log({ token, description });
+    console.log({ lat, lon });
     const { _id: userID } = await getUserFromToken(token);
 
     if (!userID)
@@ -46,7 +49,8 @@ module.exports = (app) => {
         message: "Something went wrong, please try again.",
       });
 
-    let location = "London";
+    let location = "London"; // static for now
+
     let post = await Post.create({ userID, description, location });
     cloudinary.uploader.upload(imageUrl, function (error, result) {
       post.image = result.public_id;
