@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import Appbar from "../components/Appbar";
 import axios from "axios";
 import { getToken } from "../utils/Common";
+import { Redirect } from "react-router-dom";
 
 function UploadPost() {
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState(null);
 
   const onSubmit = (e) => {
+    setError(null);
     e.preventDefault();
     let formData = new FormData();
     const obj = { imageUrl, description, token: getToken() };
@@ -23,6 +26,9 @@ function UploadPost() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+      })
+      .then((response) => {
+        setError(false)
       })
       .catch((err) => console.error(err));
   };
@@ -47,7 +53,9 @@ function UploadPost() {
     reader.readAsDataURL(file);
   };
 
-  return (
+  return error === false ? (
+    <Redirect to="/feed" />
+  ) : (
     <>
     <Appbar />
       <div className="flex items-center h-screen">
