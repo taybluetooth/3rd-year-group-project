@@ -31,6 +31,10 @@
   box-sizing: border-box;
 }
 
+img[src=""] {
+  display: none;
+}
+
 body {
   min-height: 100vh;
   margin: 0;

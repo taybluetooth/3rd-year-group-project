@@ -49,31 +49,37 @@ function UploadPost() {
 
   return (
     <>
-      <div className="h-screen">
-        <div className="flex justify-center mx-auto pt-20">
+    <Appbar />
+      <div className="flex items-center h-screen">
+        <div className="flex justify-center mx-auto">
           <form encType="multipart/form-data">
-            <div className="flex flex-col p-5 items-center">
-              <h1 className="pb-5 text-2xl text-white text-bold"> Hey! I see you wanna make a post... </h1>
-              <div>
-                <span className="text-bold text-lg text-white"> Description: </span>
-                <br></br>
-                <textarea
-                  type="text"
-                  onChange={OnTextChange}
-                  value={description}
-                  style={{resize: "none"}}
-                  className="border-2 rounded p-10"
-                />
-              </div>
-              <div className="p-6">
+            <div className="flex flex-col p-5">
+              <h1 className="pb-5 text-2xl text-white text-bold"> Hey! &#128075; I see you wanna make a post... </h1>
+              <textarea
+                type="text"
+                onChange={OnTextChange}
+                value={description}
+                style={{resize: "none"}}
+                className="border-2 rounded p-10"
+              />
+              <div className="mx-auto p-6">
                 <input type="file" id="files" onChange={onImageFileChange} className="hidden"/>
                 <label className="rounded p-4 text-md bg-white text-black" for="files"> Select Image </label>
               </div>
-              <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
+              {(imageUrl === "" || description === "")
+                ?
+                <button className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
+                :
+                <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
+              }
+              <div className='mt-2 rounded gallery-item square-box border-solid border-4'>
+                <div className='square-content'>
+                  <img src={imageUrl} className="gallery-image" />
+                </div>
+              </div>
             </div>
           </form>
         </div>
-        <Appbar />
       </div>
     </>
   );
