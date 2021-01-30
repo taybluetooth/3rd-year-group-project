@@ -64,10 +64,10 @@ function UploadPost() {
   ) : token == null ? (
     <Redirect to="/" />
   ) : (
-    <>
-    <Appbar />
-      <div className="flex items-center h-screen">
-        <div className="flex justify-center mx-auto">
+    <div className="h-full">
+      <Appbar />
+      <div className="flex items-center">
+        <div className="flex justify-center mx-auto pt-20">
           <form encType="multipart/form-data">
             <div className="flex flex-col p-5">
               <h1 className="pb-5 text-2xl text-white text-bold"> Hey! &#128075; I see you wanna make a post... </h1>
@@ -97,7 +97,7 @@ function UploadPost() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
