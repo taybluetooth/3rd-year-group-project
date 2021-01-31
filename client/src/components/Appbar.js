@@ -21,8 +21,8 @@ const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 
 export default () => {
   return (
-    <nav className="">
-      <div className="bg-black w-full bottom-0 md:top-0 md:bottom-auto fixed px-6 md:px-8">
+    <nav>
+      <div className="bg-black w-full bottom-0 md:top-0 fixed md:bottom-auto px-6 md:px-8">
         <div className="flex items-center justify-center md:justify-between h-16">
           <div className="w-20 h-10 hidden md:flex items-center">
             <Image

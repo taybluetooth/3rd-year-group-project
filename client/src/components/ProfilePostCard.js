@@ -18,14 +18,16 @@ export default (props) => {
         <div className="gallery-item-info mx-auto">
           <ul>
             <li>
-              <span className="text-sm md:text-lg"> {heart} 0 </span>
+              <span className="font-extrabold text-sm md:text-xl"> {heart} 0 </span>
             </li>
             <li>
-              <span className="text-sm md:text-lg"> {star} 0 </span>
+              <span className="font-extrabold text-sm md:text-xl"> {star} 0 </span>
             </li>
+            {/*
             <li>
               <span className="text-sm md:text-lg"> {comment} 0 </span>
             </li>
+            */}
           </ul>
         </div>
       </div>

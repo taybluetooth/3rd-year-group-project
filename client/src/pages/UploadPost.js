@@ -9,6 +9,7 @@ function UploadPost() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
+  const [imgError, setImgError] = useState("");
   const token = getToken();
 
 
@@ -48,13 +49,29 @@ function UploadPost() {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    let extension = file.name.split(".").pop();
 
     reader.onloadend = () => {
-      setFile(file);
-      let { result } = reader;
-      setImageUrl(result);
-      console.log({ file, result });
-    };
+      if(extension == "png" || extension == "jpg") {
+        if(file.size <= (1 * 1024 * 1024)) {
+          console.log(file.size);
+          setFile(file);
+          let { result } = reader;
+          setImageUrl(result);
+          console.log({ file, result });
+          setImgError("");
+        }
+        else {
+          console.log(file.size);
+          setImgError("File is too large to upload");
+          console.log("File is too large to upload.");
+        }
+    }
+    else {
+      setImgError("File must be a .png or .jpg image!");
+      console.log("File must be a .png or .jpg image!");
+    }
+  };
 
     reader.readAsDataURL(file);
   };
@@ -79,18 +96,19 @@ function UploadPost() {
                 className="border-2 rounded p-10"
               />
               <div className="mx-auto p-6">
-                <input type="file" id="files" onChange={onImageFileChange} className="hidden"/>
+                <input accept="image/x-png,image/gif,image/jpeg" type="file" id="files" onChange={onImageFileChange} className="hidden"/>
                 <label className="rounded p-4 text-md bg-white text-black" for="files"> Select Image </label>
               </div>
               {(imageUrl === "" || description === "")
                 ?
-                <button className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
+                <button id="uploadBtn" className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
                 :
                 <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
               }
-              <div className='mt-2 rounded gallery-item square-box border-solid border-4'>
+              <div className='mt-2 rounded gallery-item square-box'>
                 <div className='square-content'>
                   <img src={imageUrl} className="gallery-image" />
+                  <h4> {imgError} </h4>
                 </div>
               </div>
             </div>
