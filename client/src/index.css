@@ -39,6 +39,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background-color: #333333;
+  padding-top: 60px;
 }
 
 .profile-container {
