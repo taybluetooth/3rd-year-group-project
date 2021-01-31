@@ -42,6 +42,10 @@ body {
   padding-top: 60px;
 }
 
+button:focus {
+  outline: none;
+}
+
 .profile-container {
   max-width: 93.5rem;
   margin: 0 auto;

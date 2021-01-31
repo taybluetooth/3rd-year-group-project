@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsisH,
@@ -7,11 +7,34 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { getToken } from "../utils/Common";
 
 const ellipsis = <FontAwesomeIcon icon={faEllipsisH} />;
-const heart = <FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" />;
 
-export default (props) => {
+function PostCard(props) {
+
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    setLiked(!liked);
+    axios
+      .post(`/api/like/`, {
+        token: getToken(),
+        likedPost: props.post,
+      })
+      .then((res) => {
+        console.dir(res);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Sorry, something went wrong. Please try again");
+      });
+  }
+
+  const changeColour = liked ? "#FF1493" : "#333333";
+
   return (
     <div className="overflow-hidden border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
       <div className="w-full flex justify-between p-3">
@@ -45,7 +68,7 @@ export default (props) => {
 
       <div className="px-3 pb-2">
         <div className="flex flex-row pt-2">
-          <button className="text-lg">{heart}</button>
+          <button onClick={toggleLike} className="text-lg"><FontAwesomeIcon icon={faHeart} color={changeColour}size="lg" /></button>
         </div>
         <div className="flex flex-row pt-2">
           <span className="text-sm text-gray-400 mr-2">
@@ -69,3 +92,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default PostCard;

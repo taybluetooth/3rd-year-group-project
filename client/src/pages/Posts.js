@@ -47,13 +47,14 @@ function Posts() {
   const renderPost = (post) => {
     return (
       <PostCard
-        key={post._id}
+        _id={post._id}
         user={getUsername(post)}
         location={post.location}
         description={post.description}
         image={post.image}
         likes={post.likes}
         points={post.points}
+        post={post}
       />
     );
   };

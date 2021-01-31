@@ -21,6 +21,7 @@ require("./routes/postRoutes")(app);
 require("./routes/achievementRoutes")(app);
 require("./routes/followerRoutes")(app);
 require("./routes/channelFollowerRoutes")(app);
+require("./routes/likeRoutes")(app);
 
 app.get("/api/verifyToken/:token", async (req, res) => {
   const token = req.params.token;
