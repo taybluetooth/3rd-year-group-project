@@ -26,10 +26,27 @@ const channelSchema = Schema(
       maxlength: 15,
       unique: true,
     },
+    numFollows: {
+      type: Number,
+      default: 0,
+    },
+    profileImage: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
 
 const Channel = mongoose.model("Channel", channelSchema);
 
-module.exports = { Channel };
+async function getChannelFromUsername(username) {
+  try {
+    const channel = await Channel.findOne({ username });
+    return channel;
+  } catch (error) {
+    return null;
+  }
+}
+
+module.exports = { Channel, getChannelFromUsername };

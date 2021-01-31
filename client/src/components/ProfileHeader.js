@@ -10,13 +10,19 @@ function ProfileHeader({
   numFollows,
   numFollowing,
   isFollowing,
+  isChannel,
 }) {
   const followOrUnfollow = () => {
     axios
-      .post(`/api/${isFollowing ? "unfollow" : "follow"}`, {
-        token: getToken(),
-        followingUsername: username,
-      })
+      .post(
+        `/api/${isFollowing ? "unfollow" : "follow"}/${
+          isChannel ? "channel/" : ""
+        }`,
+        {
+          token: getToken(),
+          followingUsername: username,
+        }
+      )
       .then((res) => {
         console.dir(res);
         window.location.reload();
@@ -42,7 +48,6 @@ function ProfileHeader({
             <div className="md:text-2xl text-md pt-5 pb-2">
               <span> {username} </span>
             </div>
-            {/* change this later*/}
             {isLoggedInUser === null ? null : isLoggedInUser ? (
               <button
                 href="#"
@@ -64,7 +69,9 @@ function ProfileHeader({
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">
               <div>0 posts</div>
               <div>{numFollows} follower(s)</div>
-              <div>{numFollowing} following</div>
+              {numFollowing === null ? null : (
+                <div>{numFollowing} following</div>
+              )}
             </div>
             <div className="md:text-lg text-sm pb-8 pt-3">
               <span> {displayName} </span>

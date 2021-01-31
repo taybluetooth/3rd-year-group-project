@@ -15,10 +15,11 @@ const postSchema = Schema(
     },
     image: {
       type: String,
+      default: "",
     },
     likes: {
-    type: Number,
-    default: 0,
+      type: Number,
+      default: 0,
     },
     description: {
       type: String,

@@ -7,7 +7,7 @@ import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { getToken, getUser } from "../utils/Common";
 
-function Profile() {
+function Profile({ isChannel }) {
   const [loading, setLoading] = useState(true);
   const [profileUser, setProfileUser] = useState(null);
   const [profileUserError, setProfileUserError] = useState(null);
@@ -20,18 +20,21 @@ function Profile() {
   const [isFollowing, setIsFollowing] = useState(null); // true if the user is following the profile they are looking at
 
   let { username: userName } = useParams();
+  const getProfileURL = (userName) => {
+    return `/api/${isChannel ? "channel" : "user"}/username/${userName}`;
+  };
   const token = getToken();
 
   useEffect(() => {
     axios
-      .get(`/api/user/username/${userName}`)
+      .get(getProfileURL(userName))
       .then((res) => {
-        const user = res.data.user;
+        const profile = res.data[isChannel ? "channel" : "user"];
         // set_id(user._id);
         // setUsername(user.username);
         // setDisplayName(user.displayName);
         // setBio(user.bio);
-        setProfileUser(user);
+        setProfileUser(profile);
         setProfileUserError(false);
       })
       .catch((error) => {
@@ -46,7 +49,11 @@ function Profile() {
   useEffect(() => {
     if (profileUser !== null && token !== null) {
       axios
-        .get(`/api/follow/${token}/${profileUser.username}`)
+        .get(
+          `/api/follow/${isChannel ? "channel/" : ""}${token}/${
+            profileUser.username
+          }`
+        )
         .then((res) => {
           console.dir(res);
           setIsFollowing(res.data.isFollowing);
@@ -57,7 +64,9 @@ function Profile() {
   }, [profileUser]);
 
   useEffect(() => {
-    if (profileUser !== null)
+    if (isChannel) {
+      setIsLoggedInUser(false);
+    } else if (profileUser !== null)
       setIsLoggedInUser(
         getUser() === null ? null : getUser()._id === profileUser._id
       );
@@ -78,8 +87,9 @@ function Profile() {
               bio={profileUser.bio}
               isLoggedInUser={isLoggedInUser}
               numFollows={profileUser.numFollows}
-              numFollowing={profileUser.numFollowing}
+              numFollowing={isChannel ? null : profileUser.numFollowing}
               isFollowing={isFollowing}
+              isChannel={isChannel}
             />
           ) : null}
         </div>

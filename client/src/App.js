@@ -50,7 +50,10 @@ function App() {
           <SignIn isLogin={false} />
         </Route>
         <Route path="/profile/:username">
-          <Profile />
+          <Profile isChannel={false} />
+        </Route>
+        <Route path="/channel/:username">
+          <Profile isChannel={true} />
         </Route>
         <Route path="/feed">
           <Feed />

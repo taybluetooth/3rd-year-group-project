@@ -24,23 +24,9 @@ const userSchema = Schema(
       minlength: 1,
       maxlength: 70,
     },
-    email: {
-      type: String,
-      required: true,
-      minlength: 5,
-      maxlength: 255,
-      unique: true,
-    },
     bio: {
       type: String,
       default: "",
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 8,
-      maxlength: 75,
-      set: setPassword, // hash the password before it's stored in the db
     },
     username: {
       type: String,
@@ -48,15 +34,6 @@ const userSchema = Schema(
       minlength: 5,
       maxlength: 15,
       unique: true,
-    },
-    verified: {
-      type: Boolean,
-      default: false,
-    },
-    // e.g. admin etc
-    userType: {
-      type: String,
-      default: "user",
     },
     profileImage: {
       type: String,
@@ -69,6 +46,29 @@ const userSchema = Schema(
     numFollowing: {
       type: Number,
       default: 0,
+    },
+    email: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 255,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 75,
+      set: setPassword, // hash the password before it's stored in the db
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    // e.g. admin etc
+    userType: {
+      type: String,
+      default: "user",
     },
   },
   { timestamps: true }
