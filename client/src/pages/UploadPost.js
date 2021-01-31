@@ -88,7 +88,7 @@ function UploadPost() {
                 :
                 <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
               }
-              <div className='mt-2 rounded gallery-item square-box border-solid border-4'>
+              <div className='mt-2 rounded gallery-item square-box'>
                 <div className='square-content'>
                   <img src={imageUrl} className="gallery-image" />
                 </div>
