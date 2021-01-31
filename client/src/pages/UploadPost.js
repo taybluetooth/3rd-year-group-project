@@ -120,8 +120,9 @@ function UploadPost() {
               {imageUrl === "" || description === "" ? (
                 <button
                   id="uploadBtn"
-                  className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white"
+                  className="rounded py-4 px-8 text-md bg-gray-500 text-white"
                   onClick={onSubmit}
+                  disabled
                 >
                   Your description or image is empty!
                 </button>
