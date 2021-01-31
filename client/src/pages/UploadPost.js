@@ -51,7 +51,8 @@ function UploadPost() {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      if(file.buffer <= (1 * 1920 * 1080)) {
+      if(file.size <= (1 * 1024 * 1024)) {
+        console.log(file.size);
         setFile(file);
         let { result } = reader;
         setImageUrl(result);
@@ -59,6 +60,7 @@ function UploadPost() {
         setImgError("");
       }
       else {
+        console.log(file.size);
         setImgError("File is too large to upload");
         console.log("File is too large to upload.");
       }
