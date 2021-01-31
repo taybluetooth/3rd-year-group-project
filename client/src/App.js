@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Posts from "./pages/Posts";
 import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
@@ -12,8 +11,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import PrivateRoute from "./utils/PrivateRoute";
-import PublicRoute from "./utils/PublicRoute";
 import { getToken, removeUserSession, setUser } from "./utils/Common";
 
 function App() {

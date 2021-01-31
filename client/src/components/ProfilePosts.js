@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ProfilePostCard from "./ProfilePostCard";
-import PostCard from "./PostCard";
 import postService from "../services/postService";
 
 function ProfilePosts(props) {
   const [posts, setposts] = useState(null);
 
   useEffect(() => {
+
+    const getPosts = async () => {
+      let res = await postService.getUsersPosts(props.id);
+      setposts(res);
+    };
+
     if (!posts) {
       getPosts();
     }
-  }, []);
-
-  const getPosts = async () => {
-    let res = await postService.getUsersPosts(props.id);
-    setposts(res);
-  };
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderPost = (post, i) => {
     return <ProfilePostCard key={i} image={post.image} />;

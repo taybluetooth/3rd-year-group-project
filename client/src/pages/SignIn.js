@@ -32,7 +32,7 @@ const SignIn = ({ isLogin, ...props }) => {
           .max(70, "Maximum of 70 characters and minimum of 1 character"),
       });
     }
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLogin = async (values) => {
     setError(null);

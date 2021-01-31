@@ -45,7 +45,7 @@ function Profile({ isChannel }) {
         alert("Sorry, something went wrong. Please try again.");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (profileUser !== null && token !== null) {
@@ -62,7 +62,7 @@ function Profile({ isChannel }) {
         .catch((error) => console.error(error));
     }
     // console.log({ token, profileUser });
-  }, [profileUser]);
+  }, [profileUser]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isChannel) {
@@ -71,7 +71,7 @@ function Profile({ isChannel }) {
       setIsLoggedInUser(
         getUser() === null ? null : getUser()._id === profileUser._id
       );
-  }, [profileUser]);
+  }, [profileUser]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return loading ? (
     <Loading />

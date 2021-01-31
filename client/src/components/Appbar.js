@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faHeart,
-  faCompass,
   faUser,
   faSignOutAlt,
   faPlus,
@@ -14,12 +13,11 @@ import { Image } from "cloudinary-react";
 
 const home = <FontAwesomeIcon icon={faHome} />;
 const heart = <FontAwesomeIcon icon={faHeart} />;
-const compass = <FontAwesomeIcon icon={faCompass} />;
 const user = <FontAwesomeIcon icon={faUser} />;
 const plus = <FontAwesomeIcon icon={faPlus} />;
 const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 
-export default () => {
+function Appbar() {
   return (
     <nav>
       <div className="bg-black w-full bottom-0 md:top-0 fixed md:bottom-auto px-6 md:px-8">
@@ -74,3 +72,5 @@ export default () => {
     </nav>
   );
 };
+
+export default Appbar;

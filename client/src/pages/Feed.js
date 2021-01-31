@@ -4,7 +4,7 @@ import Appbar from "../components/Appbar";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-export default () => {
+function Feed() {
   return (
     <>
       <main className="mx-auto">
@@ -14,3 +14,5 @@ export default () => {
     </>
   );
 };
+
+export default Feed;
