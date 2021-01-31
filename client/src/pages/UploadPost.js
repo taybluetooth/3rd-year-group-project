@@ -52,13 +52,8 @@ function UploadPost() {
     let extension = file.name.split(".").pop();
 
     reader.onloadend = () => {
-<<<<<<< HEAD
       if(extension === "png" || extension === "jpg") {
         if(file.size <= (1 * 1024 * 1024)) {
-=======
-      if (extension == "png" || extension == "jpg") {
-        if (file.size <= 1 * 1024 * 1024) {
->>>>>>> d82ab870ce2debe37d5ee6ccfa437ff68e9b3d8c
           console.log(file.size);
           setFile(file);
           let { result } = reader;
