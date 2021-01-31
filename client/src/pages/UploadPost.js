@@ -8,16 +8,16 @@ function UploadPost() {
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [channelUsername, setChannelUsername] = useState("");
   const [error, setError] = useState(null);
   const [imgError, setImgError] = useState("");
   const token = getToken();
-
 
   const onSubmit = (e) => {
     setError(null);
     e.preventDefault();
     let formData = new FormData();
-    const obj = { imageUrl, description, token: getToken() };
+    const obj = { imageUrl, description, token, channelUsername };
     console.log(obj);
     Object.keys(obj).forEach((key, i) => {
       formData.append(key, obj[key]);
@@ -35,14 +35,14 @@ function UploadPost() {
         },
       })
       .then((response) => {
-        setError(false)
+        setError(false);
       })
       .catch((err) => console.error(err));
   };
 
-  const OnTextChange = (e) => {
+  const onTextChange = (e, setter) => {
     e.preventDefault();
-    setDescription(e.target.value);
+    setter(e.target.value);
   };
 
   const onImageFileChange = (e) => {
@@ -52,26 +52,29 @@ function UploadPost() {
     let extension = file.name.split(".").pop();
 
     reader.onloadend = () => {
+<<<<<<< HEAD
       if(extension === "png" || extension === "jpg") {
         if(file.size <= (1 * 1024 * 1024)) {
+=======
+      if (extension == "png" || extension == "jpg") {
+        if (file.size <= 1 * 1024 * 1024) {
+>>>>>>> d82ab870ce2debe37d5ee6ccfa437ff68e9b3d8c
           console.log(file.size);
           setFile(file);
           let { result } = reader;
           setImageUrl(result);
           console.log({ file, result });
           setImgError("");
-        }
-        else {
+        } else {
           console.log(file.size);
           setImgError("File is too large to upload");
           console.log("File is too large to upload.");
         }
-    }
-    else {
-      setImgError("File must be a .png or .jpg image!");
-      console.log("File must be a .png or .jpg image!");
-    }
-  };
+      } else {
+        setImgError("File must be a .png or .jpg image!");
+        console.log("File must be a .png or .jpg image!");
+      }
+    };
 
     reader.readAsDataURL(file);
   };
@@ -84,29 +87,59 @@ function UploadPost() {
     <div className="h-full">
       <Appbar />
       <div className="flex items-center">
-        <div className="flex justify-center mx-auto pt-20">
+        <div className="flex justify-center mx-auto md:pt-20">
           <form encType="multipart/form-data">
             <div className="flex flex-col p-5">
-              <h1 className="pb-5 text-2xl text-white text-bold"> Hey! &#128075; I see you wanna make a post... </h1>
+              <h1 className="pb-5 text-2xl text-white text-bold">
+                Hey! &#128075; I see you wanna make a post...
+              </h1>
               <textarea
                 type="text"
-                onChange={OnTextChange}
+                onChange={(e) => onTextChange(e, setDescription)}
                 value={description}
-                style={{resize: "none"}}
+                style={{ resize: "none" }}
                 className="border-2 rounded p-10"
               />
+              <label className="mt-4">Channel Username</label>
+              <input
+                type="text"
+                onChange={(e) => onTextChange(e, setChannelUsername)}
+                value={channelUsername}
+                className="border-2 rounded mb-4"
+              />
               <div className="mx-auto p-6">
-                <input accept="image/x-png,image/gif,image/jpeg" type="file" id="files" onChange={onImageFileChange} className="hidden"/>
-                <label className="rounded p-4 text-md bg-white text-black" for="files"> Select Image </label>
+                <input
+                  accept="image/x-png,image/gif,image/jpeg"
+                  type="file"
+                  id="files"
+                  onChange={onImageFileChange}
+                  className="hidden"
+                />
+                <label
+                  className="rounded p-4 text-md bg-white text-black"
+                  for="files"
+                >
+                  Select Image
+                </label>
               </div>
-              {(imageUrl === "" || description === "")
-                ?
-                <button id="uploadBtn" className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
-                :
-                <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
-              }
-              <div className='mt-2 rounded gallery-item square-box'>
-                <div className='square-content'>
+              {imageUrl === "" || description === "" ? (
+                <button
+                  id="uploadBtn"
+                  className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white"
+                  onClick={onSubmit}
+                >
+                  Your description or image is empty!
+                </button>
+              ) : (
+                <button
+                  className="rounded py-4 px-8 text-md gradient text-white"
+                  onClick={onSubmit}
+                >
+                  Submit!
+                </button>
+              )}
+              <div className="mt-2 rounded gallery-item square-box">
+                <div className="square-content">
                   <img src={imageUrl} className="gallery-image" />
                   <h4> {imgError} </h4>
                 </div>

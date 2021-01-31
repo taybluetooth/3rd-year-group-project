@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ProfilePostCard from "./ProfilePostCard";
-import PostCard from "./PostCard";
-import postService from "../services/postService";
+// import PostCard from "./PostCard";
+// import postService from "../services/postService";
+import axios from "axios";
 
-function ProfilePosts(props) {
+function ChannelPosts({ channelUsername }) {
   const [posts, setposts] = useState(null);
 
   useEffect(() => {
     if (!posts) {
       getPosts();
     }
-  }, []);
+  });
 
   const getPosts = async () => {
-    let res = await postService.getUsersPosts(props.id);
-    setposts(res);
+    let res = await axios.get(`/api/post/channel/${channelUsername}`);
+    setposts(res.data);
   };
 
   const renderPost = (post, i) => {
@@ -34,4 +35,4 @@ function ProfilePosts(props) {
   );
 }
 
-export default ProfilePosts;
+export default ChannelPosts;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePosts from "../components/ProfilePosts";
+import ChannelPosts from "../components/ChannelPosts";
 import Appbar from "../components/Appbar";
 import Loading from "../components/Loading";
 import { Redirect, useParams } from "react-router-dom";
@@ -94,7 +95,13 @@ function Profile({ isChannel }) {
           ) : null}
         </div>
         <div className="justify-center mx-auto p-1">
-          {profileUser ? <ProfilePosts id={profileUser._id} /> : null}
+          {profileUser ? (
+            isChannel ? (
+              <ChannelPosts channelUsername={userName} />
+            ) : (
+              <ProfilePosts id={profileUser._id} />
+            )
+          ) : null}
         </div>
       </div>
       <Appbar />
