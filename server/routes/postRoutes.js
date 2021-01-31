@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
-const Post = mongoose.model("Post");
+const { Post } = require("../models/post");
 const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
+const { getChannelFromUsername } = require("../models/channel");
 const upload = multer();
-const navigate = require('navigator');
 
 cloudinary.config({
   cloud_name: "bluetooth",
@@ -17,6 +17,31 @@ module.exports = (app) => {
   app.get("/api/post", async (req, res) => {
     let posts = await Post.find();
     return res.status(200).send(posts);
+  });
+
+  app.get("/api/post/channel/:channelUsername", async (req, res) => {
+    const { channelUsername } = req.params;
+    const channel = await getChannelFromUsername(channelUsername);
+
+    if (!channel) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    try {
+      let posts = await Post.find({ channelID: channel._id })
+        .populate({ path: "user", select: "_id username profileImage" })
+        .exec();
+      return res.status(200).send(posts);
+    } catch (error) {
+      console.error(error);
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
   });
 
   // get posts by userID
@@ -37,9 +62,10 @@ module.exports = (app) => {
 
   // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
-    const { token, description, imageUrl } = req.body;
+    const { token, description, imageUrl, channelUsername = "" } = req.body;
     const { lat, lon } = req.query;
-    console.log({ token, description });
+    let location = "London"; // static for now
+    console.log({ token, description, channelUsername });
     console.log({ lat, lon });
     const { _id: userID } = await getUserFromToken(token);
 
@@ -49,12 +75,29 @@ module.exports = (app) => {
         message: "Something went wrong, please try again.",
       });
 
-    let location = "London"; // static for now
+    let postObj = {
+      userID,
+      description,
+      location,
+    };
 
-    let post = await Post.create({ userID, description, location });
-    cloudinary.uploader.upload(imageUrl, function (error, result) {
+    if (channelUsername) {
+      const channel = await getChannelFromUsername(channelUsername);
+
+      if (!channel) {
+        return res.status(401).send({
+          error: true,
+          message: "Something went wrong, please try again.",
+        });
+      }
+
+      postObj.channelID = channel._id;
+    }
+
+    let post = await Post.create(postObj);
+    cloudinary.uploader.upload(imageUrl, async function (error, result) {
       post.image = result.public_id;
-      post.save();
+      await post.save();
       console.log(result, error);
     });
     return res.status(201).send({

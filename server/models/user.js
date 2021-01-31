@@ -16,8 +16,12 @@ function setPassword(password) {
   return createHash(password, this._id);
 }
 
-const userSchema = Schema(
+const userSchema = new Schema(
   {
+    _id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
     displayName: {
       type: String,
       required: true,

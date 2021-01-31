@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var idValidator = require("mongoose-id-validator");
 var Schema = mongoose.Schema;
 
-const postSchema = Schema(
+const postSchema = new Schema(
   {
     userID: {
       type: Schema.Types.ObjectId,
@@ -44,6 +44,16 @@ const postSchema = Schema(
 );
 
 postSchema.plugin(idValidator);
+
+postSchema.virtual("user", {
+  ref: "User",
+  localField: "userID",
+  foreignField: "_id",
+  justOne: true,
+});
+
+postSchema.set("toObject", { virtuals: true });
+postSchema.set("toJSON", { virtuals: true });
 
 const Post = mongoose.model("Post", postSchema);
 

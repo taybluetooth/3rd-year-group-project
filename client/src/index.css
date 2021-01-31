@@ -39,7 +39,6 @@ body {
   min-height: 100vh;
   margin: 0;
   background-color: #333333;
-  padding-top: 60px;
 }
 
 .profile-container {
@@ -169,5 +168,11 @@ body {
   }
   .app-hide {
     display: inherit;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    padding-top: 60px;
   }
 }

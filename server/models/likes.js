@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var idValidator = require("mongoose-id-validator");
 var Schema = mongoose.Schema;
 
-const likesSchema = Schema(
+const likesSchema = new Schema(
   {
     userID: {
       type: Schema.Types.ObjectId,

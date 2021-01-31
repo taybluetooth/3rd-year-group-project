@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var idValidator = require("mongoose-id-validator");
 var Schema = mongoose.Schema;
 
-const channelFollowsSchema = Schema(
+const channelFollowsSchema = new Schema(
   {
     followerID: {
       type: Schema.Types.ObjectId,

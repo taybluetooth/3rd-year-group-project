@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 var Schema = mongoose.Schema;
 
-const channelSchema = Schema(
+const channelSchema = new Schema(
   {
     displayName: {
       type: String,
