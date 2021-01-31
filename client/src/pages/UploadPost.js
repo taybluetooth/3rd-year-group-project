@@ -9,6 +9,7 @@ function UploadPost() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
+  const [imgError, setImgError] = useState("");
   const token = getToken();
 
 
@@ -50,10 +51,17 @@ function UploadPost() {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      setFile(file);
-      let { result } = reader;
-      setImageUrl(result);
-      console.log({ file, result });
+      if(file.buffer <= (1 * 1920 * 1080)) {
+        setFile(file);
+        let { result } = reader;
+        setImageUrl(result);
+        console.log({ file, result });
+        setImgError("");
+      }
+      else {
+        setImgError("File is too large to upload");
+        console.log("File is too large to upload.");
+      }
     };
 
     reader.readAsDataURL(file);
@@ -84,13 +92,14 @@ function UploadPost() {
               </div>
               {(imageUrl === "" || description === "")
                 ?
-                <button className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
+                <button id="uploadBtn" className="rounded py-4 px-8 text-md disabled bg-gray-500 text-white" onClick={onSubmit}>Your description or image is empty!</button>
                 :
                 <button className="rounded py-4 px-8 text-md gradient text-white" onClick={onSubmit}>Submit!</button>
               }
               <div className='mt-2 rounded gallery-item square-box'>
                 <div className='square-content'>
                   <img src={imageUrl} className="gallery-image" />
+                  <h4> {imgError} </h4>
                 </div>
               </div>
             </div>
