@@ -49,9 +49,9 @@ function UploadPost() {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-    let extension = file.name.split(".").pop();
 
     reader.onloadend = () => {
+      let extension = file.name.split(".").pop().toLowerCase();
       if(extension === "png" || extension === "jpg") {
         if(file.size <= (1 * 1024 * 1024)) {
           console.log(file.size);
