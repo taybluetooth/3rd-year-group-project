@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const { Post } = require("../models/post");
 const { Likes } = require("../models/likes");
 const { generateToken } = require("../token");
 const { getUserFromToken } = require("../models/user");
@@ -9,16 +10,40 @@ module.exports = (app) => {
 
     const { token, likedPost } = req.body;
     const user = await getUserFromToken(token);
-    const userID = user.userID;
+    const userID = user._id;
     const postID = likedPost._id;
 
-    like = await Likes.create({ userID, postID });
+    if (!user || !likedPost) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
 
-    console.log("Post Liked");
+    const likeExist = await Likes.findOne({ userID: userID, postID: postID }).select("_id").lean();
 
-    return res.status(201).send({
-      error: false,
-      like,
-    });
+    if(!likeExist) {
+      like = await Likes.create({ userID, postID });
+      likedPost.likes++;
+      let post = likedPost
+      post = await Post.findByIdAndUpdate(post._id, post);
+      console.log(user.username + " Liked Post ID: " + postID);
+
+      return res.status(201).send({
+        error: false,
+        like,
+      });
+    }
+    else {
+      let unlike = await Likes.findOneAndDelete({ userID: userID, postID: postID });
+      likedPost.likes--;
+      let post = likedPost
+      post = await Post.findByIdAndUpdate(post._id, post);
+      console.log(user.username + " Unliked Post ID: " + postID);
+      return res.status(201).send({
+        error: false,
+        unlike,
+      });
+    }
   });
 };

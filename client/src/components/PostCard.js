@@ -10,7 +10,7 @@ import axios from "axios";
 import { getToken } from "../utils/Common";
 
 const ellipsis = <FontAwesomeIcon icon={faEllipsisH} />;
-
+//${liked ? "unlike" : "like"}
 function PostCard(props) {
 
   const [liked, setLiked] = useState(false);
@@ -18,7 +18,7 @@ function PostCard(props) {
   const toggleLike = () => {
     setLiked(!liked);
     axios
-      .post(`/api/like/`, {
+      .post(`/api/like`, {
         token: getToken(),
         likedPost: props.post,
       })

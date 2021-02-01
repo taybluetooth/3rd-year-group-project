@@ -60,6 +60,7 @@ mongoose
     }
   );
 mongoose.set("useCreateIndex", true);
+mongoose.set('useFindAndModify', false);
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
