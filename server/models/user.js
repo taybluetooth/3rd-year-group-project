@@ -18,10 +18,6 @@ function setPassword(password) {
 
 const userSchema = new Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
     displayName: {
       type: String,
       required: true,

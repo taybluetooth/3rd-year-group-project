@@ -12,6 +12,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getToken, removeUserSession, setUser } from "./utils/Common";
+import PrivateRoute from "./utils/PrivateRoute";
+import CreateChannel from "./pages/CreateChannel";
 
 function App() {
   useEffect(() => {
@@ -40,9 +42,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/upload_post">
-          <UploadPost />
-        </Route>
+        <PrivateRoute path="/create_channel" component={CreateChannel} />
+        <PrivateRoute path="/upload_post" component={UploadPost} />
         <Route path="/signup">
           <SignIn isLogin={false} />
         </Route>
