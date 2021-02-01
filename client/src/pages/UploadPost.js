@@ -52,7 +52,7 @@ function UploadPost() {
     let extension = file.name.split(".").pop().toLowerCase();
 
     reader.onloadend = () => {
-      if(extension === "png" || extension === "jpg") {
+      if(extension === "heic" || extension === "jpeg" || extension === "png" || extension === "jpg") {
         if(file.size <= (1 * 1024 * 1024)) {
           console.log(file.size);
           setFile(file);
@@ -104,7 +104,7 @@ function UploadPost() {
               />
               <div className="mx-auto p-6">
                 <input
-                  accept="image/x-png,image/gif,image/jpeg"
+                  accept="image/x-png,image/gif,image/jpeg,image/heic"
                   type="file"
                   id="files"
                   onChange={onImageFileChange}
