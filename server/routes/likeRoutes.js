@@ -47,9 +47,10 @@ module.exports = (app) => {
     }
   });
 
-  app.get("/api/like/:postID", async (req, res) => {
-    const { postID } = req.params;
-    let like = await Likes.findOne({ postID: postID }).select("_id").lean();
+  app.get("/api/like/:postID/:token", async (req, res) => {
+    const { postID, token } = req.params;
+    const user = await getUserFromToken(token);
+    let like = await Likes.findOne({ userID: user._id, postID: postID }).select("_id").lean();
 
     if (!like) {
       return res.status(401).send({
@@ -58,6 +59,8 @@ module.exports = (app) => {
       });
     }
 
-    return res.status(200).send(true);
+    return res.status(200).send({
+      isLiked: like ? true : false,
+    });
   });
 };

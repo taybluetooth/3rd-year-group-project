@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const likeService = {
-  getLike: async (postID) => {
-    let res = await axios.get(`/api/like/${postID}`);
+  getLike: async (postID, token) => {
+    let res = await axios.get(`/api/like/${postID}/${token}`);
     return res.data || [];
   }
 };
