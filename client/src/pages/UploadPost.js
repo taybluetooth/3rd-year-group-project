@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Appbar from "../components/Appbar";
 import axios from "axios";
 import { getToken } from "../utils/Common";
@@ -17,7 +17,7 @@ function UploadPost() {
     setError(null);
     e.preventDefault();
     let formData = new FormData();
-    const obj = { file, imageUrl, description, token, channelUsername };
+    const obj = { imageUrl, description, token, channelUsername };
     console.log(obj);
     Object.keys(obj).forEach((key, i) => {
       formData.append(key, obj[key]);
@@ -49,9 +49,9 @@ function UploadPost() {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    let extension = file.name.split(".").pop().toLowerCase();
 
     reader.onloadend = () => {
-      let extension = file.name.split(".").pop().toLowerCase();
       if(extension === "png" || extension === "jpg") {
         if(file.size <= (1 * 1024 * 1024)) {
           console.log(file.size);
@@ -136,7 +136,7 @@ function UploadPost() {
               )}
               <div className="mt-2 rounded gallery-item square-box">
                 <div className="square-content">
-                  <img alt="uploaded" src={imageUrl} className="gallery-image" />
+                  <img src={imageUrl} className="gallery-image" />
                   <h4> {imgError} </h4>
                 </div>
               </div>
