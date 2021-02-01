@@ -52,7 +52,10 @@ module.exports = (app) => {
     let like = await Likes.findOne({ postID: postID }).select("_id").lean();
 
     if (!like) {
-      return res.status(401).send(false);
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
     }
 
     return res.status(200).send(true);
