@@ -13,6 +13,6 @@ function Feed() {
       <Appbar />
     </>
   );
-};
+}
 
 export default Feed;

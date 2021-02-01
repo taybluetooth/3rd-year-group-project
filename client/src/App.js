@@ -53,9 +53,10 @@ function App() {
         <Route path="/channel/:username">
           <Profile isChannel={true} />
         </Route>
-        <Route path="/feed">
+        {/* <Route path="/feed">
           <Feed />
-        </Route>
+        </Route> */}
+        <PrivateRoute path="/feed" component={Feed} />
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
         </Route>

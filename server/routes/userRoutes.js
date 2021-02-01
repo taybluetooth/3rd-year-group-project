@@ -122,7 +122,7 @@ module.exports = (app) => {
     if (user)
       return res.status(401).send({
         error: true,
-        message: "Login combination failed, please try again.",
+        message: "This email/username is taken, please try again.",
       });
 
     try {

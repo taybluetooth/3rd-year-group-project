@@ -34,7 +34,7 @@ function ProfileHeader({
   };
 
   return (
-    <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-12">
+    <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-6">
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
           <div className="flex items-center justify-center overflow-hidden">
