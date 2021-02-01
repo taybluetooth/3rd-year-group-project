@@ -18,7 +18,7 @@ function ProfilePosts(props) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderPost = (post, i) => {
-    return <ProfilePostCard key={i} image={post.image} />;
+    return <ProfilePostCard key={i} image={post.image} likes={post.likes} points={post.points} />;
   };
 
   return (

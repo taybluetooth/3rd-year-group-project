@@ -46,4 +46,15 @@ module.exports = (app) => {
       });
     }
   });
+
+  app.get("/api/like/:postID", async (req, res) => {
+    const { postID } = req.params;
+    let like = await Likes.findOne({ postID: postID }).select("_id").lean();
+
+    if (!like) {
+      return res.status(401).send(false);
+    }
+
+    return res.status(200).send(true);
+  });
 };

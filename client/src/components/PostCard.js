@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsisH,
@@ -8,15 +8,33 @@ import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../utils/Common";
+import likeService from "../services/likeService";
 
 const ellipsis = <FontAwesomeIcon icon={faEllipsisH} />;
-//${liked ? "unlike" : "like"}
+
 function PostCard(props) {
 
   const [liked, setLiked] = useState(false);
 
+  useEffect(() => {
+    if (liked === false) {
+      getLikes();
+    }
+  });
+
+  // Get all posts from backend
+  const getLikes = async () => {
+    let res = await likeService.getLike(props.post._id);
+    console.log(res);
+    setLiked(res);
+  };
+
   const toggleLike = () => {
     setLiked(!liked);
+  }
+
+  const like = () => {
+    toggleLike();
     axios
       .post(`/api/like`, {
         token: getToken(),
@@ -32,7 +50,7 @@ function PostCard(props) {
       });
   }
 
-  const changeColour = liked ? "#FF1493" : "#333333";
+  const changeColour = liked ? "#333333" : "#FF1493";
 
   return (
     <div className="overflow-hidden border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
@@ -67,7 +85,7 @@ function PostCard(props) {
 
       <div className="px-3 pb-2">
         <div className="flex flex-row pt-2">
-          <button onClick={toggleLike} className="text-lg"><FontAwesomeIcon icon={faHeart} color={changeColour}size="lg" /></button>
+          <button onClick={like} className="text-lg"><FontAwesomeIcon icon={faHeart} color={changeColour}size="lg" /></button>
         </div>
         <div className="flex flex-row pt-2">
           <span className="text-sm text-gray-400 mr-2">

@@ -16,10 +16,10 @@ function ProfilePostCard (props) {
         <div className="gallery-item-info mx-auto">
           <ul>
             <li>
-              <span className="font-extrabold text-sm md:text-xl"> {heart} 0 </span>
+              <span className="font-extrabold text-sm md:text-xl"> {heart} {props.likes} </span>
             </li>
             <li>
-              <span className="font-extrabold text-sm md:text-xl"> {star} 0 </span>
+              <span className="font-extrabold text-sm md:text-xl"> {star} {props.points} </span>
             </li>
           </ul>
         </div>
