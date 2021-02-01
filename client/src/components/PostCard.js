@@ -18,13 +18,9 @@ function PostCard(props) {
 
   // Get all posts from backend
   const getLikes = async () => {
-    let res = await likeService.getLike(props.post._id);
-    setLiked(res);
+    let res = await likeService.getLike(props.post._id, getToken());
+    setLiked(res.data.isLiked);
   };
-
-  if (liked === false && props.post.likes > 0) {
-    getLikes();
-  }
 
   const toggleLike = () => {
     setLiked(!liked);
