@@ -1408,13 +1408,6 @@ h1, h2, h3, h4, h5,
 .accordion-item[aria-expanded="true"] {
   color: #3a4971; }
 
-.social-media {
-  display: inline-block;
-  margin-bottom: 0px;
-  padding: 0; }
-  .social-media li {
-    display: inline-block; }
-
 .ft-feature-1 {
   margin-bottom: 80px; }
   .ft-feature-1 .ft-feature-1-content {
@@ -1806,7 +1799,7 @@ h1, h2, h3, h4, h5,
     .fa {
       padding: 20px;
       font-size: 30px;
-      width: 75px;
+      width: 90px;
       text-align: center;
       text-decoration: none;
     }
