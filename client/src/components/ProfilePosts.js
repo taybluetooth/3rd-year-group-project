@@ -6,7 +6,6 @@ function ProfilePosts(props) {
   const [posts, setposts] = useState(null);
 
   useEffect(() => {
-
     const getPosts = async () => {
       let res = await postService.getUsersPosts(props.id);
       setposts(res);
@@ -15,10 +14,17 @@ function ProfilePosts(props) {
     if (!posts) {
       getPosts();
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderPost = (post, i) => {
-    return <ProfilePostCard key={i} image={post.image} likes={post.likes} points={post.points} />;
+    return (
+      <ProfilePostCard
+        key={i}
+        image={post.image}
+        likes={post.likes}
+        points={post.points}
+      />
+    );
   };
 
   return (

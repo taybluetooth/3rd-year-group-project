@@ -19,7 +19,14 @@ function ChannelPosts({ channelUsername }) {
   };
 
   const renderPost = (post, i) => {
-    return <ProfilePostCard key={i} image={post.image} />;
+    return (
+      <ProfilePostCard
+        key={i}
+        image={post.image}
+        likes={post.likes}
+        points={post.points}
+      />
+    );
   };
 
   return (
