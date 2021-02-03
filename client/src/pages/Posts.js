@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "../components/PostCard.js";
+import Loading from "../components/Loading";
 
 // SERVICES
 import postService from "../services/postService";
@@ -56,20 +57,24 @@ function Posts() {
         likes={post.likes}
         points={post.points}
         post={post}
-        userImg ={getUsername(post).profileImage}
+        userImg={getUsername(post).profileImage}
       />
     );
   };
 
   return (
     <>
-      <div className="flex items-center flex-col">
-        {posts && posts.length > 0 ? (
-          posts.map((post) => renderPost(post))
-        ) : (
-          <p>No posts found</p>
-        )}
-      </div>
+      {users && posts ? (
+        <div className="flex items-center flex-col">
+          {posts && posts.length > 0 ? (
+            posts.map((post) => renderPost(post))
+          ) : (
+            <p>No posts found</p>
+          )}
+        </div>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }
