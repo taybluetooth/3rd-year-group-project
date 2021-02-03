@@ -1,9 +1,10 @@
 import axios from "axios";
-import React from "react";
-import { getToken } from "../utils/Common";
+import React, { useState, useEffect } from "react";
+import { getToken, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
 
 function ProfileHeader({
+  _id,
   username,
   isLoggedInUser,
   displayName,
@@ -14,6 +15,13 @@ function ProfileHeader({
   isChannel,
   profileImage,
 }) {
+
+  useEffect(() => {
+    if(getUser()._id === _id) {
+      document.getElementById("profile-img").classList.add("profile-pic")
+    }
+  }, []);
+
   const followOrUnfollow = () => {
     axios
       .post(
@@ -34,13 +42,13 @@ function ProfileHeader({
         alert("Sorry, something went wrong. Please try again");
       });
   };
-  console.log(profileImage);
+
   return (
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-6">
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
-          <div className="flex items-center justify-center overflow-hidden">
-            <Image className="profilepic rounded-full w-40 md:w-48" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true"></Image>
+          <div id="profile-img" className="relative w-40 md:w-48 flex items-center justify-center" data-content="Edit">
+            <Image className="rounded-full" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true" data-content="Edit"></Image>
           </div>
           <div className="pt-4 md:pt-0 md:ml-10">
             <div className="md:text-2xl text-md pt-5 pb-2">

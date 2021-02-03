@@ -89,7 +89,7 @@ button:focus {
 }
 
 .gallery-item:hover .gallery-item-info,
-.gallery-item:focus .gallery-item-info {
+.gallery-item:focus .gallery-item-info,{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,6 +110,26 @@ button:focus {
   margin-right: 1rem;
 }
 
+.profile-pic:after {
+  content: attr(data-content);
+  position: absolute;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  width: 100%; height:100%;
+  top:0; left:0;
+  background:rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+
+.profile-pic:hover:after {
+    opacity: 1;
+}
+
 .gallery-image {
   width: 100%;
   height: 100%;
@@ -117,7 +137,7 @@ button:focus {
   display: block;
 }
 
-.gradient {
+.gradient, .profile-pic:after {
   background: #11998e; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,

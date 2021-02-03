@@ -79,6 +79,7 @@ function Profile({ isChannel }) {
         <div className="flex justify-center mx-auto p-1">
           {profileUser ? (
             <ProfileHeader
+              _id={profileUser._id}
               username={profileUser.username}
               displayName={profileUser.displayName}
               bio={profileUser.bio}
