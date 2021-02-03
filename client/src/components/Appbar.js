@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../bodystyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -45,6 +46,10 @@ function Appbar() {
               <button className="px-3 py-2 rounded-md text-xl text-pink-500">
                 {heart}
               </button>
+              {/* find icon for this later */}
+              <Link to="/create_channel" className="text-white">
+                Create Channel
+              </Link>
               <a
                 href={
                   getUser() === null
@@ -71,6 +76,6 @@ function Appbar() {
       </div>
     </nav>
   );
-};
+}
 
 export default Appbar;
