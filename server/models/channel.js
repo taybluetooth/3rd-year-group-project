@@ -32,7 +32,7 @@ const channelSchema = new Schema(
     },
     profileImage: {
       type: String,
-      default: "",
+      default: "default-img",
     },
   },
   { timestamps: true }
