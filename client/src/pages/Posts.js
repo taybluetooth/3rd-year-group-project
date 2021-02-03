@@ -32,16 +32,16 @@ function Posts() {
   };
   // Get username from post.user foreign key
   const getUsername = (post) => {
-    var username = "";
+    var user;
     if (users && users.length > 0) {
-      for (let user of users) {
-        if (user._id === post.userID) {
-          username = user.username;
+      for (let postuser of users) {
+        if (postuser._id === post.userID) {
+          user = postuser;
         }
       }
     }
 
-    return username;
+    return user;
   };
 
   const renderPost = (post) => {
@@ -49,13 +49,14 @@ function Posts() {
       <PostCard
         key={post._id}
         _id={post._id}
-        user={getUsername(post)}
+        user={getUsername(post).username}
         location={post.location}
         description={post.description}
         image={post.image}
         likes={post.likes}
         points={post.points}
         post={post}
+        userImg ={getUsername(post).profileImage}
       />
     );
   };

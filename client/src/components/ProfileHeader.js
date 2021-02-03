@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { getToken } from "../utils/Common";
+import { Image } from "cloudinary-react";
 
 function ProfileHeader({
   username,
@@ -11,6 +12,7 @@ function ProfileHeader({
   numFollowing,
   isFollowing,
   isChannel,
+  profileImage,
 }) {
   const followOrUnfollow = () => {
     axios
@@ -32,17 +34,13 @@ function ProfileHeader({
         alert("Sorry, something went wrong. Please try again");
       });
   };
-
+  console.log(profileImage);
   return (
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-12">
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
           <div className="flex items-center justify-center overflow-hidden">
-            <img
-              className="rounded-full w-40 md:w-48"
-              src="https://avatars0.githubusercontent.com/u/39353470?s=460&u=c82cc7e746e25bdab580cdb83ec41dbb938a7d71&v=4"
-              alt="profilepic"
-            ></img>
+            <Image className="profilepic rounded-full w-40 md:w-48" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true"></Image>
           </div>
           <div className="pt-4 md:pt-0 md:ml-10">
             <div className="md:text-2xl text-md pt-5 pb-2">

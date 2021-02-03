@@ -37,7 +37,7 @@ const userSchema = new Schema(
     },
     profileImage: {
       type: String,
-      default: "",
+      default: "default-img",
     },
     numFollows: {
       type: Number,

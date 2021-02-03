@@ -31,10 +31,6 @@ function Profile({ isChannel }) {
       .get(getProfileURL(userName))
       .then((res) => {
         const profile = res.data[isChannel ? "channel" : "user"];
-        // set_id(user._id);
-        // setUsername(user.username);
-        // setDisplayName(user.displayName);
-        // setBio(user.bio);
         setProfileUser(profile);
         setProfileUserError(false);
       })
@@ -91,6 +87,7 @@ function Profile({ isChannel }) {
               numFollowing={isChannel ? null : profileUser.numFollowing}
               isFollowing={isFollowing}
               isChannel={isChannel}
+              profileImage={profileUser.profileImage}
             />
           ) : null}
         </div>
