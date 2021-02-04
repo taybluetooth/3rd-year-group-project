@@ -28,6 +28,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    profileImage: {
+      type:String,
+      default: "default-img",
+    },
     username: {
       type: String,
       required: true,

@@ -163,9 +163,16 @@ module.exports = (app) => {
     const { id } = req.params;
     var dataURI = req.body.dataURI;
     var uploadStr = '' + dataURI;
-    console.log(uploadStr)
-    cloudinary.uploader.upload(uploadStr, {public_id: id + "pp", overwrite: true, invalidate: true}, async function (error, result) {
+    let user = null;
+    let public_id = id + "pp";
+    cloudinary.uploader.destroy(public_id, {invalidate: true})
+    cloudinary.uploader.upload(uploadStr, {public_id: public_id, overwrite: true}, async function (error, result) {
+      user = await User.findByIdAndUpdate(id, {profileImage: public_id});
       console.log(result, error);
+    });
+    return res.status(202).send({
+      error: false,
+      user,
     });
   });
 

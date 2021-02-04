@@ -38,12 +38,12 @@ function ProfileHeader({
           setFile(file);
           let { result } = reader;
           let dataURI = result
-          console.log(dataURI)
           setImgError("");
           axios
             .post(`/api/user/profilepic/${_id}`, {dataURI:dataURI})
             .then((response) => {
               setError(false);
+              window.location.reload();
             })
             .catch((err) => console.error(err));
         } else {
@@ -86,8 +86,8 @@ function ProfileHeader({
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
           <label id="fileselect" htmlFor="files">
-            <div id="profile-img" className="relative w-40 md:w-48 flex items-center justify-center" data-content="Edit">
-              <Image className="rounded-full" cloudName="bluetooth" alt="profilepic" publicId={'' + _id + 'pp'} secure="true" data-content="Edit"></Image>
+            <div id="profile-img" className="relative w-40 h-40 flex items-center justify-center" data-content="Edit">
+              <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true" data-content="Edit"></Image>
               <input
                 accept="image/x-png,image/gif,image/jpeg,image/heic"
                 type="file"

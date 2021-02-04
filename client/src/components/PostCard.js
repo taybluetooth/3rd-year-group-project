@@ -37,8 +37,8 @@ function PostCard(props) {
       <div className="w-full flex justify-between p-3">
         <Link to={`/profile/${props.user}`}>
           <div className="flex">
-            <div className="flex items-center justify-center overflow-hidden">
-              <Image className="rounded-full h-8 w-8" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
+            <div className="h-8 w-8 flex items-center justify-center overflow-hidden">
+              <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
             </div>
             <div className="block">
               <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
@@ -73,8 +73,8 @@ function PostCard(props) {
           </span>
         </div>
         <div className="flex flex-row text-sm pt-2">
-          <div className="mr-1 flex items-center justify-center overflow-hidden">
-            <Image className="rounded-full h-5 w-5" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
+          <div className="h-5 w-5 mr-1 flex items-center justify-center overflow-hidden">
+            <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
           </div>
           <span className="font-bold text-md mr-2">{props.user}</span>
           {props.description}

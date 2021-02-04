@@ -88,6 +88,7 @@ function Profile({ isChannel }) {
               numFollowing={isChannel ? null : profileUser.numFollowing}
               isFollowing={isFollowing}
               isChannel={isChannel}
+              profileImage={profileUser.profileImage}
             />
           ) : null}
         </div>

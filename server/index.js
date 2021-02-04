@@ -6,6 +6,7 @@ const { Post } = require("./models/post");
 const { Achievement } = require("./models/achievement");
 const dbConfig = require("./database/db.js");
 const { getUserFromToken } = require("./models/user");
+const nocache = require('nocache');
 require("dotenv/config");
 
 const app = express();
@@ -14,6 +15,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(express.json()); // Make sure it comes back as json
+app.use(nocache());
 
 // importing routes
 require("./routes/userRoutes")(app);

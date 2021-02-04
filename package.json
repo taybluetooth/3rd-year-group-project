@@ -26,5 +26,7 @@
   "devDependencies": {
     "concurrently": "^5.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "nocache": "^2.1.0"
+  }
 }

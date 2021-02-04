@@ -8,6 +8,7 @@ import {
   faUser,
   faSignOutAlt,
   faPlus,
+  faTv,
 } from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
@@ -16,6 +17,7 @@ const home = <FontAwesomeIcon icon={faHome} />;
 const heart = <FontAwesomeIcon icon={faHeart} />;
 const user = <FontAwesomeIcon icon={faUser} />;
 const plus = <FontAwesomeIcon icon={faPlus} />;
+const channel = <FontAwesomeIcon icon={faTv} />;
 const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 
 function Appbar() {
@@ -48,7 +50,9 @@ function Appbar() {
               </button>
               {/* find icon for this later */}
               <Link to="/create_channel" className="text-white">
-                Create Channel
+                <button className="px-3 py-2 rounded-md text-xl text-white">
+                  {channel}
+                </button>
               </Link>
               <a
                 href={
