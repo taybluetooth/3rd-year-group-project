@@ -162,17 +162,22 @@ module.exports = (app) => {
   app.post("/api/user/profilepic/:id", async (req, res) => {
     const { id } = req.params;
     var dataURI = req.body.dataURI;
-    var uploadStr = '' + dataURI;
+    var uploadStr = "" + dataURI;
     let user = null;
     let public_id = id + "pp" + Date.now();
-    cloudinary.uploader.destroy(public_id, {invalidate: true})
-    cloudinary.uploader.upload(uploadStr, {public_id: public_id, overwrite: true}, async function (error, result) {
-      user = await User.findByIdAndUpdate(id, {profileImage: public_id});
-      console.log(result, error);
-    });
+    cloudinary.uploader.destroy(public_id, { invalidate: true });
+    await cloudinary.uploader.upload(
+      uploadStr,
+      { public_id: public_id, overwrite: true },
+      async function (error, result) {
+        user = await User.findByIdAndUpdate(id, { profileImage: public_id });
+        console.log(result, error);
+      }
+    );
     return res.status(202).send({
       error: false,
-      user,
+      // user,
+      profileImage: public_id,
     });
   });
 

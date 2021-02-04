@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { getToken, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
+import Loading from "./Loading";
 
 function ProfileHeader({
   _id,
@@ -15,14 +16,14 @@ function ProfileHeader({
   isChannel,
   profileImage,
 }) {
-
   const [file, setFile] = useState();
   const [error, setError] = useState(null);
   const [imgError, setImgError] = useState("");
+  const [imageLoading, setImageLoading] = useState(null);
 
   useEffect(() => {
-    if(getUser()._id === _id) {
-      document.getElementById("profile-img").classList.add("profile-pic")
+    if (getUser()._id === _id) {
+      document.getElementById("profile-img").classList.add("profile-pic");
     }
   }, []);
 
@@ -33,19 +34,30 @@ function ProfileHeader({
     let extension = file.name.split(".").pop().toLowerCase();
 
     reader.onloadend = () => {
-      if(extension === "heic" || extension === "jpeg" || extension === "png" || extension === "jpg") {
-        if(file.size <= (1 * 1024 * 1024)) {
+      if (
+        extension === "heic" ||
+        extension === "jpeg" ||
+        extension === "png" ||
+        extension === "jpg"
+      ) {
+        if (file.size <= 1 * 1024 * 1024) {
           setFile(file);
           let { result } = reader;
-          let dataURI = result
+          let dataURI = result;
           setImgError("");
+          setImageLoading(true);
           axios
-            .post(`/api/user/profilepic/${_id}`, {dataURI:dataURI})
+            .post(`/api/user/profilepic/${_id}`, { dataURI })
             .then((response) => {
               setError(false);
+              console.log(response);
               window.location.reload();
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+              console.error(err);
+              alert("Sorry something went wrong, please try again.");
+            })
+            .finally(() => setImageLoading(false));
         } else {
           setImgError("File is too large to upload");
           console.log("File is too large to upload.");
@@ -54,7 +66,6 @@ function ProfileHeader({
         setImgError("File must be a .png or .jpg image!");
         console.log("File must be a .png or .jpg image!");
       }
-
     };
 
     reader.readAsDataURL(file);
@@ -86,8 +97,23 @@ function ProfileHeader({
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
           <label id="fileselect" htmlFor="files">
-            <div id="profile-img" className="relative w-40 h-40 flex items-center justify-center" data-content="Edit">
-              <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true" data-content="Edit"></Image>
+            <div
+              id="profile-img"
+              className="relative w-40 h-40 flex items-center justify-center"
+              data-content="Edit"
+            >
+              {imageLoading === true ? (
+                <Loading />
+              ) : (
+                <Image
+                  className="gallery-image rounded-full"
+                  cloudName="bluetooth"
+                  alt="profilepic"
+                  publicId={profileImage}
+                  secure="true"
+                  data-content="Edit"
+                />
+              )}
               <input
                 accept="image/x-png,image/gif,image/jpeg,image/heic"
                 type="file"
