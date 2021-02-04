@@ -35,10 +35,6 @@ const userSchema = new Schema(
       maxlength: 15,
       unique: true,
     },
-    profileImage: {
-      type: String,
-      default: "default-img",
-    },
     numFollows: {
       type: Number,
       default: 0,

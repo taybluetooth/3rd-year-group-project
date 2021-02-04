@@ -16,11 +16,49 @@ function ProfileHeader({
   profileImage,
 }) {
 
+  const [file, setFile] = useState();
+  const [error, setError] = useState(null);
+  const [imgError, setImgError] = useState("");
+
   useEffect(() => {
     if(getUser()._id === _id) {
       document.getElementById("profile-img").classList.add("profile-pic")
     }
   }, []);
+
+  const onImageFileChange = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    let extension = file.name.split(".").pop().toLowerCase();
+
+    reader.onloadend = () => {
+      if(extension === "heic" || extension === "jpeg" || extension === "png" || extension === "jpg") {
+        if(file.size <= (1 * 1024 * 1024)) {
+          setFile(file);
+          let { result } = reader;
+          let dataURI = result
+          console.log(dataURI)
+          setImgError("");
+          axios
+            .post(`/api/user/profilepic/${_id}`, {dataURI:dataURI})
+            .then((response) => {
+              setError(false);
+            })
+            .catch((err) => console.error(err));
+        } else {
+          setImgError("File is too large to upload");
+          console.log("File is too large to upload.");
+        }
+      } else {
+        setImgError("File must be a .png or .jpg image!");
+        console.log("File must be a .png or .jpg image!");
+      }
+
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   const followOrUnfollow = () => {
     axios
@@ -47,9 +85,18 @@ function ProfileHeader({
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-6">
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
-          <div id="profile-img" className="relative w-40 md:w-48 flex items-center justify-center" data-content="Edit">
-            <Image className="rounded-full" cloudName="bluetooth" alt="profilepic" publicId={profileImage} secure="true" data-content="Edit"></Image>
-          </div>
+          <label id="fileselect" htmlFor="files">
+            <div id="profile-img" className="relative w-40 md:w-48 flex items-center justify-center" data-content="Edit">
+              <Image className="rounded-full" cloudName="bluetooth" alt="profilepic" publicId={'' + _id + 'pp'} secure="true" data-content="Edit"></Image>
+              <input
+                accept="image/x-png,image/gif,image/jpeg,image/heic"
+                type="file"
+                id="files"
+                onChange={onImageFileChange}
+                className="hidden"
+              />
+            </div>
+          </label>
           <div className="pt-4 md:pt-0 md:ml-10">
             <div className="md:text-2xl text-md pt-5 pb-2">
               <span> {username} </span>

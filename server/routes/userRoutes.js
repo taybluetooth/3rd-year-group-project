@@ -8,6 +8,13 @@ const {
   getUserFromUsername,
   getUserFromToken,
 } = require("../models/user");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "bluetooth",
+  api_key: "171536158776577",
+  api_secret: "xXv64nJhkSZcTKqjb0MEltxIsqc",
+});
 
 module.exports = (app) => {
   app.get("/api/user", async (req, res) => {
@@ -149,6 +156,16 @@ module.exports = (app) => {
     return res.status(202).send({
       error: false,
       user,
+    });
+  });
+
+  app.post("/api/user/profilepic/:id", async (req, res) => {
+    const { id } = req.params;
+    var dataURI = req.body.dataURI;
+    var uploadStr = '' + dataURI;
+    console.log(uploadStr)
+    cloudinary.uploader.upload(uploadStr, {public_id: id + "pp", overwrite: true, invalidate: true}, async function (error, result) {
+      console.log(result, error);
     });
   });
 
