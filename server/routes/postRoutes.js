@@ -125,4 +125,34 @@ module.exports = (app) => {
       post,
     });
   });
+
+  app.get("/api/feed/:userID", async (req, res) => {
+    const userID = req.params.userID;
+    const following = await Follows.find({ followerID: userID }).select(
+      "followedID"
+    );
+    console.log(following);
+    let users = [];
+    following.forEach(({ followedID }) => users.push(followedID));
+    console.log(users);
+
+    const post = await Post.find({})
+      .where("userID")
+      .in(users)
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .populate({
+        path: "event",
+        populate: {
+          path: "attending",
+          select: "eventID userID",
+        },
+      })
+      .exec();
+    console.log(post);
+    return res.status(200).send({ post });
+    // return res.send(following);
+  });
 };

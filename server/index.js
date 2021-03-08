@@ -6,14 +6,14 @@ const { Post } = require("./models/post");
 const { Achievement } = require("./models/achievement");
 const dbConfig = require("./database/db.js");
 const { getUserFromToken } = require("./models/user");
-const nocache = require('nocache');
+const nocache = require("nocache");
 require("dotenv/config");
 
 const app = express();
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(express.json()); // Make sure it comes back as json
 app.use(nocache());
 
@@ -25,6 +25,7 @@ require("./routes/achievementRoutes")(app);
 require("./routes/followerRoutes")(app);
 require("./routes/channelFollowerRoutes")(app);
 require("./routes/likeRoutes")(app);
+require("./routes/eventRoutes")(app);
 
 app.get("/api/verifyToken/:token", async (req, res) => {
   const token = req.params.token;
@@ -63,7 +64,7 @@ mongoose
     }
   );
 mongoose.set("useCreateIndex", true);
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {

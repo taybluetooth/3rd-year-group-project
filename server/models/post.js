@@ -39,6 +39,10 @@ const postSchema = new Schema(
     //   type: String,
     //   default: "tester",
     // },
+    eventID: {
+      type: Schema.Types.ObjectId,
+      ref: "Event",
+    },
   },
   { timestamps: true }
 );
@@ -48,6 +52,13 @@ postSchema.plugin(idValidator);
 postSchema.virtual("user", {
   ref: "User",
   localField: "userID",
+  foreignField: "_id",
+  justOne: true,
+});
+
+postSchema.virtual("event", {
+  ref: "Event",
+  localField: "eventID",
   foreignField: "_id",
   justOne: true,
 });
