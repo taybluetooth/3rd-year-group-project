@@ -1,15 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
 const postService = {
   getAll: async () => {
-    let res = await axios.get('/api/post');
+    let res = await axios.get("/api/post");
     return res.data || [];
   },
   getUsersPosts: async (userID) => {
     let res = await axios.get(`/api/post/${userID}`);
     console.log(res.data);
     return res.data || [];
-  }
+  },
+  getFeed: async (userID) => {
+    let res = await axios.get(`/api/feed/${userID}`);
+    console.log(res.data);
+    return res.data || [];
+  },
 };
 
 export default postService;
