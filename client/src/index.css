@@ -75,7 +75,7 @@ button:focus {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   padding-bottom: 3rem;
 }
@@ -186,6 +186,9 @@ button:focus {
 }
 
 @media only screen and (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .gallery-item:hover .gallery-item-info,
   .gallery-item:focus .gallery-item-info {
     display: none;
