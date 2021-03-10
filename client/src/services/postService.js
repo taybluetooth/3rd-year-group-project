@@ -5,6 +5,10 @@ const postService = {
     let res = await axios.get("/api/post");
     return res.data || [];
   },
+  getById: async (id) => {
+    let res = await axios.get(`/api/post/${id}`)
+    return res.data || [];
+  },
   getUsersPosts: async (userID) => {
     let res = await axios.get(`/api/post/${userID}`);
     console.log(res.data);

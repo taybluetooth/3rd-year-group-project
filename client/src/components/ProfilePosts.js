@@ -20,6 +20,7 @@ function ProfilePosts(props) {
     return (
       <ProfilePostCard
         key={i}
+        id={post._id}
         image={post.image}
         likes={post.likes}
         points={post.points}
