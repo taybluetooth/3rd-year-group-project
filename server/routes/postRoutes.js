@@ -60,6 +60,22 @@ module.exports = (app) => {
     return res.status(200).send(posts);
   });
 
+  // get post by postID
+  app.get("/api/post/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    let post = await Post.find({_id: id}).exec();
+
+    if (!post) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    return res.status(200).send(post);
+  });
+
   // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
     const { token, description, imageUrl, channelUsername = "" } = req.body;
