@@ -36,21 +36,21 @@ function Appbar() {
           <div className="">
             <div className="flex items-baseline mx-auto">
               <Link to="/feed">
-                <button className="px-3 py-2 rounded-md text-xl text-white">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {home}
                 </button>
               </Link>
               <Link to="/upload_post">
-                <button className="px-3 py-2 rounded-md text-xl text-white">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {plus}
                 </button>
               </Link>
-              <button className="px-3 py-2 rounded-md text-xl text-pink-500">
+              <button className="mx-5 my-2 rounded-md text-xl text-pink-500">
                 {heart}
               </button>
               {/* find icon for this later */}
               <Link to="/create_channel" className="text-white">
-                <button className="px-3 py-2 rounded-md text-xl text-white">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {channel}
                 </button>
               </Link>
@@ -61,12 +61,12 @@ function Appbar() {
                     : `/profile/${getUser().username}`
                 }
               >
-                <button className="px-3 py-2 rounded-md text-xl text-white">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {user}
                 </button>
               </a>
               <button
-                className="px-3 py-2 rounded-md text-xl text-red-500"
+                className="mx-5 my-2 rounded-md text-xl text-red-500"
                 onClick={() => {
                   removeUserSession();
                   window.location.href = "/";
