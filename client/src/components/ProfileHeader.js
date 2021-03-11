@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getToken, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
 import Loading from "./Loading";
@@ -128,12 +129,11 @@ function ProfileHeader({
               <span> {username} </span>
             </div>
             {isLoggedInUser === null ? null : isLoggedInUser ? (
-              <button
-                href="#"
-                className="px-3 py-2 mb-2 rounded-md text-xs bg-white text-black"
-              >
-                EDIT
-              </button>
+              <Link to="/">
+                <button className="px-3 py-2 rounded-md text-xs bg-white text-black">
+                  EDIT PROFILE
+                </button>
+              </Link>
             ) : (
               <button
                 href="#"
