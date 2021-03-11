@@ -146,7 +146,6 @@ function ProfileHeader({
               </button>
             )}
             <div className="md:text-lg text-sm gap-5 sm:gap-10 grid grid-flow-col auto-cols-max">
-              <div>0 posts</div>
               <div>{numFollows} follower(s)</div>
               {numFollowing === null ? null : (
                 <div>{numFollowing} following</div>
