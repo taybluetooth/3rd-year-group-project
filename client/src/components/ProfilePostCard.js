@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,8 +13,20 @@ const heart = <FontAwesomeIcon icon={faHeart} />;
 const star = <FontAwesomeIcon icon={faStar} />;
 
 function ProfilePostCard(props) {
+  const [modalIsOpen,setIsOpen] = React.useState(false);
 
-  const expandDetails = () => {
+  const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+  const renderPost = () => {
     let post = props.post
     return (
       <PostCard
@@ -30,9 +44,29 @@ function ProfilePostCard(props) {
     );
   }
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal(){
+    setIsOpen(false);
+  }
+
   return (
     <>
-      <div className="gallery-item square-box">
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="Example Modal"
+    >
+
+      <button onClick={closeModal}>close</button>
+      <div className="flex items-center flex-col w-full">
+      {renderPost()}
+      </div>
+    </Modal>
+      <div onClick={openModal} className="gallery-item square-box">
         <div className="square-content">
           <Image
             className="gallery-image"
