@@ -17,12 +17,14 @@ function ProfilePostCard(props) {
 
   const customStyles = {
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    background: 'none',
+    outline: 'none',
   }
 };
 
@@ -60,9 +62,7 @@ function ProfilePostCard(props) {
       style={customStyles}
       contentLabel="Example Modal"
     >
-
-      <button onClick={closeModal}>close</button>
-      <div className="flex items-center flex-col w-full">
+      <div className="flex items-center flex-col">
       {renderPost()}
       </div>
     </Modal>
