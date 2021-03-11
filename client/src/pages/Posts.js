@@ -15,9 +15,6 @@ function Posts() {
     if (!posts) {
       getPosts();
     }
-    // if (!users) {
-    //   getUsers();
-    // }
   });
 
   // Get all posts from backend
@@ -27,25 +24,6 @@ function Posts() {
     console.log(res);
     setposts(res.post);
   };
-  // // Get all users from backend
-  // const getUsers = async () => {
-  //   let res = await userService.getAll();
-  //   console.log(res);
-  //   setusers(res);
-  // };
-  // // Get username from post.user foreign key
-  // const getUsername = (post) => {
-  //   var user;
-  //   if (users && users.length > 0) {
-  //     for (let postuser of users) {
-  //       if (postuser._id === post.userID) {
-  //         user = postuser;
-  //       }
-  //     }
-  //   }
-
-  //   return user;
-  // };
 
   const renderPost = (post) => {
     return (

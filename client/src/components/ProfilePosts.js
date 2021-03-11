@@ -24,6 +24,9 @@ function ProfilePosts(props) {
         image={post.image}
         likes={post.likes}
         points={post.points}
+        post={post}
+        username={props.userName}
+        profileImage={props.profileImage}
       />
     );
   };
