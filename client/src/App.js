@@ -4,6 +4,7 @@ import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
+import EditProfile from "./pages/EditProfile";
 
 import {
   BrowserRouter as Router,
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route path="/channel/:username">
           <Profile isChannel={true} />
+        </Route>
+        <Route path="/editprofile/">
+          <EditProfile/>
         </Route>
         {/* <Route path="/feed">
           <Feed />

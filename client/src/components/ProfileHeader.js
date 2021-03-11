@@ -129,7 +129,7 @@ function ProfileHeader({
               <span> {username} </span>
             </div>
             {isLoggedInUser === null ? null : isLoggedInUser ? (
-              <Link to="/">
+              <Link to="/editprofile">
                 <button className="px-3 py-2 rounded-md text-xs bg-white text-black">
                   EDIT PROFILE
                 </button>
