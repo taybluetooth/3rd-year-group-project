@@ -152,7 +152,7 @@ module.exports = (app) => {
   // update a user's details by their ID
   app.post("/api/user/:id", async (req, res) => {
     const { id } = req.params;
-    let user = await User.findByIdAndUpdate(id, {displayName: req.body.displayName, username: req.body.username });
+    let user = await User.findByIdAndUpdate(id, {bio: req.body.bio, displayName: req.body.displayName, username: req.body.username });
     return res.status(202).send({
       error: false,
       user,

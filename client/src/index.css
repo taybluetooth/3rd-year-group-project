@@ -173,6 +173,11 @@ button:focus {
   display: none;
 }
 
+.border-field {
+    border-bottom: 1px solid #000000;
+    background: none;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
