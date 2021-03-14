@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEllipsisH,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
@@ -9,8 +8,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../utils/Common";
 import likeService from "../services/likeService";
-
-const ellipsis = <FontAwesomeIcon icon={faEllipsisH} />;
 
 function PostCard(props) {
 
@@ -49,9 +46,9 @@ function PostCard(props) {
             </div>
           </div>
         </Link>
-        <span className="px-2 hover:bg-gray-300 cursor-pointer rounded">
-          {ellipsis}
-        </span>
+        <button className="hover:bg-gray-300 p-3 cursor-pointer rounded">
+          <span>X</span>
+        </button>
       </div>
       <Image
         cloudName="bluetooth"
