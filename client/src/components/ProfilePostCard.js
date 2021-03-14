@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
-import { Image } from "cloudinary-react";
+import { Modal } from 'react-responsive-modal';
 import { Link } from "react-router-dom";
+import 'react-responsive-modal/styles.css';
+
+import { Image } from "cloudinary-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import postService from "../services/postService";
@@ -13,60 +15,31 @@ const heart = <FontAwesomeIcon icon={faHeart} />;
 const star = <FontAwesomeIcon icon={faStar} />;
 
 function ProfilePostCard(props) {
-  const [modalIsOpen,setIsOpen] = React.useState(false);
-
-  const customStyles = {
-  content : {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    background: 'none',
-    outline: 'none',
-  }
-};
-
-  const renderPost = () => {
-    let post = props.post
-    return (
-      <PostCard
-        key={post._id}
-        _id={post._id}
-        user={props.username}
-        location={post.location}
-        description={post.description}
-        image={post.image}
-        likes={post.likes}
-        points={post.points}
-        post={post}
-        userImg={props.profileImage}
-      />
-    );
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal(){
-    setIsOpen(false);
-  }
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   return (
     <>
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Example Modal"
-    >
-      <div className="flex items-center flex-col">
-      {renderPost()}
-      </div>
-    </Modal>
-      <div onClick={openModal} className="gallery-item square-box">
+
+      <Modal open={open} onClose={onCloseModal} center>
+        <div className="flex justify-center items-center">
+          <PostCard
+            key={props.post._id}
+            _id={props.post._id}
+            user={props.username}
+            location={props.post.location}
+            description={props.post.description}
+            image={props.post.image}
+            likes={props.post.likes}
+            points={props.post.points}
+            post={props.post}
+            userImg={props.profileImage}
+          />
+        </div>
+      </Modal>
+
+      <div onClick={onOpenModal} className="gallery-item square-box">
         <div className="square-content">
           <Image
             className="gallery-image"
