@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const { Post } = require("../models/post");
+const { Follows } = require("../models/follows");
 const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
 const { getChannelFromUsername } = require("../models/channel");
@@ -64,7 +65,7 @@ module.exports = (app) => {
   app.get("/api/post/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id);
-    let post = await Post.find({_id: id}).exec();
+    let post = await Post.find({ _id: id }).exec();
 
     if (!post) {
       return res.status(401).send({
@@ -147,7 +148,12 @@ module.exports = (app) => {
     const following = await Follows.find({ followerID: userID }).select(
       "followedID"
     );
-    console.log(following);
+    // console.log(following);
+
+    if (!following) {
+      res.status(200).send([]);
+    }
+
     let users = [];
     following.forEach(({ followedID }) => users.push(followedID));
     console.log(users);

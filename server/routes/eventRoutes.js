@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { Event } = require("../models/event");
 const { EventAttend } = require("../models/eventAttend");
-const { Follows } = require("../models/follows");
 const { Post } = require("../models/post");
 
 module.exports = (app) => {
