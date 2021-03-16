@@ -5,15 +5,15 @@ const { EventAttend } = require("../models/eventAttend");
 const { Post } = require("../models/post");
 
 module.exports = (app) => {
-  app.post("/api/event", async (req, res) => {
-    const post = await Post.create(req.body.post);
-    const postID = post._id;
-    const event = await Event.create({ ...req.body.event, postID });
-    post.eventID = event._id;
-    await post.save();
-    console.log({ post, event });
-    return res.status(200).send({ post, event });
-  });
+  // app.post("/api/event", async (req, res) => {
+  //   const post = await Post.create(req.body.post);
+  //   const postID = post._id;
+  //   const event = await Event.create({ ...req.body.event, postID });
+  //   post.eventID = event._id;
+  //   await post.save();
+  //   console.log({ post, event });
+  //   return res.status(200).send({ post, event });
+  // });
 
   app.post("/api/event-attend", async (req, res) => {
     const eventAttend = await EventAttend.create(req.body);

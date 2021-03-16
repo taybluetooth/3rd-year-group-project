@@ -9,6 +9,9 @@ function UploadPost() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [channelUsername, setChannelUsername] = useState("");
+  const [isEvent, setIsEvent] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [error, setError] = useState(null);
   const [imgError, setImgError] = useState("");
   const token = getToken();
@@ -17,7 +20,15 @@ function UploadPost() {
     setError(null);
     e.preventDefault();
     let formData = new FormData();
-    const obj = { imageUrl, description, token, channelUsername };
+    const obj = {
+      imageUrl,
+      description,
+      token,
+      channelUsername,
+      isEvent,
+      startDate,
+      endDate,
+    };
     console.log(obj);
     Object.keys(obj).forEach((key, i) => {
       formData.append(key, obj[key]);
@@ -37,7 +48,10 @@ function UploadPost() {
       .then((response) => {
         setError(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   };
 
   const onTextChange = (e, setter) => {
@@ -52,8 +66,13 @@ function UploadPost() {
     let extension = file.name.split(".").pop().toLowerCase();
 
     reader.onloadend = () => {
-      if(extension === "heic" || extension === "jpeg" || extension === "png" || extension === "jpg") {
-        if(file.size <= (1 * 1024 * 1024)) {
+      if (
+        extension === "heic" ||
+        extension === "jpeg" ||
+        extension === "png" ||
+        extension === "jpg"
+      ) {
+        if (file.size <= 1 * 1024 * 1024) {
           console.log(file.size);
           setFile(file);
           let { result } = reader;
@@ -95,13 +114,38 @@ function UploadPost() {
                 style={{ resize: "none" }}
                 className="border-2 rounded p-10"
               />
-              <label className="mt-4">Channel Username</label>
+              <label className="mt-4 text-white">Channel Username</label>
               <input
                 type="text"
                 onChange={(e) => onTextChange(e, setChannelUsername)}
                 value={channelUsername}
                 className="border-2 rounded mb-4"
               />
+              <label className="mt-4 text-white">Event Post</label>
+              <input
+                type="checkbox"
+                onChange={(e) => setIsEvent(!isEvent)}
+                value={isEvent}
+                className="border-2 rounded mb-4"
+              />
+              {isEvent && (
+                <>
+                  <label className="mt-4 text-white"></label>
+                  <input
+                    type="date"
+                    onChange={(e) => onTextChange(e, setStartDate)}
+                    value={startDate}
+                    className="border-2 rounded mb-4"
+                  />
+                  <label className="mt-4 text-white"></label>
+                  <input
+                    type="date"
+                    onChange={(e) => onTextChange(e, setEndDate)}
+                    value={endDate}
+                    className="border-2 rounded mb-4"
+                  />
+                </>
+              )}
               <div className="mx-auto p-6">
                 <input
                   accept="image/x-png,image/gif,image/jpeg,image/heic"

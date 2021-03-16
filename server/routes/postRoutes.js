@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const { Post } = require("../models/post");
+const { Event } = require("../models/event");
 const { Follows } = require("../models/follows");
 const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
@@ -79,7 +80,15 @@ module.exports = (app) => {
 
   // upload a post
   app.post("/api/post", upload.none(), async (req, res) => {
-    const { token, description, imageUrl, channelUsername = "" } = req.body;
+    const {
+      token,
+      description,
+      imageUrl,
+      channelUsername = "",
+      startDate,
+      endDate,
+      isEvent,
+    } = req.body;
     const { lat, lon } = req.query;
     let location = "London"; // static for now
     console.log({ token, description, channelUsername });
@@ -117,9 +126,20 @@ module.exports = (app) => {
       await post.save();
       console.log(result, error);
     });
+
+    let event = null;
+    if (isEvent) {
+      const postID = post._id;
+      event = await Event.create({ postID, startDate, endDate });
+      post.eventID = event._id;
+      await post.save();
+      console.log({ post, event });
+    }
+
     return res.status(201).send({
       error: false,
       post,
+      event,
     });
   });
 
@@ -148,7 +168,6 @@ module.exports = (app) => {
     const following = await Follows.find({ followerID: userID }).select(
       "followedID"
     );
-    // console.log(following);
 
     if (!following) {
       res.status(200).send([]);
@@ -175,6 +194,5 @@ module.exports = (app) => {
       .exec();
     console.log(post);
     return res.status(200).send({ post });
-    // return res.send(following);
   });
 };
