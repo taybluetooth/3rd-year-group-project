@@ -29,6 +29,21 @@ function PostCard(props) {
       });
   }
 
+  const deletePost = (id) => {
+    if(window.confirm("Are you sure you want to delete this post? This can't be undone!")) {
+      axios.delete(`/api/post/${id}`, {
+      })
+      .then((res) => {
+        console.dir(res);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Sorry, something went wrong. Please try again");
+      });
+    }
+  }
+
   return (
     <div className="overflow-hidden border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
       <div className="w-full flex justify-between p-3">
@@ -47,10 +62,10 @@ function PostCard(props) {
           </div>
         </Link>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
-          <button className="hover:bg-gray-300 p-3 cursor-pointer rounded">
+          <button onClick={() => {deletePost(props._id)}} className="hover:bg-gray-300 p-3 cursor-pointer rounded">
             <span>X</span>
           </button>
-        ):(<div></div>)
+        ):(<div className="hidden"></div>)
         }
       </div>
       <Image
