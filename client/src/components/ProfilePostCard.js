@@ -35,6 +35,7 @@ function ProfilePostCard(props) {
             points={props.post.points}
             post={props.post}
             userImg={props.profileImage}
+            isLoggedInUser={props.isLoggedInUser}
           />
         </div>
       </Modal>

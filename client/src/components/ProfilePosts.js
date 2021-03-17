@@ -27,6 +27,7 @@ function ProfilePosts(props) {
         post={post}
         username={props.userName}
         profileImage={props.profileImage}
+        isLoggedInUser={props.isLoggedInUser}
       />
     );
   };

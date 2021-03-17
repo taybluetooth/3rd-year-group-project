@@ -6,7 +6,7 @@ import {
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { getToken } from "../utils/Common";
+import { getToken, getUser } from "../utils/Common";
 import likeService from "../services/likeService";
 
 function PostCard(props) {
@@ -46,9 +46,12 @@ function PostCard(props) {
             </div>
           </div>
         </Link>
-        <button className="hover:bg-gray-300 p-3 cursor-pointer rounded">
-          <span>X</span>
-        </button>
+        {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
+          <button className="hover:bg-gray-300 p-3 cursor-pointer rounded">
+            <span>X</span>
+          </button>
+        ):(<div></div>)
+        }
       </div>
       <Image
         cloudName="bluetooth"
