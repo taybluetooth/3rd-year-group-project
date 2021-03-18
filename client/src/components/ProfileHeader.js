@@ -115,13 +115,18 @@ function ProfileHeader({
                   data-content="Edit"
                 />
               )}
-              <input
-                accept="image/x-png,image/gif,image/jpeg,image/heic"
-                type="file"
-                id="files"
-                onChange={onImageFileChange}
-                className="hidden"
-              />
+              {isLoggedInUser === null ? null : isLoggedInUser ? (
+                <input
+                  accept="image/x-png,image/gif,image/jpeg,image/heic"
+                  type="file"
+                  id="files"
+                  onChange={onImageFileChange}
+                  className="hidden"
+                />
+            ):(
+              <div className="hidden"></div>
+            )
+              }
             </div>
           </label>
           <div className="pt-4 md:pt-0 md:ml-10">

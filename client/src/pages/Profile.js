@@ -97,7 +97,7 @@ function Profile({ isChannel }) {
             isChannel ? (
               <ChannelPosts channelUsername={userName} />
             ) : (
-              <ProfilePosts id={profileUser._id} userName={profileUser.username} profileImage={profileUser.profileImage} />
+              <ProfilePosts id={profileUser._id} userName={profileUser.username} profileImage={profileUser.profileImage} isLoggedInUser={isLoggedInUser}/>
             )
           ) : null}
         </div>

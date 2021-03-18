@@ -22,8 +22,10 @@ function ProfilePostCard(props) {
   return (
     <>
 
-      <Modal open={open} onClose={onCloseModal} center>
-        <div className="flex justify-center items-center">
+      <Modal open={open} onClose={onCloseModal} center  classNames={{
+          modal: 'post-modal',
+        }}>
+        <div className="flex justify-center items-center w-12/12">
           <PostCard
             key={props.post._id}
             _id={props.post._id}
@@ -35,6 +37,7 @@ function ProfilePostCard(props) {
             points={props.post.points}
             post={props.post}
             userImg={props.profileImage}
+            isLoggedInUser={props.isLoggedInUser}
           />
         </div>
       </Modal>

@@ -2,11 +2,12 @@ import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { getToken } from "../utils/Common";
+import { getToken, getUser } from "../utils/Common";
 import likeService from "../services/likeService";
 
 function PostCard(props) {
@@ -29,8 +30,23 @@ function PostCard(props) {
       });
   }
 
+  const deletePost = (id) => {
+    if(window.confirm("Are you sure you want to delete this post? This can't be undone!")) {
+      axios.delete(`/api/post/${id}`, {
+      })
+      .then((res) => {
+        console.dir(res);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Sorry, something went wrong. Please try again");
+      });
+    }
+  }
+
   return (
-    <div className="overflow-hidden border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+    <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
       <div className="w-full flex justify-between p-3">
         <Link to={`/profile/${props.user}`}>
           <div className="flex">
@@ -46,17 +62,23 @@ function PostCard(props) {
             </div>
           </div>
         </Link>
-        <button className="hover:bg-gray-300 p-3 cursor-pointer rounded">
-          <span>X</span>
-        </button>
+        {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
+          <button onClick={() => {deletePost(props._id)}} className="hover:bg-gray-300 p-3 cursor-pointer rounded">
+            <FontAwesomeIcon icon={faTrash} color="#FF0000" size="lg" />
+          </button>
+        ):(<div className="hidden"></div>)
+        }
       </div>
-      <Image
-        cloudName="bluetooth"
-        className="w-full bg-cover"
-        publicId={props.image}
-        secure="true"
-      ></Image>
-
+      <div className="gallery-item square-box">
+        <div className="square-content">
+          <Image
+            cloudName="bluetooth"
+            className="w-full bg-cover gallery-image"
+            publicId={props.image}
+            secure="true"
+          ></Image>
+        </div>
+      </div>
       <div className="px-3 pb-2">
         <div className="flex flex-row pt-2">
           <button onClick={like} className="text-lg"><FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" /></button>
