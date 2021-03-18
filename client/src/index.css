@@ -178,6 +178,11 @@ button:focus {
     background: none;
 }
 
+.post-modal {
+  max-width: 500px;
+  width: 80%;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

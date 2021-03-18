@@ -45,7 +45,7 @@ function PostCard(props) {
   }
 
   return (
-    <div className="overflow-hidden border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+    <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
       <div className="w-full flex justify-between p-3">
         <Link to={`/profile/${props.user}`}>
           <div className="flex">
@@ -68,13 +68,16 @@ function PostCard(props) {
         ):(<div className="hidden"></div>)
         }
       </div>
-      <Image
-        cloudName="bluetooth"
-        className="w-full bg-cover"
-        publicId={props.image}
-        secure="true"
-      ></Image>
-
+      <div className="gallery-item square-box">
+        <div className="square-content">
+          <Image
+            cloudName="bluetooth"
+            className="w-full bg-cover gallery-image"
+            publicId={props.image}
+            secure="true"
+          ></Image>
+        </div>
+      </div>
       <div className="px-3 pb-2">
         <div className="flex flex-row pt-2">
           <button onClick={like} className="text-lg"><FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" /></button>

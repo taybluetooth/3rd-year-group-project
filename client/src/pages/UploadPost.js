@@ -46,6 +46,7 @@ function UploadPost() {
         },
       })
       .then((response) => {
+        console.log(error);
         setError(false);
       })
       .catch((err) => {
