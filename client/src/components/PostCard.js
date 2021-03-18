@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
@@ -63,7 +64,7 @@ function PostCard(props) {
         </Link>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
           <button onClick={() => {deletePost(props._id)}} className="hover:bg-gray-300 p-3 cursor-pointer rounded">
-            <span>X</span>
+            <FontAwesomeIcon icon={faTrash} color="#FF0000" size="lg" />
           </button>
         ):(<div className="hidden"></div>)
         }
