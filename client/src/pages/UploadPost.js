@@ -46,6 +46,7 @@ function UploadPost() {
         },
       })
       .then((response) => {
+        console.log(response);
         setError(false);
       })
       .catch((err) => {
@@ -63,6 +64,7 @@ function UploadPost() {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    if (!file) return;
     let extension = file.name.split(".").pop().toLowerCase();
 
     reader.onloadend = () => {
@@ -161,14 +163,18 @@ function UploadPost() {
                   Select Image
                 </label>
               </div>
-              {imageUrl === "" || description === "" ? (
+              {imageUrl === "" ||
+              description === "" ||
+              (isEvent && (startDate === "" || endDate === "")) ? (
                 <button
                   id="uploadBtn"
                   className="rounded py-4 px-8 text-md bg-gray-500 text-white"
                   onClick={onSubmit}
                   disabled
                 >
-                  Your description or image is empty!
+                  {`Your description ${
+                    isEvent && ", start date, end date"
+                  } or image is empty!`}
                 </button>
               ) : (
                 <button

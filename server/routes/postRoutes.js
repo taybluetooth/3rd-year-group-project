@@ -91,7 +91,14 @@ module.exports = (app) => {
     } = req.body;
     const { lat, lon } = req.query;
     let location = "London"; // static for now
-    console.log({ token, description, channelUsername });
+    console.log({
+      token,
+      description,
+      channelUsername,
+      isEvent,
+      startDate,
+      endDate,
+    });
     console.log({ lat, lon });
     const { _id: userID } = await getUserFromToken(token);
 
@@ -128,7 +135,7 @@ module.exports = (app) => {
     });
 
     let event = null;
-    if (isEvent) {
+    if (isEvent === "true") {
       const postID = post._id;
       event = await Event.create({ postID, startDate, endDate });
       post.eventID = event._id;
