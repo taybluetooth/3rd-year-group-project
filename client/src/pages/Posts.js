@@ -41,6 +41,8 @@ function Posts() {
           post={post}
           // userImg={getUsername(post).profileImage}
           userImg={post.user.profileImage}
+          event={post.event}
+          eventID={post.eventID}
         />
       </div>
     );

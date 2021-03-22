@@ -26,10 +26,25 @@ function PostCard(props) {
       });
   };
 
-  const attendEvent = (eventID, userID) => {
-    // axios.post(`/api/`);
-    // console.log("hi");
+  const eventReq = (eventID, userID) => {
     console.dir({ eventID, userID });
+    axios
+      .post(`/api/event/${isAttendingEvent() ? "un" : ""}attend`, {
+        userID,
+        eventID,
+      })
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Sorry, something went wrong, please try again.");
+      });
+  };
+
+  const isAttendingEvent = () => {
+    return props.event !== null && props.event.attending.length > 0;
   };
 
   const deletePost = (id) => {
@@ -107,9 +122,9 @@ function PostCard(props) {
               <button
                 class="ml-4 bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
                 type="button"
-                onClick={() => attendEvent(props.eventID, getUser()._id)}
+                onClick={() => eventReq(props.eventID, getUser()._id)}
               >
-                ATTEND
+                {`${isAttendingEvent() ? "UN" : ""}ATTEND`}
               </button>
             </div>
           ) : null}
