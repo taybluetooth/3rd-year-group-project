@@ -46,11 +46,7 @@ function UploadPost() {
         },
       })
       .then((response) => {
-<<<<<<< HEAD
         console.log(response);
-=======
-        console.log(error);
->>>>>>> 07136b3c825be303ebbf95a89ccff7598956ef0a
         setError(false);
       })
       .catch((err) => {

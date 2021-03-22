@@ -27,20 +27,22 @@ function Posts() {
 
   const renderPost = (post) => {
     return (
-      <PostCard
-        key={post._id}
-        _id={post._id}
-        // user={getUsername(post).username}
-        user={post.user.username}
-        location={post.location}
-        description={post.description}
-        image={post.image}
-        likes={post.likes}
-        points={post.points}
-        post={post}
-        // userImg={getUsername(post).profileImage}
-        userImg={post.user.profileImage}
-      />
+      <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+        <PostCard
+          key={post._id}
+          _id={post._id}
+          // user={getUsername(post).username}
+          user={post.user.username}
+          location={post.location}
+          description={post.description}
+          image={post.image}
+          likes={post.likes}
+          points={post.points}
+          post={post}
+          // userImg={getUsername(post).profileImage}
+          userImg={post.user.profileImage}
+        />
+    </div>
     );
   };
 
