@@ -50,7 +50,15 @@ module.exports = (app) => {
   app.get("/api/post/:userID", async (req, res) => {
     const { userID } = req.params;
     console.log(userID);
-    let posts = await Post.find({ userID: userID }).exec();
+    let posts = await Post.find({ userID: userID })
+      .populate({
+        path: "event",
+        // populate: {
+        //   path: "attending",
+        //   select: "eventID userID",
+        // },
+      })
+      .exec();
 
     if (!posts) {
       return res.status(401).send({
@@ -196,6 +204,7 @@ module.exports = (app) => {
         populate: {
           path: "attending",
           select: "eventID userID",
+          match: { userID },
         },
       })
       .exec();

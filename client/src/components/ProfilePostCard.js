@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
-import ReactDOM from 'react-dom';
-import { Modal } from 'react-responsive-modal';
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import { Modal } from "react-responsive-modal";
 import { Link } from "react-router-dom";
-import 'react-responsive-modal/styles.css';
+import "react-responsive-modal/styles.css";
 
 import { Image } from "cloudinary-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,10 +21,14 @@ function ProfilePostCard(props) {
 
   return (
     <>
-
-      <Modal open={open} onClose={onCloseModal} center  classNames={{
-          modal: 'post-modal',
-        }}>
+      <Modal
+        open={open}
+        onClose={onCloseModal}
+        center
+        classNames={{
+          modal: "post-modal",
+        }}
+      >
         <div className="flex justify-center items-center w-12/12">
           <PostCard
             key={props.post._id}
@@ -38,6 +42,7 @@ function ProfilePostCard(props) {
             post={props.post}
             userImg={props.profileImage}
             isLoggedInUser={props.isLoggedInUser}
+            event={props.post.event}
           />
         </div>
       </Modal>

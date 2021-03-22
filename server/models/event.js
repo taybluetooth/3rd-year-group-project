@@ -28,6 +28,10 @@ const eventSchema = new Schema(
         ref: "EventAttend",
       },
     ],
+    numAttending: {
+      type: Number,
+      default: 0,
+    },
     // location: {
     //   type: String,
     //   required: true,

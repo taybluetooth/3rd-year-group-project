@@ -1,9 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,7 +8,6 @@ import { getToken, getUser } from "../utils/Common";
 import likeService from "../services/likeService";
 
 function PostCard(props) {
-
   const [liked, setLiked] = useState(false);
 
   const like = () => {
@@ -28,22 +24,32 @@ function PostCard(props) {
         console.error(error);
         alert("Sorry, something went wrong. Please try again");
       });
-  }
+  };
+
+  const attendEvent = (eventID, userID) => {
+    // axios.post(`/api/`);
+    // console.log("hi");
+    console.dir({ eventID, userID });
+  };
 
   const deletePost = (id) => {
-    if(window.confirm("Are you sure you want to delete this post? This can't be undone!")) {
-      axios.delete(`/api/post/${id}`, {
-      })
-      .then((res) => {
-        console.dir(res);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Sorry, something went wrong. Please try again");
-      });
+    if (
+      window.confirm(
+        "Are you sure you want to delete this post? This can't be undone!"
+      )
+    ) {
+      axios
+        .delete(`/api/post/${id}`, {})
+        .then((res) => {
+          console.dir(res);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Sorry, something went wrong. Please try again");
+        });
     }
-  }
+  };
 
   return (
     <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
@@ -51,7 +57,13 @@ function PostCard(props) {
         <Link to={`/profile/${props.user}`}>
           <div className="flex">
             <div className="h-8 w-8 flex items-center justify-center overflow-hidden">
-              <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
+              <Image
+                className="gallery-image rounded-full"
+                cloudName="bluetooth"
+                alt="profilepic"
+                publicId={props.userImg}
+                secure="true"
+              ></Image>
             </div>
             <div className="block">
               <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
@@ -63,11 +75,17 @@ function PostCard(props) {
           </div>
         </Link>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
-          <button onClick={() => {deletePost(props._id)}} className="hover:bg-gray-300 p-3 cursor-pointer rounded">
+          <button
+            onClick={() => {
+              deletePost(props._id);
+            }}
+            className="hover:bg-gray-300 p-3 cursor-pointer rounded"
+          >
             <FontAwesomeIcon icon={faTrash} color="#FF0000" size="lg" />
           </button>
-        ):(<div className="hidden"></div>)
-        }
+        ) : (
+          <div className="hidden"></div>
+        )}
       </div>
       <div className="gallery-item square-box">
         <div className="square-content">
@@ -81,19 +99,36 @@ function PostCard(props) {
       </div>
       <div className="px-3 pb-2">
         <div className="flex flex-row pt-2">
-          <button onClick={like} className="text-lg"><FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" /></button>
+          <button onClick={like} className="text-lg">
+            <FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" />
+          </button>
+          {props.event !== null ? (
+            <div className="flex">
+              <button
+                class="ml-4 bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+                type="button"
+                onClick={() => attendEvent(props.eventID, getUser()._id)}
+              >
+                ATTEND
+              </button>
+            </div>
+          ) : null}
         </div>
         <div className="flex flex-row pt-2">
           <span className="text-sm text-gray-400 mr-2">
             {props.likes} likes
           </span>
-          <span className="text-sm text-gray-400">
-            {props.points} points
-          </span>
+          <span className="text-sm text-gray-400">{props.points} points</span>
         </div>
         <div className="flex flex-row text-sm pt-2">
           <div className="h-5 w-5 mr-1 flex items-center justify-center overflow-hidden">
-            <Image className="gallery-image rounded-full" cloudName="bluetooth" alt="profilepic" publicId={props.userImg} secure="true"></Image>
+            <Image
+              className="gallery-image rounded-full"
+              cloudName="bluetooth"
+              alt="profilepic"
+              publicId={props.userImg}
+              secure="true"
+            ></Image>
           </div>
           <span className="font-bold text-md mr-2">{props.user}</span>
           {props.description}
@@ -101,6 +136,6 @@ function PostCard(props) {
       </div>
     </div>
   );
-};
+}
 
 export default PostCard;
