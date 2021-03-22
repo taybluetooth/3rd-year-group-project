@@ -30,6 +30,7 @@ function ProfilePostCard(props) {
         }}
       >
         <div className="flex justify-center items-center w-12/12">
+<<<<<<< HEAD
           <PostCard
             key={props.post._id}
             _id={props.post._id}
@@ -44,6 +45,23 @@ function ProfilePostCard(props) {
             isLoggedInUser={props.isLoggedInUser}
             event={props.post.event}
           />
+=======
+          <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+            <PostCard
+              key={props.post._id}
+              _id={props.post._id}
+              user={props.username}
+              location={props.post.location}
+              description={props.post.description}
+              image={props.post.image}
+              likes={props.post.likes}
+              points={props.post.points}
+              post={props.post}
+              userImg={props.profileImage}
+              isLoggedInUser={props.isLoggedInUser}
+            />
+          </div>
+>>>>>>> 257b23f24a3c3a13c5da8f6cebe6b3cf5d105b10
         </div>
       </Modal>
 

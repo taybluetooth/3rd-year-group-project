@@ -35,6 +35,10 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
+    tag: {
+      type: Array,
+      default: [],
+    },
     // achievement: {
     //   type: String,
     //   default: "tester",

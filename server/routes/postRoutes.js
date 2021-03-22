@@ -136,8 +136,9 @@ module.exports = (app) => {
     }
 
     let post = await Post.create(postObj);
-    cloudinary.uploader.upload(imageUrl, async function (error, result) {
+    cloudinary.uploader.upload(imageUrl, {categorization: "aws_rek_tagging"}, async function (error, result) {
       post.image = result.public_id;
+      post.tag = result.info.categorization.aws_rek_tagging.data;
       await post.save();
       console.log(result, error);
     });

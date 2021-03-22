@@ -52,7 +52,7 @@ function PostCard(props) {
   };
 
   return (
-    <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+    <>
       <div className="w-full flex justify-between p-3">
         <Link to={`/profile/${props.user}`}>
           <div className="flex">
@@ -134,7 +134,7 @@ function PostCard(props) {
           {props.description}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
