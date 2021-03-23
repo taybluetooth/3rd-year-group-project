@@ -157,7 +157,14 @@ function PostCard(props) {
           <span className="text-sm text-gray-400 mr-2">
             {props.likes} likes
           </span>
-          <span className="text-sm text-gray-400">{props.points} points</span>
+          <span className="text-sm mr-2 text-gray-400">
+            {props.points} points
+          </span>
+          {props.event ? (
+            <span className="text-sm text-gray-400">
+              {props.event.numAttending} attending
+            </span>
+          ) : null}
         </div>
         <div className="flex flex-row text-sm pt-2">
           <div className="h-5 w-5 mr-1 flex items-center justify-center overflow-hidden">
