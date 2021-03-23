@@ -6,8 +6,14 @@ import { setUserSession } from "../utils/Common";
 import { Redirect } from "react-router-dom";
 import { Image } from "cloudinary-react";
 
+import ReactNotification from 'react-notifications-component'
+import {store} from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+
+
 const SignIn = ({ isLogin, ...props }) => {
   const [error, setError] = useState(null);
+  const [notification, setNotification] = useState(false);
   const [schema, setSchema] = useState({
     username: Yup.string()
       .max(15, "Maximum of 15 characters and minimum of 5 characters")
@@ -34,6 +40,25 @@ const SignIn = ({ isLogin, ...props }) => {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const createNotification = () => {
+    if(notification === false) {
+      store.addNotification({
+        title: "Login Successful",
+        message: "Welcome back!",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 2000,
+          onScreen: true
+        },
+      });
+      setNotification(true);
+    }
+  }
+
   const handleLogin = async (values) => {
     setError(null);
     axios
@@ -42,6 +67,7 @@ const SignIn = ({ isLogin, ...props }) => {
         setUserSession(response.data.token, response.data.user);
         setError(false);
         console.dir(response);
+        createNotification();
       })
       .catch((error) => {
         console.dir(error);

@@ -7,15 +7,39 @@ import { getUser } from "../utils/Common";
 import postService from "../services/postService";
 import userService from "../services/userService";
 
+// NOTIFICATIONS
+import ReactNotification from 'react-notifications-component'
+import {store} from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+
 function Posts() {
   const [posts, setposts] = useState(null);
   const [users, setusers] = useState(null);
+  const [notification, setNotification] = useState(false)
+
 
   useEffect(() => {
     if (!posts) {
       getPosts();
     }
   });
+
+  const createNotification = () => {
+    if(posts.length === 0) {
+      if(notification === false) {
+        store.addNotification({
+          title: "No Posts Found!",
+          message: "Start following some users to see some posts!",
+          type: "warning",
+          insert: "top",
+          container: "center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+        });
+        setNotification(true);
+      }
+    }
+  }
 
   // Get all posts from backend
   const getPosts = async () => {
@@ -55,7 +79,7 @@ function Posts() {
           {posts && posts.length > 0 ? (
             posts.map((post) => renderPost(post))
           ) : (
-            <p>No posts found</p>
+            createNotification()
           )}
         </div>
       ) : (
