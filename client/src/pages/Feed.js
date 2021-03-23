@@ -23,7 +23,7 @@ function Feed() {
       type: "info",
       className:"custom-notification",
       insert: "top",
-      container: "top-full",
+      container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"],
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {

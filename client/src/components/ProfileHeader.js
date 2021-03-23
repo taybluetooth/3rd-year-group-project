@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { getToken, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
 import Loading from "./Loading";
+import ReactNotification from 'react-notifications-component'
+import {store} from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function ProfileHeader({
   _id,
@@ -56,7 +59,7 @@ function ProfileHeader({
             })
             .catch((err) => {
               console.error(err);
-              alert("Sorry something went wrong, please try again.");
+              alert("Could not change profile picture to this image.");
             })
             .finally(() => setImageLoading(false));
         } else {
@@ -94,6 +97,8 @@ function ProfileHeader({
   };
 
   return (
+    <>
+    <ReactNotification />
     <div className="md:w-8/12 mx-3 text-white overflow-hidden md:mt-6">
       <div className="md:w-full container p-3">
         <div className="md:flex items-center justify-center container divider md:py-4">
@@ -165,6 +170,7 @@ function ProfileHeader({
         </div>
       </div>
     </div>
+    </>
   );
 }
 

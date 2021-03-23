@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePosts from "../components/ProfilePosts";
 import ChannelPosts from "../components/ChannelPosts";
 import Appbar from "../components/Appbar";
 import Loading from "../components/Loading";
+
 import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { getToken, getUser } from "../utils/Common";

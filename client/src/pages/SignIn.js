@@ -40,7 +40,7 @@ const SignIn = ({ isLogin, ...props }) => {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const createNotification = () => {
+  const successNotification = () => {
     if(notification === false) {
       store.addNotification({
         title: "Login Successful",
@@ -67,7 +67,7 @@ const SignIn = ({ isLogin, ...props }) => {
         setUserSession(response.data.token, response.data.user);
         setError(false);
         console.dir(response);
-        createNotification();
+        successNotification();
       })
       .catch((error) => {
         console.dir(error);
@@ -207,7 +207,7 @@ const SignIn = ({ isLogin, ...props }) => {
                   </button>
                 </div>
               </form>
-              {error ? <div className="">{error}</div> : null}
+              {error ? <div style={{color: "red"}}>{error}</div> : null}
             </>
           )}
         </Formik>
