@@ -45,6 +45,10 @@ button:focus {
   outline: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .profile-container {
   max-width: 93.5rem;
   margin: 0 auto;

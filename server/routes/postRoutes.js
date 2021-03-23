@@ -98,6 +98,7 @@ module.exports = (app) => {
       isEvent,
     } = req.body;
     const { lat, lon } = req.query;
+    let tags = [];
     let location = "London"; // static for now
     console.log({
       token,
@@ -138,7 +139,10 @@ module.exports = (app) => {
     let post = await Post.create(postObj);
     cloudinary.uploader.upload(imageUrl, {categorization: "aws_rek_tagging"}, async function (error, result) {
       post.image = result.public_id;
-      post.tag = result.info.categorization.aws_rek_tagging.data;
+      for(let i = 0; i < 5; i++){
+        tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+      }
+      post.tag = tags;
       await post.save();
       console.log(result, error);
     });

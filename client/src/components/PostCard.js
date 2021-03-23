@@ -69,7 +69,6 @@ function PostCard(props) {
   return (
     <>
       <div className="w-full flex justify-between p-3">
-        <Link to={`/profile/${props.user}`}>
           <div className="flex">
             <div className="h-8 w-8 flex items-center justify-center overflow-hidden">
               <Image
@@ -81,14 +80,15 @@ function PostCard(props) {
               ></Image>
             </div>
             <div className="block">
-              <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
+              <Link to={`/profile/${props.user}`} style={{ textDecoration: 'none', outline: 'none', }}>
+                <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
+              </Link>
               <br></br>
               <span className="ml-2 text-sm text-gray-400">
                 {props.location}
               </span>
             </div>
           </div>
-        </Link>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
           <button
             onClick={() => {
