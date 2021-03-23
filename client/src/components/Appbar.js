@@ -14,7 +14,6 @@ import { removeUserSession, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
 
 const home = <FontAwesomeIcon icon={faHome} />;
-const heart = <FontAwesomeIcon icon={faHeart} />;
 const user = <FontAwesomeIcon icon={faUser} />;
 const plus = <FontAwesomeIcon icon={faPlus} />;
 const channel = <FontAwesomeIcon icon={faTv} />;
@@ -45,9 +44,6 @@ function Appbar() {
                   {plus}
                 </button>
               </Link>
-              <button className="mx-5 my-2 rounded-md text-xl text-pink-500">
-                {heart}
-              </button>
               {/* find icon for this later */}
               <Link to="/create_channel" className="text-white">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
