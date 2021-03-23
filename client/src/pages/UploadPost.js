@@ -173,7 +173,7 @@ function UploadPost() {
                   disabled
                 >
                   {`Your description ${
-                    isEvent && ", start date, end date"
+                    isEvent ? ", start date, end date" : ""
                   } or image is empty!`}
                 </button>
               ) : (
