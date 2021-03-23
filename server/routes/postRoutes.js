@@ -53,10 +53,11 @@ module.exports = (app) => {
     let posts = await Post.find({ userID: userID })
       .populate({
         path: "event",
-        // populate: {
-        //   path: "attending",
-        //   select: "eventID userID",
-        // },
+        populate: {
+          path: "attending",
+          select: "eventID userID",
+          match: { userID },
+        },
       })
       .exec();
 
@@ -137,15 +138,19 @@ module.exports = (app) => {
     }
 
     let post = await Post.create(postObj);
-    cloudinary.uploader.upload(imageUrl, {categorization: "aws_rek_tagging"}, async function (error, result) {
-      post.image = result.public_id;
-      for(let i = 0; i < 5; i++){
-        tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+    cloudinary.uploader.upload(
+      imageUrl,
+      { categorization: "aws_rek_tagging" },
+      async function (error, result) {
+        post.image = result.public_id;
+        for (let i = 0; i < 5; i++) {
+          tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+        }
+        post.tag = tags;
+        await post.save();
+        console.log(result, error);
       }
-      post.tag = tags;
-      await post.save();
-      console.log(result, error);
-    });
+    );
 
     let event = null;
     if (isEvent === "true") {
