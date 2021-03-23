@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faTrash,
+  faCalendarTimes,
+  faCalendarPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +14,12 @@ import likeService from "../services/likeService";
 
 function PostCard(props) {
   const [liked, setLiked] = useState(false);
+  const dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
   const like = () => {
     axios
@@ -43,6 +54,10 @@ function PostCard(props) {
       });
   };
 
+  const printDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", dateOptions);
+  };
+
   const isAttendingEvent = () => {
     return props.event !== null && props.event.attending.length > 0;
   };
@@ -69,26 +84,27 @@ function PostCard(props) {
   return (
     <>
       <div className="w-full flex justify-between p-3">
-          <div className="flex">
-            <div className="h-8 w-8 flex items-center justify-center overflow-hidden">
-              <Image
-                className="gallery-image rounded-full"
-                cloudName="bluetooth"
-                alt="profilepic"
-                publicId={props.userImg}
-                secure="true"
-              ></Image>
-            </div>
-            <div className="block">
-              <Link to={`/profile/${props.user}`} style={{ textDecoration: 'none', outline: 'none', }}>
-                <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
-              </Link>
-              <br></br>
-              <span className="ml-2 text-sm text-gray-400">
-                {props.location}
-              </span>
-            </div>
+        <div className="flex">
+          <div className="h-8 w-8 flex items-center justify-center overflow-hidden">
+            <Image
+              className="gallery-image rounded-full"
+              cloudName="bluetooth"
+              alt="profilepic"
+              publicId={props.userImg}
+              secure="true"
+            ></Image>
           </div>
+          <div className="block">
+            <Link
+              to={`/profile/${props.user}`}
+              style={{ textDecoration: "none", outline: "none" }}
+            >
+              <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
+            </Link>
+            <br></br>
+            <span className="ml-2 text-sm text-gray-400">{props.location}</span>
+          </div>
+        </div>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (
           <button
             onClick={() => {
@@ -113,20 +129,28 @@ function PostCard(props) {
         </div>
       </div>
       <div className="px-3 pb-2">
+        {props.event !== null ? (
+          <div className="flex flex-row pt-2">
+            <h3>{`${printDate(props.event.startDate)} · ${printDate(
+              props.event.endDate
+            )}`}</h3>
+          </div>
+        ) : null}
         <div className="flex flex-row pt-2">
-          <button onClick={like} className="text-lg">
+          <button onClick={like} className="text-lg mr-2">
             <FontAwesomeIcon icon={faHeart} color="#FF1493" size="lg" />
           </button>
           {props.event !== null ? (
-            <div className="flex">
-              <button
-                class="ml-4 bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={() => eventReq(props.eventID, getUser()._id)}
-              >
-                {`${isAttendingEvent() ? "UN" : ""}ATTEND`}
-              </button>
-            </div>
+            <button
+              onClick={() => eventReq(props.eventID, getUser()._id)}
+              className="text-lg mx-2"
+            >
+              <FontAwesomeIcon
+                icon={isAttendingEvent() ? faCalendarTimes : faCalendarPlus}
+                color="#FF1493"
+                size="lg"
+              />
+            </button>
           ) : null}
         </div>
         <div className="flex flex-row pt-2">
