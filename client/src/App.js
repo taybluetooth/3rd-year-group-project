@@ -29,12 +29,10 @@ function App() {
         .then((response) => {
           console.dir(response);
           setUser(response.data.user);
-          // setAuthLoading(false);
         })
         .catch((error) => {
           console.dir(error);
           removeUserSession();
-          // setAuthLoading(false);
         });
 
     verifyToken();
@@ -57,9 +55,6 @@ function App() {
         <Route path="/editprofile/">
           <EditProfile/>
         </Route>
-        {/* <Route path="/feed">
-          <Feed />
-        </Route> */}
         <PrivateRoute path="/feed" component={Feed} />
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}

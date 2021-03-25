@@ -20,8 +20,7 @@ function Feed() {
       title: "Today's Challenge is Mountains!",
       message:
         "Create a post by 12pm GMT containing a picture of a mountain to earn 500 points!",
-      type: "info",
-      className: "custom-notification",
+      type: "default",
       insert: "top",
       container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"],
