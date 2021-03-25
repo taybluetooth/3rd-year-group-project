@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import EditProfile from "./pages/EditProfile";
+import Leaderboard from "./pages/Leaderboard";
 
 import {
   BrowserRouter as Router,
@@ -48,14 +49,23 @@ function App() {
           <SignIn isLogin={false} />
         </Route>
         <Route path="/profile/:username">
-          <Profile isChannel={false} />
+          {getToken() ? (
+            <Profile isChannel={false} />
+          ) : (
+            <SignIn isLogin={true} />
+          )}
         </Route>
         <Route path="/channel/:username">
-          <Profile isChannel={true} />
+          {getToken() ? (
+            <Profile isChannel={true} />
+          ) : (
+            <SignIn isLogin={true} />
+          )}
         </Route>
-        <Route path="/editprofile/">
-          <EditProfile/>
+        <Route path="/leaderboard">
+          <Leaderboard />
         </Route>
+        <PrivateRoute path="/editprofile/" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
