@@ -50,9 +50,17 @@ a {
 }
 
 .notification__item--custom {
-  background: #FC466B;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3F5EFB, #FC466B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #fc466b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-left: 8px solid #1e42fa;
 }
 
@@ -185,8 +193,8 @@ a {
 }
 
 .border-field {
-    border-bottom: 1px solid #000000;
-    background: none;
+  border-bottom: 1px solid #000000;
+  background: none;
 }
 
 .post-modal {
@@ -220,4 +228,19 @@ a {
   .app-hide {
     display: inherit;
   }
+}
+
+.challenges-list {
+  min-height: 500px;
+  width: 100%;
+  padding: 15px;
+}
+.challenges-list li {
+  height: 100px;
+}
+
+.challenges-user img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
