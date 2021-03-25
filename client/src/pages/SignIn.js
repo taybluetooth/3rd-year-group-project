@@ -94,8 +94,7 @@ const SignIn = ({ isLogin, ...props }) => {
     axios
       .get(`/api/challenge`)
       .then((response) => {
-        console.log(response.data[0])
-        setChallenge(response.data[0])
+        setChallenge(response.data[Math.floor(Math.random() * 5)])
       })
       .catch((error) => {
         console.log(error);
