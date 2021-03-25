@@ -23,7 +23,7 @@ module.exports = (app) => {
   });
 
   // get specific user by tokenised ID.
-  app.get("/api/user/:token", async (req, res) => {
+  app.get("/api/user/token/:token", async (req, res) => {
     const { token } = req.params;
     const user = await getUserFromToken(token);
 
@@ -153,6 +153,17 @@ module.exports = (app) => {
   app.post("/api/user/:id", async (req, res) => {
     const { id } = req.params;
     let user = await User.findByIdAndUpdate(id, {bio: req.body.bio, displayName: req.body.displayName, username: req.body.username });
+    return res.status(202).send({
+      error: false,
+      user,
+    });
+  });
+
+  app.post("/api/user/challenge/:id", async (req, res) => {
+    const { id } = req.params;
+    const challengeFields = req.body.challenge;
+    let user = await User.findByIdAndUpdate(id, {challenge: [challengeFields.name,
+                                            challengeFields.description, challengeFields.points]});
     return res.status(202).send({
       error: false,
       user,

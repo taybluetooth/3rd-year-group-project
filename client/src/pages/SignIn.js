@@ -5,6 +5,7 @@ import axios from "axios";
 import { setUserSession } from "../utils/Common";
 import { Redirect } from "react-router-dom";
 import { Image } from "cloudinary-react";
+import challengeService from "../services/challengeService";
 
 import ReactNotification from 'react-notifications-component'
 import {store} from 'react-notifications-component'
@@ -14,6 +15,7 @@ import 'react-notifications-component/dist/theme.css'
 const SignIn = ({ isLogin, ...props }) => {
   const [error, setError] = useState(null);
   const [notification, setNotification] = useState(false);
+  const [challenge, setChallenge] = useState(null);
   const [schema, setSchema] = useState({
     username: Yup.string()
       .max(15, "Maximum of 15 characters and minimum of 5 characters")
@@ -24,6 +26,10 @@ const SignIn = ({ isLogin, ...props }) => {
       .max(75, "Maximum of 75 characters and minimum of 8 characters")
       .required("Required"),
   });
+
+  useEffect(() => {
+    getChallenge();
+  }, [])
 
   useEffect(() => {
     if (!isLogin) {
@@ -65,6 +71,15 @@ const SignIn = ({ isLogin, ...props }) => {
       .post(`/api/user/${isLogin ? "login" : "signup"}`, values)
       .then((response) => {
         setUserSession(response.data.token, response.data.user);
+        axios
+          .post(`/api/user/challenge/${response.data.user._id}`, {challenge})
+          .then((res) => {
+            console.log({challenge});
+          })
+          .catch((error) => {
+            console.dir(error);
+            setError(error.res.data.message);
+          });
         setError(false);
         console.dir(response);
         successNotification();
@@ -72,6 +87,18 @@ const SignIn = ({ isLogin, ...props }) => {
       .catch((error) => {
         console.dir(error);
         setError(error.response.data.message);
+      });
+  };
+
+  const getChallenge = async () => {
+    axios
+      .get(`/api/challenge`)
+      .then((response) => {
+        console.log(response.data[0])
+        setChallenge(response.data[0])
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

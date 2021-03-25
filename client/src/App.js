@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
@@ -17,6 +17,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import CreateChannel from "./pages/CreateChannel";
 
 function App() {
+
   useEffect(() => {
     const token = getToken();
     if (!token) {

@@ -65,6 +65,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    challenge: {
+      type: Array,
+      default: [],
+    },
     // e.g. admin etc
     userType: {
       type: String,
