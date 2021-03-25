@@ -10,10 +10,6 @@ const challengeSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    required: true,
-  },
   points: {
     type: Number,
     required: true,
