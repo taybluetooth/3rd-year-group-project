@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const challenge = mongoose.model("challenges");
+const challenge = mongoose.model("Challenge");
 
 module.exports = (app) => {
   app.get('/api/challenge', async (req, res) => {

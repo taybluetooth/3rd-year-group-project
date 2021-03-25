@@ -20,6 +20,6 @@ const challengeSchema = new Schema({
   },
 });
 
-const challenge = mongoose.model("challenges", challengeSchema);
+const Challenge = mongoose.model("Challenge", challengeSchema);
 
-module.exports = { challenge };
+module.exports = { Challenge };
