@@ -7,6 +7,7 @@ import Feed from "./pages/Feed";
 import EditProfile from "./pages/EditProfile";
 import Leaderboard from "./pages/Leaderboard";
 import Events from "./pages/Events";
+import Map from "./pages/Map";
 
 import {
   BrowserRouter as Router,
@@ -70,6 +71,9 @@ function App() {
         </Route>
         <PrivateRoute path="/editprofile/" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />
+        <Route path="/map">
+          <Map />
+        </Route>
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
         </Route>
