@@ -5,6 +5,7 @@ import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
+import Map from './pages/Map';
 
 import {
   BrowserRouter as Router,
@@ -58,6 +59,7 @@ function App() {
         <Route path="/feed">
           <Feed />
         </Route>
+        <Route path="/map"><Map/></Route>
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
         </Route>
