@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import EditProfile from "./pages/EditProfile";
 import Leaderboard from "./pages/Leaderboard";
+import Events from "./pages/Events";
 
 import {
   BrowserRouter as Router,
@@ -18,7 +19,6 @@ import PrivateRoute from "./utils/PrivateRoute";
 import CreateChannel from "./pages/CreateChannel";
 
 function App() {
-
   useEffect(() => {
     const token = getToken();
     if (!token) {
@@ -64,6 +64,9 @@ function App() {
         </Route>
         <Route path="/leaderboard">
           <Leaderboard />
+        </Route>
+        <Route path="/events">
+          <Events />
         </Route>
         <PrivateRoute path="/editprofile/" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />

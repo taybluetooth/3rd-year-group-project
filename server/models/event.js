@@ -15,7 +15,7 @@ const eventSchema = new Schema(
       required: true,
     },
     startDate: {
-      type: String,
+      type: Date,
       required: true,
     },
     endDate: {
@@ -48,7 +48,7 @@ const eventSchema = new Schema(
 
 eventSchema.plugin(idValidator);
 
-// eventSchema.virtual("attendingUsers", {
+// eventSchema.virtual("attending", {
 //   ref: "EventAttend",
 //   localField: "attending",
 //   foreignField: "_id",

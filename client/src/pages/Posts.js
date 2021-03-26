@@ -5,18 +5,15 @@ import { getUser } from "../utils/Common";
 
 // SERVICES
 import postService from "../services/postService";
-import userService from "../services/userService";
 
 // NOTIFICATIONS
-import ReactNotification from 'react-notifications-component'
-import {store} from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 function Posts() {
   const [posts, setposts] = useState(null);
-  const [users, setusers] = useState(null);
-  const [notification, setNotification] = useState(false)
-
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     if (!posts) {
@@ -25,8 +22,8 @@ function Posts() {
   });
 
   const createNotification = () => {
-    if(posts.length === 0) {
-      if(notification === false) {
+    if (posts.length === 0) {
+      if (notification === false) {
         store.addNotification({
           title: "No Posts Found!",
           message: "Start following some users to see some posts!",
@@ -39,7 +36,7 @@ function Posts() {
         setNotification(true);
       }
     }
-  }
+  };
 
   // Get all posts from backend
   const getPosts = async () => {
@@ -76,11 +73,9 @@ function Posts() {
     <>
       {posts ? (
         <div className="flex items-center flex-col">
-          {posts && posts.length > 0 ? (
-            posts.map((post) => renderPost(post))
-          ) : (
-            createNotification()
-          )}
+          {posts && posts.length > 0
+            ? posts.map((post) => renderPost(post))
+            : createNotification()}
         </div>
       ) : (
         <Loading />

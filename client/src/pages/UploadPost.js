@@ -184,12 +184,14 @@ function UploadPost() {
                   Submit!
                 </button>
               )}
-              <div className="mt-2 rounded gallery-item square-box">
-                <div className="square-content">
-                  <img src={imageUrl} className="gallery-image" />
-                  <h4> {imgError} </h4>
+              {imageUrl ? (
+                <div className="mt-2 rounded gallery-item square-box">
+                  <div className="square-content">
+                    <img src={imageUrl} className="gallery-image" />
+                    <h4> {imgError} </h4>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </form>
         </div>

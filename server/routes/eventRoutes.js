@@ -5,6 +5,41 @@ const { EventAttend } = require("../models/eventAttend");
 const { Post } = require("../models/post");
 
 module.exports = (app) => {
+  // get all events a user is attending
+  app.get("/api/attending-events/:userID", async (req, res) => {
+    const { userID = "" } = req.params;
+    if (userID === "") {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    const attending = await EventAttend.find({ userID })
+      .distinct("eventID")
+      .exec();
+    console.log(attending);
+
+    const posts = await Post.find({})
+      .where("eventID")
+      .in(attending)
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .populate({
+        path: "event",
+        populate: {
+          path: "attending",
+          select: "eventID userID",
+          match: { userID },
+        },
+      })
+      .exec();
+
+    res.send(posts);
+  });
+
   app.post("/api/event/attend", async (req, res) => {
     const { eventID = "", userID = "" } = req.body;
 
