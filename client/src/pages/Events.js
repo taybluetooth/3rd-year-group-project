@@ -53,7 +53,7 @@ const Events = () => {
           ) : (
             <div className="text-center">
               <h1 className="mt-12 text-2xl text-white text-bold">
-                Attend some events!
+                Attend some events!!
               </h1>
               <p className="text-xl text-white text-bold">
                 When you click the{" "}
