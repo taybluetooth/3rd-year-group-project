@@ -47,6 +47,9 @@ function UploadPost() {
       })
       .then((response) => {
         console.log(response);
+        if(response.challenge) {
+          console.log("Challenge Completed!");
+        }
         setError(false);
       })
       .catch((err) => {
