@@ -160,27 +160,17 @@ module.exports = (app) => {
     let challenge = null;
     cloudinary.uploader.upload(
       imageUrl,
-<<<<<<< HEAD
-      // { categorization: "aws_rek_tagging" },
-      async function (error, result) {
-        post.image = result.public_id;
-        // for (let i = 0; i < 5; i++) {
-        //   tags[i] = result.info.categorization.aws_rek_tagging.data[i];
-        // }
-        // post.tag = tags;
-=======
       { categorization: "google_tagging" },
       async function (error, result) {
         post.image = result.public_id;
         for (let i = 0; i < 5; i++) {
           tags[i] = result.info.categorization.google_tagging.data[i];
-          if(tags[i].tag == user.challenge[0]) {
-            challenge = user.challenge[0]
+          if (tags[i].tag == user.challenge[0]) {
+            challenge = user.challenge[0];
             post.points += user.challenge[2];
           }
         }
         post.tag = tags;
->>>>>>> 1378599b18ec57900896e0c17744fa229dea8eee
         await post.save();
         console.log(result, error);
       }

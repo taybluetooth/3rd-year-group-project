@@ -65,7 +65,11 @@ function UploadPost() {
       })
       .then((response) => {
         console.log(response);
+<<<<<<< HEAD
         if (response.challenge) {
+=======
+        if(response.challenge) {
+>>>>>>> 1378599b18ec57900896e0c17744fa229dea8eee
           console.log("Challenge Completed!");
         }
         setError(false);
