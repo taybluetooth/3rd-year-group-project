@@ -138,6 +138,7 @@ module.exports = (app) => {
     }
 
     let post = await Post.create(postObj);
+    const user = await getUserFromToken(token);
     cloudinary.uploader.upload(
       imageUrl,
       { categorization: "aws_rek_tagging" },
@@ -145,6 +146,9 @@ module.exports = (app) => {
         post.image = result.public_id;
         for (let i = 0; i < 5; i++) {
           tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+          if(tags[i].tag == user.challenge[0]) {
+            post.points += user.challenge[2];
+          }
         }
         post.tag = tags;
         await post.save();
