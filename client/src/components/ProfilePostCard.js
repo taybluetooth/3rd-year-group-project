@@ -29,7 +29,7 @@ function ProfilePostCard(props) {
           modal: "post-modal",
         }}
       >
-        <div className="flex justify-center items-center w-12/12">
+        <div className="flex justify-center items-center">
           <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
             <PostCard
               key={props.post._id}

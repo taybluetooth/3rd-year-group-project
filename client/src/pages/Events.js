@@ -27,7 +27,6 @@ const Events = () => {
         <PostCard
           key={post._id}
           _id={post._id}
-          // user={getUsername(post).username}
           user={post.user.username}
           location={post.location}
           description={post.description}
@@ -35,7 +34,6 @@ const Events = () => {
           likes={post.likes}
           points={post.points}
           post={post}
-          // userImg={getUsername(post).profileImage}
           userImg={post.user.profileImage}
           event={post.event}
           eventID={post.eventID}
@@ -53,7 +51,7 @@ const Events = () => {
           ) : (
             <div className="text-center">
               <h1 className="mt-12 text-2xl text-white text-bold">
-                Attend some events!!
+                Attend some events!
               </h1>
               <p className="text-xl text-white text-bold">
                 When you click the{" "}

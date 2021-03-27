@@ -44,8 +44,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/create_channel" component={CreateChannel} />
-        <PrivateRoute path="/upload_post" component={UploadPost} />
+        <PrivateRoute path="/create-channel" component={CreateChannel} />
+        <PrivateRoute path="/upload-post" component={UploadPost} />
         <Route path="/signup">
           <SignIn isLogin={false} />
         </Route>
@@ -67,9 +67,7 @@ function App() {
         <PrivateRoute path="/events" component={Events} />
         <PrivateRoute path="/editprofile/" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />
-        <Route path="/map">
-          <Map />
-        </Route>
+        <PrivateRoute path="/map-feed" component={Map} />
         <Route path="/">
           {getToken() ? <Redirect to="/feed" /> : <SignIn isLogin={true} />}
         </Route>

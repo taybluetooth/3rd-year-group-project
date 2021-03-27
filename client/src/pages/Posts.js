@@ -38,7 +38,6 @@ function Posts() {
     }
   };
 
-  // Get all posts from backend
   const getPosts = async () => {
     const userID = getUser()._id;
     let res = await postService.getFeed(userID);
@@ -52,7 +51,6 @@ function Posts() {
         <PostCard
           key={post._id}
           _id={post._id}
-          // user={getUsername(post).username}
           user={post.user.username}
           location={post.location}
           description={post.description}
@@ -60,7 +58,6 @@ function Posts() {
           likes={post.likes}
           points={post.points}
           post={post}
-          // userImg={getUsername(post).profileImage}
           userImg={post.user.profileImage}
           event={post.event}
           eventID={post.eventID}

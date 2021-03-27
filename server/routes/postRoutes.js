@@ -155,22 +155,23 @@ module.exports = (app) => {
       postObj.channelID = channel._id;
     }
 
+    // TODO: uncomment for demo
     let post = await Post.create(postObj);
     const user = await getUserFromToken(token);
     let challenge = null;
     cloudinary.uploader.upload(
       imageUrl,
-      { categorization: "google_tagging" },
+      // { categorization: "google_tagging" },
       async function (error, result) {
         post.image = result.public_id;
-        for (let i = 0; i < 5; i++) {
-          tags[i] = result.info.categorization.google_tagging.data[i];
-          if (tags[i].tag == user.challenge[0]) {
-            challenge = user.challenge[0];
-            post.points += user.challenge[2];
-          }
-        }
-        post.tag = tags;
+        // for (let i = 0; i < 5; i++) {
+        //   tags[i] = result.info.categorization.google_tagging.data[i];
+        //   if (tags[i].tag == user.challenge[0]) {
+        //     challenge = user.challenge[0];
+        //     post.points += user.challenge[2];
+        //   }
+        // }
+        // post.tag = tags;
         await post.save();
         console.log(result, error);
       }

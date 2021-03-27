@@ -10,6 +10,7 @@ import {
   faPlus,
   faTv,
   faCalendar,
+  faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession, getUser } from "../utils/Common";
 import { Image } from "cloudinary-react";
@@ -20,6 +21,7 @@ const plus = <FontAwesomeIcon icon={faPlus} />;
 const channel = <FontAwesomeIcon icon={faTv} />;
 const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 const events = <FontAwesomeIcon icon={faCalendar} />;
+const map = <FontAwesomeIcon icon={faMapMarkerAlt} />;
 
 function Appbar() {
   return (
@@ -41,12 +43,12 @@ function Appbar() {
                   {home}
                 </button>
               </Link>
-              <Link to="/upload_post">
+              <Link to="/upload-post">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {plus}
                 </button>
               </Link>
-              <Link to="/create_channel" className="text-white">
+              <Link to="/create-channel" className="text-white">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {channel}
                 </button>
@@ -54,6 +56,11 @@ function Appbar() {
               <Link to="/events" className="text-white hidden md:block">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {events}
+                </button>
+              </Link>
+              <Link to="/map-feed" className="text-white hidden md:block">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
+                  {map}
                 </button>
               </Link>
               <a

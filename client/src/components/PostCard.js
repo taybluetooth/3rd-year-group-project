@@ -92,7 +92,7 @@ function PostCard(props) {
               alt="profilepic"
               publicId={props.userImg}
               secure="true"
-            ></Image>
+            />
           </div>
           <div className="block">
             <Link

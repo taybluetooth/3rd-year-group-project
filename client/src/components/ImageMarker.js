@@ -1,30 +1,43 @@
 import React, { useState } from "react";
 import { Marker } from "react-map-gl";
+import { Image } from "cloudinary-react";
 
-function ImageMarker({ latitude, longitude, viewport, url, setSelectedImage }) {
+function ImageMarker({
+  latitude,
+  longitude,
+  viewport,
+  url,
+  alt,
+  setSelectedPost,
+  postIndex,
+}) {
   const [ringColour, setRingColour] = useState("white");
+  const size = 6 * viewport.zoom > 35 ? 6 * viewport.zoom : 35;
 
   return (
-    <Marker latitude={latitude} longitude={longitude}>
+    <Marker latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}>
       <div
         className="mkr"
         style={{
-          width: `${6 * viewport.zoom}px`,
-          height: `${6 * viewport.zoom}px`,
+          width: `${size}px`,
+          height: `${size}px`,
           borderRadius: "50%",
           cursor: "pointer",
         }}
+        onMouseEnter={() => setRingColour("plum")}
+        onMouseLeave={() => setRingColour("white")}
         onClick={() => {
-          console.log(viewport.zoom);
           setRingColour("plum");
           setTimeout(() => {
-            setSelectedImage(url);
+            setSelectedPost(postIndex);
             setRingColour("white");
           }, 500);
         }}
       >
-        <img
-          src={url}
+        <Image
+          cloudName="bluetooth"
+          publicId={url}
+          secure="true"
           style={{
             width: "100%",
             height: "100%",
@@ -36,7 +49,7 @@ function ImageMarker({ latitude, longitude, viewport, url, setSelectedImage }) {
             MozTransition: "0.5s ease",
             WebkitTransition: "0.5s ease",
           }}
-          alt=""
+          alt={alt}
         />
       </div>
     </Marker>
