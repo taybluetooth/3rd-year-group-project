@@ -7,6 +7,7 @@ const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
 const { getChannelFromUsername } = require("../models/channel");
 const upload = multer();
+const cities = require("all-the-cities");
 
 cloudinary.config({
   cloud_name: "bluetooth",
@@ -97,10 +98,11 @@ module.exports = (app) => {
       startDate,
       endDate,
       isEvent,
+      location,
+      lat,
+      long,
     } = req.body;
-    const { lat, lon } = req.query;
     let tags = [];
-    let location = "London"; // static for now
     console.log({
       token,
       description,
@@ -108,8 +110,10 @@ module.exports = (app) => {
       isEvent,
       startDate,
       endDate,
+      location,
+      lat,
+      long,
     });
-    console.log({ lat, lon });
     const { _id: userID } = await getUserFromToken(token);
 
     if (!userID)
@@ -118,10 +122,24 @@ module.exports = (app) => {
         message: "Something went wrong, please try again.",
       });
 
+    // const city = cities.find((city) => city.name.match(location));
+
+    // if (!city)
+    //   return res.status(401).send({
+    //     error: true,
+    //     message: "Sorry, this city couldn't be found, please try again.",
+    //   });
+
+    // const lat = city.loc.coordinates[1];
+    // const long = city.loc.coordinates[0];
+    // console.log({ city, lat, long });
+
     let postObj = {
       userID,
       description,
       location,
+      lat,
+      long,
     };
 
     if (channelUsername) {
@@ -138,15 +156,31 @@ module.exports = (app) => {
     }
 
     let post = await Post.create(postObj);
+    const user = await getUserFromToken(token);
+    let challenge = null;
     cloudinary.uploader.upload(
       imageUrl,
-      { categorization: "aws_rek_tagging" },
+<<<<<<< HEAD
+      // { categorization: "aws_rek_tagging" },
+      async function (error, result) {
+        post.image = result.public_id;
+        // for (let i = 0; i < 5; i++) {
+        //   tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+        // }
+        // post.tag = tags;
+=======
+      { categorization: "google_tagging" },
       async function (error, result) {
         post.image = result.public_id;
         for (let i = 0; i < 5; i++) {
-          tags[i] = result.info.categorization.aws_rek_tagging.data[i];
+          tags[i] = result.info.categorization.google_tagging.data[i];
+          if(tags[i].tag == user.challenge[0]) {
+            challenge = user.challenge[0]
+            post.points += user.challenge[2];
+          }
         }
         post.tag = tags;
+>>>>>>> 1378599b18ec57900896e0c17744fa229dea8eee
         await post.save();
         console.log(result, error);
       }
@@ -165,6 +199,7 @@ module.exports = (app) => {
       error: false,
       post,
       event,
+      challenge,
     });
   });
 

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Field, Formik } from "formik";
 import Appbar from "../components/Appbar";
 import axios from "axios";
 import { getToken } from "../utils/Common";
 import { Redirect } from "react-router-dom";
+import mapboxService from "../services/mapboxService";
 
 function UploadPost() {
   const [file, setFile] = useState();
@@ -14,12 +16,29 @@ function UploadPost() {
   const [endDate, setEndDate] = useState("");
   const [error, setError] = useState(null);
   const [imgError, setImgError] = useState("");
+  const [location, setLocation] = useState("");
+  const [mapboxLocals, setMapboxLocals] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(-1);
   const token = getToken();
+
+  useEffect(() => {
+    if (location.length > 0) {
+      setSelectedLocation(-1);
+      mapboxService
+        .forwardGeocode(location)
+        .then((res) => setMapboxLocals(res));
+    }
+  }, [location]);
 
   const onSubmit = (e) => {
     setError(null);
     e.preventDefault();
     let formData = new FormData();
+    const { text: location, geometry } = mapboxLocals.features[
+      selectedLocation
+    ];
+    const long = geometry.coordinates[0];
+    const lat = geometry.coordinates[1];
     const obj = {
       imageUrl,
       description,
@@ -28,6 +47,9 @@ function UploadPost() {
       isEvent,
       startDate,
       endDate,
+      location,
+      lat,
+      long,
     };
     console.log(obj);
     Object.keys(obj).forEach((key, i) => {
@@ -40,13 +62,12 @@ function UploadPost() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        params: {
-          lat: 55.953251,
-          lon: -3.188267, //static for now
-        },
       })
       .then((response) => {
         console.log(response);
+        if (response.challenge) {
+          console.log("Challenge Completed!");
+        }
         setError(false);
       })
       .catch((err) => {
@@ -103,9 +124,9 @@ function UploadPost() {
     <div className="h-full">
       <Appbar />
       <div className="flex items-center">
-        <div className="flex justify-center mx-auto md:pt-20">
+        <div className="flex justify-center mx-auto">
           <form encType="multipart/form-data">
-            <div className="flex flex-col p-5">
+            <div className="flex flex-col p-5 max-w-xs md:max-w-sm">
               <h1 className="pb-5 text-2xl text-white text-bold">
                 Hey! &#128075; I see you wanna make a post...
               </h1>
@@ -123,6 +144,34 @@ function UploadPost() {
                 value={channelUsername}
                 className="border-2 rounded mb-4"
               />
+              <label className="mt-4 text-white">Location Search</label>
+              <input
+                type="text"
+                onChange={(e) => onTextChange(e, setLocation)}
+                value={location}
+                placeholder="Where did you take the photo?"
+                className="border-2 rounded mb-4"
+              />
+              {mapboxLocals ? (
+                <select
+                  className="border-2 rounded mb-4 truncate"
+                  value={selectedLocation}
+                  onChange={(e) => {
+                    setSelectedLocation(e.target.value);
+                  }}
+                  defaultValue={-1}
+                >
+                  <option value={-1} disabled>
+                    Select an option
+                  </option>
+                  {mapboxLocals &&
+                    mapboxLocals.features.map(({ id, place_name }, i) => (
+                      <option key={id} value={i}>
+                        {place_name}
+                      </option>
+                    ))}
+                </select>
+              ) : null}
               <label className="mt-4 text-white">Event Post</label>
               <input
                 type="checkbox"
@@ -157,13 +206,14 @@ function UploadPost() {
                   className="hidden"
                 />
                 <label
-                  className="rounded p-4 text-md bg-white text-black"
+                  className="rounded p-4 text-md bg-white text-black cursor-pointer"
                   for="files"
                 >
                   Select Image
                 </label>
               </div>
               {imageUrl === "" ||
+              selectedLocation === -1 ||
               description === "" ||
               (isEvent && (startDate === "" || endDate === "")) ? (
                 <button
@@ -172,7 +222,7 @@ function UploadPost() {
                   onClick={onSubmit}
                   disabled
                 >
-                  {`Your description ${
+                  {`Your description, location ${
                     isEvent ? ", start date, end date" : ""
                   } or image is empty!`}
                 </button>

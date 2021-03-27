@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL from "react-map-gl";
+import Appbar from "../components/Appbar";
 import ImageMarker from "../components/ImageMarker";
 
 function Map() {
@@ -44,23 +45,26 @@ function Map() {
       <button onClick={() => setSelectedImage("")}>Go back</button>
     </div>
   ) : locationError === false ? (
-    <ReactMapGL
-      width="100vw"
-      height="100vh"
-      {...viewport}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-      onViewportChange={onViewportChange}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
-    >
-      {photoData.map((marker, idx) => (
-        <ImageMarker
-          key={idx}
-          {...marker}
-          viewport={viewport}
-          setSelectedImage={setSelectedImage}
-        />
-      ))}
-    </ReactMapGL>
+    <>
+      <ReactMapGL
+        width="100vw"
+        height="100vh"
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        onViewportChange={onViewportChange}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
+      >
+        {photoData.map((marker, idx) => (
+          <ImageMarker
+            key={idx}
+            {...marker}
+            viewport={viewport}
+            setSelectedImage={setSelectedImage}
+          />
+        ))}
+      </ReactMapGL>
+      <Appbar />
+    </>
   ) : locationError === true ? (
     <div>
       <h1>Sorry, something went wrong, we couldn't access your location</h1>

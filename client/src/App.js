@@ -63,12 +63,8 @@ function App() {
             <SignIn isLogin={true} />
           )}
         </Route>
-        <Route path="/leaderboard">
-          <Leaderboard />
-        </Route>
-        <Route path="/events">
-          <Events />
-        </Route>
+        <PrivateRoute path="/leaderboard" component={Leaderboard} />
+        <PrivateRoute path="/events" component={Events} />
         <PrivateRoute path="/editprofile/" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />
         <Route path="/map">

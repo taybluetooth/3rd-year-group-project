@@ -31,6 +31,14 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    lat: {
+      type: String,
+      required: true,
+    },
+    long: {
+      type: String,
+      required: true,
+    },
     points: {
       type: Number,
       default: 0,
