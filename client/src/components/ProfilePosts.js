@@ -14,7 +14,7 @@ function ProfilePosts(props) {
     if (!posts) {
       getPosts();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const renderPost = (post, i) => {
     return (
@@ -38,7 +38,7 @@ function ProfilePosts(props) {
         {posts && posts.length > 0 ? (
           posts.map((post, i) => renderPost(post, i))
         ) : (
-          <p>No posts found</p>
+          <p className="text-white">No posts found</p>
         )}
       </div>
     </div>

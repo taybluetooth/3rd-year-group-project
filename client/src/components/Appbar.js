@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faHeart,
+  faBars,
   faUser,
   faSignOutAlt,
   faPlus,
@@ -13,6 +14,7 @@ import {
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession, getUser } from "../utils/Common";
+import Dropdown from "./Dropdown";
 import { Image } from "cloudinary-react";
 
 const home = <FontAwesomeIcon icon={faHome} />;
@@ -43,24 +45,24 @@ function Appbar() {
                   {home}
                 </button>
               </Link>
+              <Link to="/map-feed" className="">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
+                  {map}
+                </button>
+              </Link>
               <Link to="/upload-post">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {plus}
                 </button>
               </Link>
-              <Link to="/create-channel" className="text-white">
+              <Link to="/create-channel" className="hidden md:block">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {channel}
                 </button>
               </Link>
-              <Link to="/events" className="text-white hidden md:block">
+              <Link to="/events" className="hidden md:block">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {events}
-                </button>
-              </Link>
-              <Link to="/map-feed" className="text-white hidden md:block">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {map}
                 </button>
               </Link>
               <a
@@ -69,11 +71,49 @@ function Appbar() {
                     ? `/login`
                     : `/profile/${getUser().username}`
                 }
+                className="md:block hidden"
               >
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {user}
                 </button>
               </a>
+              <Dropdown
+                color="black"
+                buttonIcon={faBars}
+                outerClasses="md:hidden"
+              >
+                <Link
+                  to="/create-channel"
+                  className={
+                    "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
+                  }
+                >
+                  Create Channel
+                  {channel}
+                </Link>
+                <Link
+                  to="/events"
+                  className={
+                    "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
+                  }
+                >
+                  Events
+                  {events}
+                </Link>
+                <a
+                  href={
+                    getUser() === null
+                      ? `/login`
+                      : `/profile/${getUser().username}`
+                  }
+                  className={
+                    "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
+                  }
+                >
+                  Profile
+                  {user}
+                </a>
+              </Dropdown>
               <button
                 className="mx-5 my-2 rounded-md text-xl text-red-500"
                 onClick={() => {

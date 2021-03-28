@@ -48,7 +48,11 @@ const CreateChannel = (props) => {
         {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
           <>
             {/* finish styling later */}
-            <div className="flex items-center h-screen">
+            <div className="mt-12 flex flex-col items-center h-screen">
+              <h1 className="mb-12 text-2xl text-white text-bold text-center mx-4">
+                Make a channel about a topic (e.g. dogs, space, or aspiring
+                photographers) and then anyone can post to them!
+              </h1>
               <form onSubmit={handleSubmit} className="max-w-xs mx-auto">
                 <div className="flex flex-col mb-4">
                   <label

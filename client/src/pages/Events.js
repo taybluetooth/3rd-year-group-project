@@ -50,7 +50,7 @@ const Events = () => {
             eventPosts.map((post) => renderPost(post))
           ) : (
             <div className="text-center">
-              <h1 className="mt-12 text-2xl text-white text-bold">
+              <h1 className="mt-24 sm:mt-12 text-2xl text-white text-bold">
                 Attend some events!
               </h1>
               <p className="text-xl text-white text-bold">
