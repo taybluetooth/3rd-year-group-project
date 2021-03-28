@@ -19,6 +19,7 @@ function ProfileHeader({
   isFollowing,
   isChannel,
   profileImage,
+  channelUserID,
 }) {
   const [file, setFile] = useState();
   const [error, setError] = useState(null);
@@ -26,7 +27,7 @@ function ProfileHeader({
   const [imageLoading, setImageLoading] = useState(null);
 
   useEffect(() => {
-    if (getUser()._id === _id) {
+    if (getUser()._id === _id || getUser()._id === channelUserID) {
       document.getElementById("profile-img").classList.add("profile-pic");
     }
   }, []);
@@ -52,7 +53,9 @@ function ProfileHeader({
           setImgError("");
           setImageLoading(true);
           axios
-            .post(`/api/user/profilepic/${_id}`, { dataURI })
+            .post(`/api/${isChannel ? "channel" : "user"}/profilepic/${_id}`, {
+              dataURI,
+            })
             .then((response) => {
               setError(false);
               console.log(response);
@@ -139,7 +142,7 @@ function ProfileHeader({
                 <span> {username} </span>
               </div>
               {isLoggedInUser === null ? null : isLoggedInUser ? (
-                <Link to="/editprofile">
+                <Link to={`/editprofile${isChannel ? `/channel/${_id}` : ""}`}>
                   <button className="px-3 py-2 mb-2 rounded-md text-xs bg-white text-black">
                     EDIT PROFILE
                   </button>

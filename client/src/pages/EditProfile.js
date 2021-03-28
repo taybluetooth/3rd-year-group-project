@@ -4,18 +4,27 @@ import React, { useState } from "react";
 import { getUser } from "../utils/Common";
 import Appbar from "../components/Appbar";
 import axios from "axios";
+import { useParams } from "react-router";
 
-const EditProfile = (props) => {
+const EditProfile = ({ isChannel, ...props }) => {
   const [error, setError] = useState(null);
+  let { _id } = useParams();
 
   const handleEditProfile = async (values) => {
     setError(null);
     axios
-      .post(`/api/user/${getUser()._id}`, values)
+      .post(
+        `/api/${isChannel ? "channel" : "user"}/${
+          isChannel ? _id : getUser()._id
+        }`,
+        values
+      )
       .then((res) => {
         setError(false);
         alert("Profile successfully edited");
-        window.location.href = `/profile/${values.username}`;
+        window.location.href = `/${isChannel ? "channel" : "profile"}/${
+          values.username
+        }`;
       })
       .catch((error) => {
         console.error(error);

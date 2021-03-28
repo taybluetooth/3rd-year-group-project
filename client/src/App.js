@@ -63,9 +63,16 @@ function App() {
             <SignIn isLogin={true} />
           )}
         </Route>
+        <Route path="/editprofile/channel/:_id">
+          {getToken() ? (
+            <EditProfile isChannel={true} />
+          ) : (
+            <SignIn isLogin={true} />
+          )}
+        </Route>
         <PrivateRoute path="/leaderboard" component={Leaderboard} />
         <PrivateRoute path="/events" component={Events} />
-        <PrivateRoute path="/editprofile/" component={EditProfile} />
+        <PrivateRoute path="/editprofile" component={EditProfile} />
         <PrivateRoute path="/feed" component={Feed} />
         <PrivateRoute path="/map-feed" component={Map} />
         <Route path="/">

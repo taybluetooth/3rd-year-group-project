@@ -3,6 +3,7 @@ const cloudinary = require("cloudinary").v2;
 const { Post } = require("../models/post");
 const { Event } = require("../models/event");
 const { Follows } = require("../models/follows");
+const { ChannelFollows } = require("../models/channelFollows");
 const multer = require("multer");
 const { getUserFromToken } = require("../models/user");
 const { getChannelFromUsername } = require("../models/channel");
@@ -22,8 +23,8 @@ module.exports = (app) => {
     return res.status(200).send(posts);
   });
 
-  app.get("/api/post/channel/:channelUsername", async (req, res) => {
-    const { channelUsername } = req.params;
+  app.get("/api/post/channel/:channelUsername/:userID", async (req, res) => {
+    const { channelUsername, userID } = req.params;
     const channel = await getChannelFromUsername(channelUsername);
 
     if (!channel) {
@@ -35,7 +36,18 @@ module.exports = (app) => {
 
     try {
       let posts = await Post.find({ channelID: channel._id })
-        .populate({ path: "user", select: "_id username profileImage" })
+        .populate({
+          path: "user",
+          select: "-password",
+        })
+        .populate({
+          path: "event",
+          populate: {
+            path: "attending",
+            select: "eventID userID",
+            match: { userID },
+          },
+        })
         .exec();
       return res.status(200).send(posts);
     } catch (error) {
@@ -219,6 +231,9 @@ module.exports = (app) => {
     const following = await Follows.find({ followerID: userID }).select(
       "followedID"
     );
+    const channelFollowing = await ChannelFollows.find({
+      followerID: userID,
+    }).distinct("followedID");
 
     if (!following) {
       res.status(200).send([]);
@@ -228,7 +243,7 @@ module.exports = (app) => {
     following.forEach(({ followedID }) => users.push(followedID));
     console.log(users);
 
-    const post = await Post.find({})
+    const posts = await Post.find({})
       .where("userID")
       .in(users)
       .populate({
@@ -244,6 +259,26 @@ module.exports = (app) => {
         },
       })
       .exec();
+
+    const otherPosts = await Post.find({})
+      .where("channelID")
+      .in(channelFollowing)
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .populate({
+        path: "event",
+        populate: {
+          path: "attending",
+          select: "eventID userID",
+          match: { userID },
+        },
+      })
+      .exec();
+
+    const post = [...posts, ...otherPosts];
+
     console.log(post);
     return res.status(200).send({ post });
   });

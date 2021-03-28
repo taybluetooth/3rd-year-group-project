@@ -16,8 +16,8 @@ function Profile({ isChannel }) {
   const [profileUserError, setProfileUserError] = useState(null);
 
   // is null initially and if the user is not logged in
-  // is true when the user is looking at own their own profile
-  // is false when the user is not looking at their own profile
+  // is true when the user is looking at own their own profile/channel
+  // is false when the user is not looking at their own profile/channel
   const [isLoggedInUser, setIsLoggedInUser] = useState(null);
 
   const [isFollowing, setIsFollowing] = useState(null); // true if the user is following the profile they are looking at
@@ -32,6 +32,7 @@ function Profile({ isChannel }) {
     axios
       .get(getProfileURL(userName))
       .then((res) => {
+        console.log(res);
         const profile = res.data[isChannel ? "channel" : "user"];
         setProfileUser(profile);
         setProfileUserError(false);
@@ -63,12 +64,21 @@ function Profile({ isChannel }) {
   }, [profileUser]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (isChannel) {
-      setIsLoggedInUser(false);
-    } else if (profileUser !== null)
-      setIsLoggedInUser(
-        getUser() === null ? null : getUser()._id === profileUser._id
-      );
+    // if (isChannel) {
+    //   setIsLoggedInUser(false);
+    // } else
+
+    if (profileUser !== null) {
+      if (isChannel) {
+        setIsLoggedInUser(
+          getUser() === null ? null : getUser()._id === profileUser.userID
+        );
+      } else {
+        setIsLoggedInUser(
+          getUser() === null ? null : getUser()._id === profileUser._id
+        );
+      }
+    }
   }, [profileUser]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return loading ? (
@@ -90,6 +100,7 @@ function Profile({ isChannel }) {
               numFollowing={isChannel ? null : profileUser.numFollowing}
               isFollowing={isFollowing}
               isChannel={isChannel}
+              channelUserID={profileUser.userID}
               profileImage={profileUser.profileImage}
             />
           ) : null}
@@ -97,9 +108,17 @@ function Profile({ isChannel }) {
         <div className="justify-center mx-auto p-1">
           {profileUser ? (
             isChannel ? (
-              <ChannelPosts channelUsername={userName} />
+              <ChannelPosts
+                channelUsername={userName}
+                isLoggedInUser={isLoggedInUser}
+              />
             ) : (
-              <ProfilePosts id={profileUser._id} userName={profileUser.username} profileImage={profileUser.profileImage} isLoggedInUser={isLoggedInUser}/>
+              <ProfilePosts
+                id={profileUser._id}
+                userName={profileUser.username}
+                profileImage={profileUser.profileImage}
+                isLoggedInUser={isLoggedInUser}
+              />
             )
           ) : null}
         </div>
