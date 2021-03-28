@@ -15,7 +15,6 @@ function ChannelPosts({ channelUsername, ...props }) {
   }, []);
 
   const getPosts = async () => {
-    console.log("hi");
     let res = await axios.get(
       `/api/post/channel/${channelUsername}/${getUser()._id}`
     );
