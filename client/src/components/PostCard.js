@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -10,10 +10,10 @@ import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getToken, getUser } from "../utils/Common";
-import likeService from "../services/likeService";
+// import likeService from "../services/likeService";
 
 function PostCard(props) {
-  const [liked, setLiked] = useState(false);
+  // const [liked, setLiked] = useState(false);
   const dateOptions = {
     weekday: "long",
     year: "numeric",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import UploadPost from "./pages/UploadPost";
 import SignIn from "./pages/SignIn";

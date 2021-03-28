@@ -152,7 +152,11 @@ module.exports = (app) => {
   // update a user's details by their ID
   app.post("/api/user/:id", async (req, res) => {
     const { id } = req.params;
-    let user = await User.findByIdAndUpdate(id, {bio: req.body.bio, displayName: req.body.displayName, username: req.body.username });
+    let user = await User.findByIdAndUpdate(id, {
+      bio: req.body.bio,
+      displayName: req.body.displayName,
+      username: req.body.username,
+    });
     return res.status(202).send({
       error: false,
       user,
@@ -162,8 +166,13 @@ module.exports = (app) => {
   app.post("/api/user/challenge/:id", async (req, res) => {
     const { id } = req.params;
     const challengeFields = req.body.challenge;
-    let user = await User.findByIdAndUpdate(id, {challenge: [challengeFields.name,
-                                            challengeFields.description, challengeFields.points]});
+    let user = await User.findByIdAndUpdate(id, {
+      challenge: [
+        challengeFields.name,
+        challengeFields.description,
+        challengeFields.points,
+      ],
+    });
     return res.status(202).send({
       error: false,
       user,

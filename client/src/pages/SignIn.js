@@ -11,7 +11,7 @@ import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
-const SignIn = ({ isLogin, ...props }) => {
+const SignIn = ({ isLogin }) => {
   const [error, setError] = useState(null);
   const [notification, setNotification] = useState(false);
   const [challenge, setChallenge] = useState(null);
@@ -26,19 +26,21 @@ const SignIn = ({ isLogin, ...props }) => {
       .required("Required"),
   });
 
-  useEffect(() => {
-    async function getChallenge() {
-      axios
-        .get(`/api/challenge`)
-        .then((response) => {
-          setChallenge(response.data[Math.floor(Math.random() * 5)]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+  async function getChallenge() {
+    axios
+      .get(`/api/challenge`)
+      .then((response) => {
+        setChallenge(response.data[Math.floor(Math.random() * 5)]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
+  useEffect(() => {
+    let abort = new AbortController();
     getChallenge();
+    return () => abort.abort();
   }, []);
 
   useEffect(() => {
@@ -54,7 +56,11 @@ const SignIn = ({ isLogin, ...props }) => {
           .max(70, "Maximum of 70 characters and minimum of 1 character"),
       });
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return () => {
+      setSchema(schema);
+    };
+  }, []);
 
   const successNotification = () => {
     if (notification === false) {

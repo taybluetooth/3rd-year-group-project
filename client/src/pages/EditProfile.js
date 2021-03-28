@@ -43,16 +43,19 @@ const EditProfile = (props) => {
             .max(15, "Maximum of 15 characters and minimum of 5 characters")
             .min(5, "Maximum of 15 characters and minimum of 5 characters")
             .required("Required"),
-            username: Yup.string()
-              .max(100, "Maximum of 15 characters and minimum of 5 characters")
-              .min(1, "Maximum of 100 characters and minimum of 1 characters"),
+          bio: Yup.string()
+            .max(100, "Maximum of 100 characters and minimum of 1 characters")
+            .min(1, "Maximum of 100 characters and minimum of 1 characters"),
         })}
       >
         {({ handleSubmit, touched, errors, getFieldProps, isSubmitting }) => (
           <>
             {/* finish styling later */}
             <div className="flex items-center h-screen">
-              <form onSubmit={handleSubmit} className="bg-white p-7 rounded max-w-xs mx-auto">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white p-7 rounded max-w-xs mx-auto"
+              >
                 <div className="flex flex-col mb-4">
                   <label
                     htmlFor="displayName"
@@ -98,10 +101,8 @@ const EditProfile = (props) => {
                     autoComplete="new-bio"
                     {...getFieldProps("bio")}
                   />
-                  {touched.username && errors.username ? (
-                    <p className="text-red-500 text-xs italic">
-                      {errors.username}
-                    </p>
+                  {touched.bio && errors.bio ? (
+                    <p className="text-red-500 text-xs italic">{errors.bio}</p>
                   ) : null}
                 </div>
 
