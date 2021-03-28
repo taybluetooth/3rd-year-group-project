@@ -7,10 +7,9 @@ import { Redirect } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import challengeService from "../services/challengeService";
 
-import ReactNotification from 'react-notifications-component'
-import {store} from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
-
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 const SignIn = ({ isLogin, ...props }) => {
   const [error, setError] = useState(null);
@@ -28,8 +27,19 @@ const SignIn = ({ isLogin, ...props }) => {
   });
 
   useEffect(() => {
+    async function getChallenge() {
+      axios
+        .get(`/api/challenge`)
+        .then((response) => {
+          setChallenge(response.data[Math.floor(Math.random() * 5)]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     getChallenge();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!isLogin) {
@@ -44,10 +54,10 @@ const SignIn = ({ isLogin, ...props }) => {
           .max(70, "Maximum of 70 characters and minimum of 1 character"),
       });
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const successNotification = () => {
-    if(notification === false) {
+    if (notification === false) {
       store.addNotification({
         title: "Login Successful",
         message: "Welcome back!",
@@ -58,12 +68,12 @@ const SignIn = ({ isLogin, ...props }) => {
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
           duration: 2000,
-          onScreen: true
+          onScreen: true,
         },
       });
       setNotification(true);
     }
-  }
+  };
 
   const handleLogin = async (values) => {
     setError(null);
@@ -72,9 +82,9 @@ const SignIn = ({ isLogin, ...props }) => {
       .then((response) => {
         setUserSession(response.data.token, response.data.user);
         axios
-          .post(`/api/user/challenge/${response.data.user._id}`, {challenge})
+          .post(`/api/user/challenge/${response.data.user._id}`, { challenge })
           .then((res) => {
-            console.log({challenge});
+            console.log({ challenge });
           })
           .catch((error) => {
             console.dir(error);
@@ -87,17 +97,6 @@ const SignIn = ({ isLogin, ...props }) => {
       .catch((error) => {
         console.dir(error);
         setError(error.response.data.message);
-      });
-  };
-
-  const getChallenge = async () => {
-    axios
-      .get(`/api/challenge`)
-      .then((response) => {
-        setChallenge(response.data[Math.floor(Math.random() * 5)])
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -233,7 +232,7 @@ const SignIn = ({ isLogin, ...props }) => {
                   </button>
                 </div>
               </form>
-              {error ? <div style={{color: "red"}}>{error}</div> : null}
+              {error ? <div style={{ color: "red" }}>{error}</div> : null}
             </>
           )}
         </Formik>

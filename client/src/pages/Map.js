@@ -54,7 +54,6 @@ function Map() {
             <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
               {selectedPost !== null ? (
                 <PostCard
-                  key={posts[selectedPost]._id}
                   _id={posts[selectedPost]._id}
                   user={posts[selectedPost].user.username}
                   location={posts[selectedPost].location}
