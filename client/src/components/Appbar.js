@@ -133,8 +133,10 @@ function Appbar() {
               <button
                 className="mx-5 my-2 rounded-md text-xl text-red-500"
                 onClick={() => {
-                  removeUserSession();
-                  window.location.href = "/";
+                  if(window.confirm("Are you sure you wish to logout?")) {
+                    removeUserSession();
+                    window.location.href = "/";
+                  }
                 }}
               >
                 {logout}
