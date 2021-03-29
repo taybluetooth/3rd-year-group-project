@@ -42,36 +42,24 @@ function Appbar() {
           </div>
           <div className="">
             <div className="flex items-baseline mx-auto">
-              <Link to="/feed">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {home}
-                </button>
-              </Link>
-              <Link to="/map-feed" className="">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {map}
-                </button>
-              </Link>
-              <Link to="/upload-post">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {plus}
-                </button>
-              </Link>
-              <Link to="/create-channel" className="hidden md:block">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {channel}
-                </button>
-              </Link>
-              <Link to="/leaderboard" className="hidden md:block">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {leaderboard}
-                </button>
-              </Link>
-              <Link to="/events" className="hidden md:block">
-                <button className="mx-5 my-2 rounded-md text-xl text-white">
-                  {events}
-                </button>
-              </Link>
+              <button className="mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/feed">{home}</Link>
+              </button>
+              <button className="mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/map-feed">{map}</Link>
+              </button>
+              <button className="mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/upload-post">{plus}</Link>
+              </button>
+              <button className="hidden md:block mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/create-channel">{channel}</Link>
+              </button>
+              <button className="hidden md:block mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/leaderboard">{leaderboard}</Link>
+              </button>
+              <button className="hidden md:block mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/events">{events}</Link>
+              </button>
               <a
                 href={
                   getUser() === null
