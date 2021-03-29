@@ -39,9 +39,7 @@ const SuggestedUsers = () => {
           </div>
         </div>
         <div className="flex items-center">
-        <button className="px-3 py-2 mb-2 rounded-md text-md bg-black text-white">
-          <Link to={`/profile/${user.username}`}>View Profile</Link>
-        </button>
+        <Link className="px-3 py-2 mb-2 rounded-md text-md bg-black text-white" to={`/profile/${user.username}`}>View Profile</Link>
         </div>
       </li>
     )
