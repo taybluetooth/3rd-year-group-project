@@ -169,7 +169,7 @@ module.exports = (app) => {
 
     // TODO: uncomment for demo
     let post = await Post.create(postObj);
-    const user = await getUserFromToken(token);
+    let user = await getUserFromToken(token);
     let challenge = null;
     cloudinary.uploader.upload(
       imageUrl,
@@ -181,9 +181,11 @@ module.exports = (app) => {
         //   if (tags[i].tag == user.challenge[0]) {
         //     challenge = user.challenge[0];
         //     post.points += user.challenge[2];
+        //     user.points += user.challenge[2];
         //   }
         // }
         // post.tag = tags;
+        // await user.save();
         await post.save();
         console.log(result, error);
       }
@@ -220,6 +222,11 @@ module.exports = (app) => {
   app.delete("/api/post/:id", async (req, res) => {
     const { id } = req.params;
     let post = await Post.findByIdAndDelete(id);
+    let user = await getUserFromToken(token);
+
+    user.points -= post.points;
+    user.save();
+
     return res.status(202).send({
       error: false,
       post,

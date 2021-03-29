@@ -69,6 +69,10 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
     // e.g. admin etc
     userType: {
       type: String,

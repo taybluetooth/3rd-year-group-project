@@ -12,6 +12,7 @@ import {
   faTv,
   faCalendar,
   faMapMarkerAlt,
+  faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession, getUser } from "../utils/Common";
 import Dropdown from "./Dropdown";
@@ -24,6 +25,7 @@ const channel = <FontAwesomeIcon icon={faTv} />;
 const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 const events = <FontAwesomeIcon icon={faCalendar} />;
 const map = <FontAwesomeIcon icon={faMapMarkerAlt} />;
+const leaderboard = <FontAwesomeIcon icon={faTrophy} />;
 
 function Appbar() {
   return (
@@ -58,6 +60,11 @@ function Appbar() {
               <Link to="/create-channel" className="hidden md:block">
                 <button className="mx-5 my-2 rounded-md text-xl text-white">
                   {channel}
+                </button>
+              </Link>
+              <Link to="/leaderboard" className="hidden md:block">
+                <button className="mx-5 my-2 rounded-md text-xl text-white">
+                  {leaderboard}
                 </button>
               </Link>
               <Link to="/events" className="hidden md:block">
