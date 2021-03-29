@@ -14,6 +14,11 @@ const postService = {
     console.log(res.data);
     return res.data || [];
   },
+  getProfileUsersPosts: async (profileUserID, currentUserID) => {
+    let res = await axios.get(`/api/post/${profileUserID}/${currentUserID}`);
+    console.log(res.data);
+    return res.data || [];
+  },
   getFeed: async (userID) => {
     let res = await axios.get(`/api/feed/${userID}`);
     console.log(res.data);

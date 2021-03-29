@@ -59,7 +59,9 @@ function PostCard(props) {
   };
 
   const isAttendingEvent = () => {
-    return props.event !== null && props.event.attending.length > 0;
+    const bool = props.event !== null && props.event.attending.length > 0;
+    console.log(bool);
+    return bool;
   };
 
   const deletePost = (id) => {
@@ -81,7 +83,7 @@ function PostCard(props) {
         });
     }
   };
-
+  console.log(props);
   return (
     <>
       <div className="w-full flex justify-between p-3">
