@@ -63,13 +63,14 @@ function PostCard(props) {
   };
 
   const deletePost = (id) => {
+    let token = getToken();
     if (
       window.confirm(
         "Are you sure you want to delete this post? This can't be undone!"
       )
     ) {
       axios
-        .delete(`/api/post/${id}`, {})
+        .delete(`/api/post/${id}/${token}`, {})
         .then((res) => {
           console.dir(res);
           window.location.reload();

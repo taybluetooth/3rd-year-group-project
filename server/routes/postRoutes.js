@@ -173,19 +173,19 @@ module.exports = (app) => {
     let challenge = null;
     cloudinary.uploader.upload(
       imageUrl,
-      // { categorization: "google_tagging" },
+      { categorization: "google_tagging" },
       async function (error, result) {
         post.image = result.public_id;
-        // for (let i = 0; i < 5; i++) {
-        //   tags[i] = result.info.categorization.google_tagging.data[i];
-        //   if (tags[i].tag == user.challenge[0]) {
-        //     challenge = user.challenge[0];
-        //     post.points += user.challenge[2];
-        //     user.points += user.challenge[2];
-        //   }
-        // }
-        // post.tag = tags;
-        // await user.save();
+        for (let i = 0; i < 5; i++) {
+          tags[i] = result.info.categorization.google_tagging.data[i];
+          if (tags[i].tag == user.challenge[0]) {
+            challenge = user.challenge[0];
+            post.points += user.challenge[2];
+            user.points += user.challenge[2];
+          }
+        }
+        post.tag = tags;
+        await user.save();
         await post.save();
         console.log(result, error);
       }
@@ -219,8 +219,8 @@ module.exports = (app) => {
   });
 
   // delete a post
-  app.delete("/api/post/:id", async (req, res) => {
-    const { id } = req.params;
+  app.delete("/api/post/:id/:token", async (req, res) => {
+    const { id, token} = req.params;
     let post = await Post.findByIdAndDelete(id);
     let user = await getUserFromToken(token);
 
