@@ -159,7 +159,8 @@ a {
 }
 
 .gradient,
-.profile-pic:after {
+.profile-pic:after,
+.trophyBg {
   background: #11998e; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,

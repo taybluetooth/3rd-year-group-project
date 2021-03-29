@@ -99,6 +99,15 @@ function Appbar() {
                   {channel}
                 </Link>
                 <Link
+                  to="/leaderboard"
+                  className={
+                    "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
+                  }
+                >
+                  Leaderboard
+                  {leaderboard}
+                </Link>
+                <Link
                   to="/events"
                   className={
                     "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
