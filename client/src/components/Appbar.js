@@ -13,6 +13,7 @@ import {
   faCalendar,
   faMapMarkerAlt,
   faTrophy,
+  faCompass,
 } from "@fortawesome/free-solid-svg-icons";
 import { removeUserSession, getUser } from "../utils/Common";
 import Dropdown from "./Dropdown";
@@ -26,6 +27,7 @@ const logout = <FontAwesomeIcon icon={faSignOutAlt} />;
 const events = <FontAwesomeIcon icon={faCalendar} />;
 const map = <FontAwesomeIcon icon={faMapMarkerAlt} />;
 const leaderboard = <FontAwesomeIcon icon={faTrophy} />;
+const suggestedUsers = <FontAwesomeIcon icon={faCompass} />;
 
 function Appbar() {
   return (
@@ -59,6 +61,9 @@ function Appbar() {
               </button>
               <button className="hidden md:block mx-5 my-2 rounded-md text-xl text-white">
                 <Link to="/events">{events}</Link>
+              </button>
+              <button className="hidden md:block mx-5 my-2 rounded-md text-xl text-white">
+                <Link to="/suggested-users">{suggestedUsers}</Link>
               </button>
               <a
                 href={
@@ -103,6 +108,15 @@ function Appbar() {
                 >
                   Events
                   {events}
+                </Link>
+                <Link
+                  to="/suggestedUsers"
+                  className={
+                    "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
+                  }
+                >
+                  Discover Users
+                  {suggestedUsers}
                 </Link>
                 <a
                   href={
