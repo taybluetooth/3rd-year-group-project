@@ -59,7 +59,9 @@ function PostCard(props) {
   };
 
   const isAttendingEvent = () => {
-    return props.event !== null && props.event.attending.length > 0;
+    const bool = props.event !== null && props.event.attending.length > 0;
+    console.log(bool);
+    return bool;
   };
 
   const deletePost = (id) => {
@@ -81,7 +83,7 @@ function PostCard(props) {
         });
     }
   };
-
+  console.log(props);
   return (
     <>
       <div className="w-full flex justify-between p-3">
@@ -103,7 +105,7 @@ function PostCard(props) {
               <span className="pt-3 ml-2 font-bold text-sm">{props.user}</span>
             </Link>
             <br></br>
-            <span className="ml-2 text-sm text-gray-400">{props.location}</span>
+            <div className="ml-2 text-sm text-gray-400">{props.location}</div>
           </div>
         </div>
         {props.isLoggedInUser === null ? null : props.isLoggedInUser ? (

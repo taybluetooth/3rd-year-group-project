@@ -84,6 +84,29 @@ module.exports = (app) => {
     return res.status(200).send(posts);
   });
 
+  app.get("/api/post/:profileUserID/:currentUserID", async (req, res) => {
+    const { profileUserID: userID, currentUserID } = req.params;
+    let posts = await Post.find({ userID })
+      .populate({
+        path: "event",
+        populate: {
+          path: "attending",
+          select: "eventID userID",
+          match: { userID: currentUserID },
+        },
+      })
+      .exec();
+
+    if (!posts) {
+      return res.status(401).send({
+        error: true,
+        message: "Something went wrong, please try again.",
+      });
+    }
+
+    return res.status(200).send(posts);
+  });
+
   // get post by postID
   app.get("/api/post/:id", async (req, res) => {
     const { id } = req.params;
@@ -220,7 +243,7 @@ module.exports = (app) => {
 
   // delete a post
   app.delete("/api/post/:id/:token", async (req, res) => {
-    const { id, token} = req.params;
+    const { id, token } = req.params;
     let post = await Post.findByIdAndDelete(id);
     let user = await getUserFromToken(token);
 

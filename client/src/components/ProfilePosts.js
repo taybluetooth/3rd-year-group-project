@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ProfilePostCard from "./ProfilePostCard";
 import postService from "../services/postService";
+import { getUser } from "../utils/Common";
 
 function ProfilePosts(props) {
   const [posts, setposts] = useState(null);
 
   useEffect(() => {
     const getPosts = async () => {
-      let res = await postService.getUsersPosts(props.id);
+      let res = await postService.getProfileUsersPosts(props.id, getUser()._id);
       setposts(res);
     };
 
@@ -17,6 +18,7 @@ function ProfilePosts(props) {
   }, []);
 
   const renderPost = (post, i) => {
+    console.log(post);
     return (
       <ProfilePostCard
         key={i}
@@ -28,6 +30,8 @@ function ProfilePosts(props) {
         username={props.userName}
         profileImage={props.profileImage}
         isLoggedInUser={props.isLoggedInUser}
+        event={post.event}
+        eventID={post.eventID}
       />
     );
   };
