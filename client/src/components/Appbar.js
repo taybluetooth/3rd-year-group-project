@@ -110,7 +110,7 @@ function Appbar() {
                   {events}
                 </Link>
                 <Link
-                  to="/suggestedUsers"
+                  to="/suggested-users"
                   className={
                     "text-sm py-2 px-4 font-normal flex justify-between items-center w-full whitespace-nowrap bg-transparent text-white "
                   }
