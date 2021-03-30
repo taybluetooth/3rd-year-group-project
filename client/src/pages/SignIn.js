@@ -145,7 +145,7 @@ const SignIn = ({ isLogin }) => {
                       htmlFor="displayName"
                       className="text-gray-400 text-xs"
                     >
-                      Name
+                      First Name
                     </label>
                     <Field
                       className="border-field py-2 px-3 text-white text-xs"
