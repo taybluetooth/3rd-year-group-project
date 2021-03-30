@@ -6,12 +6,11 @@ Team 5
 
 ## Getting Started
 
-Clone the repository into your directory and navigate to the root of the folder. Install React and Node if you haven't already. Run npm install and then npm run dev to start the front and backend.
-
+Clone the repository into your directory and navigate to the root of the folder. Install React and Node if you haven't already. Run the command `npm run full-build` which will build the front-end and start the server. 
 ### Prerequisites
 
 You will need to have React, Node and other dependencies mentioned in the package-lock.json.
 
 ## Deployment
 
-'npm run dev' will start the server and react powered frontend.
+`npm run full-build` which will build the front-end and start the server. 
