@@ -60,7 +60,7 @@ const CreateChannel = (props) => {
                       htmlFor="displayName"
                       className="text-gray-400 text-xs"
                     >
-                      Name
+                      Channel Name
                     </label>
                     <Field
                       className="border-field py-2 px-3 text-white text-xs"
@@ -75,7 +75,7 @@ const CreateChannel = (props) => {
                   </div>
                   <div className="flex flex-col mb-4">
                     <label htmlFor="username" className="text-gray-400 text-xs">
-                      Username
+                      Channel Username
                     </label>
                     <Field
                       className="border-field py-2 px-3 text-white text-xs"
