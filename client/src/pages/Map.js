@@ -51,7 +51,7 @@ function Map() {
           }}
         >
           <div className="flex justify-center items-center">
-            <div className="border-b w-full lg:w-4/12 md:w-6/12 bg-white mx-0 md:mx-0 lg:mx-0">
+            <div className="border-b w-full md:w-7/12 bg-white mx-0">
               {selectedPost !== null ? (
                 <PostCard
                   _id={posts[selectedPost]._id}
