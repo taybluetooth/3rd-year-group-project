@@ -130,6 +130,7 @@ function UploadPost() {
               <h1 className="pb-5 text-2xl text-white text-bold">
                 Hey! &#128075; I see you wanna make a post...
               </h1>
+              <label className="text-white">Description</label>
               <textarea
                 type="text"
                 onChange={(e) => onTextChange(e, setDescription)}
