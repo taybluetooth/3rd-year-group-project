@@ -1,9 +1,6 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const { User } = require("./models/user");
-const { Post } = require("./models/post");
-const { Challenge } = require("./models/challenge");
 const dbConfig = require("./database/db.js");
 const { getUserFromToken } = require("./models/user");
 const nocache = require("nocache");
